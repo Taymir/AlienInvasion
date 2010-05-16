@@ -17,19 +17,19 @@
 		}
 
 		private function KeyDownHandler(e:KeyboardEvent):void {
-			if (e.keyCode == Keyboard.UP) {
+			if (e.keyCode == 87 || e.keyCode == Keyboard.UP) {
 				this.nlo.y -= 5; 
 			}
 			
-			if (e.keyCode == Keyboard.DOWN) {
+			if (e.keyCode == 83 || e.keyCode == Keyboard.DOWN) {
 				this.nlo.y += 5;
 			}
 			
-			if (e.keyCode == Keyboard.LEFT) {
+			if (e.keyCode == 65 || e.keyCode == Keyboard.LEFT) {
 				this.nlo.x -= 5;
 			}
 			
-			if (e.keyCode == Keyboard.RIGHT) {
+			if (e.keyCode == 68 || e.keyCode == Keyboard.RIGHT) {
 				this.nlo.x += 5;
 			}
 			
@@ -51,6 +51,7 @@
 				stage.removeChild(missle); // Уничтожаем ракету
 			}
 			
+			//trace("keycode: " + e.keyCode + ", charcode: " + e.charCode + ", char: " + String.fromCharCode(e.charCode));
 			trace ("Центр нло по X: " + this.getMiddleLocationNlo(this.nlo).x + ". Центр нло по Y: " + this.getMiddleLocationNlo(this.nlo).y);
 		}
 		
