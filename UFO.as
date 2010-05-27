@@ -45,6 +45,9 @@
 				vy += speed;
 			else
 				vy *= friction;
+				
+			if (key.isDown(Keyboard.SPACE))
+				fire();
 			
 			// Обновление положения
 			x += vx;
@@ -85,6 +88,11 @@
 				y = 0;
 				vy = -vy;
 			}
+		}
+		
+		public function fire () : void
+		{
+			
 		}
 		
 	}
