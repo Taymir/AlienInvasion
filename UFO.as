@@ -1,10 +1,13 @@
 ﻿package  
 {
+	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Stage;
 	import com.senocular.utils.KeyObject;
 	import flash.events.Event;
+	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
+	import common.TRegistry;
 	
 	/**
 	 * ...
@@ -19,6 +22,8 @@
 		private var vy:Number = 0;
 		private var friction:Number = 0.93;
 		private var maxspeed:Number = 15;
+		
+		private var current_sheep:DisplayObject = null;
 		
 			
 		public function UFO(stageRef:Stage) 
@@ -105,12 +110,80 @@
 				gotoAndPlay("abduction");
 				
 			// Если в области луча есть овца, начать поднимать её
+			var sheep:Sheep = findSheepInFOV();
+			if (sheep != null)
+			{
+				// начинаем поднимать овцу в корабль
+				current_sheep = sheep;
+				addEventListener(Event.ENTER_FRAME, sheep_abduction);
+			}
+		}
+		
+		private function sheep_abduction(e:Event)
+		{
+			if (current_sheep.x > this.x)
+				current_sheep.x--;
+			else if (current_sheep.x < this.x)
+				current_sheep.x++;
+				
+			current_sheep.y--;
 			
+			current_sheep.scaleX -= .01;
+			current_sheep.scaleY -= .01;
+			
+			if (current_sheep.y < this.y || current_sheep.scaleX < 0.01)
+			{
+				stage.removeChild(current_sheep);
+				removeEventListener(Event.ENTER_FRAME, sheep_abduction);
+			}
+		}
+		
+		// Найти овцу в поле видимости
+		private function findSheepInFOV() : Sheep
+		{
+			for (var i:int; i < TRegistry.instance.getValue("sheeps").length; i++)
+			{
+				var sheep:Sheep = TRegistry.instance.getValue("sheeps")[i];
+				
+				// Проверка попадания в область видимости
+				var angle:Number = getAngleBetweenObjs(this, sheep);
+				var distance:Number = getDistanceBetweenObjs(this, sheep);
+				
+				if (angle > -deg2rad(20) && angle < deg2rad(20) && distance <= 100)
+				{
+					return sheep;
+				}
+			}
+			return null;
+		}
+		
+		// Возвращает угол между граф. объектами
+		private function getAngleBetweenObjs(obj1:DisplayObject, obj2:DisplayObject) : Number
+		{
+			return Math.atan2(obj2.x - obj1.x, obj2.y - obj1.y);
+		}
+		
+		// Возвращает расстояние между граф. объектами
+		private function getDistanceBetweenObjs(obj1:DisplayObject, obj2:DisplayObject) : Number
+		{
+			return Math.sqrt(Math.pow(obj2.x - obj1.x, 2) + Math.pow(obj2.y - obj1.y, 2));
+		}
+		
+		//@DEBUG
+		private function rad2deg(rad:Number) : Number
+		{
+			return rad * 180 / Math.PI;
+		}
+		
+		private function deg2rad(deg:Number) : Number
+		{
+			return deg * Math.PI / 180;
 		}
 		
 		public function stopFire() : void 
 		{
 			gotoAndStop("idle");
+			removeEventListener(Event.ENTER_FRAME, sheep_abduction);
 		}
 		
 	}
