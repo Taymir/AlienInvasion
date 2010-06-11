@@ -23,7 +23,7 @@
 		private var friction:Number = 0.93;
 		private var maxspeed:Number = 15;
 		
-		private var current_sheep:DisplayObject = null;
+		private var current_sheep:Sheep = null;
 		
 			
 		public function UFO(stageRef:Stage) 
@@ -115,28 +115,11 @@
 			{
 				// начинаем поднимать овцу в корабль
 				current_sheep = sheep;
-				addEventListener(Event.ENTER_FRAME, sheep_abduction);
+				sheep.start_abduction(this);
 			}
 		}
 		
-		private function sheep_abduction(e:Event)
-		{
-			if (current_sheep.x > this.x)
-				current_sheep.x--;
-			else if (current_sheep.x < this.x)
-				current_sheep.x++;
-				
-			current_sheep.y--;
-			
-			current_sheep.scaleX -= .01;
-			current_sheep.scaleY -= .01;
-			
-			if (current_sheep.y < this.y || current_sheep.scaleX < 0.01)
-			{
-				stage.removeChild(current_sheep);
-				removeEventListener(Event.ENTER_FRAME, sheep_abduction);
-			}
-		}
+		
 		
 		// Найти овцу в поле видимости
 		private function findSheepInFOV() : Sheep
@@ -183,7 +166,8 @@
 		public function stopFire() : void 
 		{
 			gotoAndStop("idle");
-			removeEventListener(Event.ENTER_FRAME, sheep_abduction);
+			if(current_sheep != null)
+				current_sheep.abort_abduction();
 		}
 		
 	}
