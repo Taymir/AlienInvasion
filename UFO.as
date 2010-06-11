@@ -26,6 +26,7 @@
 			this.stageRef = stageRef;
 			key = new KeyObject(stageRef);
 			
+			
 			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
 		}
 		
@@ -46,9 +47,17 @@
 			else
 				vy *= friction;
 				
-			if (key.isDown(Keyboard.SPACE))
+			// Корректировка малых значений vx и vy
+			if (vx < .5 && vx > -.5)
+				vx = 0;
+			if (vy < .5 && vy > -.5)
+				vy = 0;
+				
+			if (vx == 0 && vy == 0 && key.isDown(Keyboard.SPACE))
 				fire();
-			
+			else 
+				stopFire();
+				
 			// Обновление положения
 			x += vx;
 			y += vy;
@@ -92,7 +101,16 @@
 		
 		public function fire () : void
 		{
+			if(currentFrameLabel == "idle")
+				gotoAndPlay("abduction");
+				
+			// Если в области луча есть овца, начать поднимать её
 			
+		}
+		
+		public function stopFire() : void 
+		{
+			gotoAndStop("idle");
 		}
 		
 	}
