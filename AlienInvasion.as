@@ -3,9 +3,6 @@
 	import flash.events.*; 
 	import flash.ui.*;
 	import common.TRegistry;
-	
-	/* Пользовательские библиотеки */
-	import Missle;
 
 	public class AlienInvasion extends MovieClip {
 		private var ufo:UFO;
