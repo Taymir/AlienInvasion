@@ -58,7 +58,7 @@ package
 		{
 			if (is_abducting)
 			{
-				trace("tick");
+				//trace("tick");
 				is_abducting = false;
 				removeEventListener(Event.ENTER_FRAME, process_abduction);
 				addEventListener(Event.ENTER_FRAME, process_falling);
@@ -67,7 +67,7 @@ package
 		
 		private function process_falling(e:Event) : void
 		{
-			if (this.y < original_y) {
+			if (this.y < original_y && this.scaleX < 1.0) {
 				this.y+=4;
 				this.scaleX += .04;
 				this.scaleY += .04;
