@@ -17,7 +17,6 @@
 			sheeps.push(addSheep(200, 500));
 			
 			TRegistry.instance.setValue("stage", stage);
-			
 			TRegistry.instance.setValue("sheeps", sheeps);
 			
 			ufo = new UFO();
