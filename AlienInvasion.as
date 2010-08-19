@@ -15,9 +15,10 @@
 			sheeps.push(addSheep(600, 500));
 			sheeps.push(addSheep(200, 500));
 			
+			TRegistry.instance.setValue("stage", stage);
 			TRegistry.instance.setValue("sheeps", sheeps);
 			
-			ufo = new UFO(this.stage);
+			ufo = new UFO();
 			ufo.x = stage.stageWidth / 2;
 			ufo.y = stage.stageHeight / 2;
 			
