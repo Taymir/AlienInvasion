@@ -17,6 +17,7 @@
 			sheeps.push(addSheep(200, 500));
 			
 			TRegistry.instance.setValue("stage", stage);
+			
 			TRegistry.instance.setValue("sheeps", sheeps);
 			
 			ufo = new UFO();
@@ -25,7 +26,7 @@
 			
 			stage.addChild(ufo);
 			
-			tank = new Tank(this.stage);
+			tank = new Tank();
 			tank.x = stage.stageWidth / 2;
 			tank.y = 500;
 			
