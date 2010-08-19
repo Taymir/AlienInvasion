@@ -26,9 +26,9 @@
 		private var current_sheep:Sheep = null;
 		
 			
-		public function UFO(stageRef:Stage) 
+		public function UFO() 
 		{
-			this.stageRef = stageRef;
+			this.stageRef = TRegistry.instance.getValue("stage");
 			key = new KeyObject(stageRef);
 			
 			
