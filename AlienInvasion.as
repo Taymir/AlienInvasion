@@ -11,13 +11,7 @@
 		public function AlienInvasion() {
 			var sheeps:Array = new Array();
 			
-			//sheeps.push(addSheep(100, 500));
-			//sheeps.push(addSheep(400, 500));
-			//sheeps.push(addSheep(600, 500));
-			//sheeps.push(addSheep(200, 500));
-			
 			TRegistry.instance.setValue("stage", stage);
-			//TRegistry.instance.setValue("sheeps", sheeps);
 			
 			ufo = new UFO();
 			ufo.x = stage.stageWidth / 2;
@@ -31,17 +25,5 @@
 			
 			stage.addChild(tank);
 		}
-		
-		/*private function addSheep(x: int, y: int) : Sheep
-		{
-			//var s:Sheep;
-			
-			//s = new Sheep();
-			//s.x = x;
-			//s.y = y;
-			//stage.addChild(s);
-			
-			//return s;
-		}*/
 	}
 }

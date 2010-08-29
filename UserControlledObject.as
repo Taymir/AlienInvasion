@@ -2,25 +2,34 @@ package
 {
 	import com.senocular.utils.KeyObject;
 	import flash.events.Event;
+	import common.Vector2D;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	/**
 	 * ...
 	 * @author Taymir
 	 */
 	public class UserControlledObject extends GameObject
 	{
+		protected var fireDelayPeriod : int = 300;
 		protected var key:KeyObject;
-		
 		protected var speed:Number = 1.5;
-		protected var vx:Number = 0;
-		protected var vy:Number = 0;
+		protected var velocity: Vector2D = new Vector2D;
 		protected var friction:Number = 0.93;
 		protected var maxspeed:Number = 15;
+		
+		protected var canFire : Boolean = true;
+		
+		private var fireTimer : Timer;
 		
 		public function UserControlledObject() 
 		{
 			key = new KeyObject(stageRef);
 			
 			addEventListener(Event.ENTER_FRAME, keyHandler, false, 0, true);
+			
+			fireTimer = new Timer(fireDelayPeriod, 1);
+			fireTimer.addEventListener(TimerEvent.TIMER, fireTimerHandler);
 		}
 		
 		protected function keyHandler(e: Event) : void
@@ -30,90 +39,116 @@ package
 		
 		protected function updatePositionFromShifts() : void
 		{
-			x += vx;
-			y += vy;
+			x += velocity.x;
+			y += velocity.y;
 		}
 		
 		protected function limitShifts() : void
 		{
-			if (vx > maxspeed)
-				vx = maxspeed;
-			else if (vx < -maxspeed)
-				vx = -maxspeed;
+			if (velocity.x > maxspeed)
+				velocity.x = maxspeed;
+			else if (velocity.x < -maxspeed)
+				velocity.x = -maxspeed;
 			
-			if (vy > maxspeed)
-				vy = maxspeed;
-			else if (vy < -maxspeed)
-				vy = -maxspeed;
+			if (velocity.y > maxspeed)
+				velocity.y = maxspeed;
+			else if (velocity.y < -maxspeed)
+				velocity.y = -maxspeed;
 		}
 		
 		protected function checkAndPlaceWithinScreenBounds() : void
 		{
-			if (x > stageRef.stageWidth)
+			if (x + halfWidth() > stageRef.stageWidth)
 			{
-				x = stageRef.stageWidth;
-				vx = -vx;
+				x = stageRef.stageWidth - halfWidth();
+				velocity.x = -velocity.x;
 			}
-			else if (x < 0)
+			else if (x - halfWidth() < 0)
 			{
-				x = 0;
-				vx = -vx;
+				x = halfWidth();
+				velocity.x = -velocity.x;
 			}
- 
-			if (y > stageRef.stageHeight)
+			
+			if (y + halfHeight() > stageRef.stageHeight)
 			{
-				y = stageRef.stageHeight;
-				vy = -vy;
+				y = stageRef.stageHeight - halfHeight();
+				velocity.y = -velocity.y;
 			}
-			else if (y < 0)
+			else if (y - halfHeight() < 0)
 			{
-				y = 0;
-				vy = -vy;
+				y = halfHeight();
+				velocity.y = -velocity.y;
 			}
+		}
+		
+		private function halfWidth() : Number
+		{
+			return width / 2;
+		}
+		
+		private function halfHeight() : Number
+		{
+			return height / 2;
 		}
 		
 		protected function isStill() : Boolean
 		{
-			return (vx == 0 && vy == 0);
+			return (velocity.x == 0 && velocity.y == 0);
 		}
 		
 		//@TODO: избавиться от корректировок
 		protected function correctLowShifts() : void
 		{
-			if (vx < .5 && vx > -.5)
-				vx = 0;
-			if (vy < .5 && vy > -.5)
-				vy = 0;
+			if (velocity.x < .1 && velocity.x > -.1)
+				velocity.x = 0;
+			if (velocity.y < .1 && velocity.y > -.1)
+				velocity.y = 0;
 		}
 		
 		protected function slowdownXShift() : void
 		{
-			vx *= friction;
+			velocity.x *= friction;
 		}
 		
 		protected function slowdownYShift() : void
 		{
-			vy *= friction;
+			velocity.y *= friction;
 		}
 		
 		protected function decXShift() : Number
 		{
-			return vx -= speed;
+			return velocity.x -= speed;
 		}
 		
 		protected function incXShift() : Number
 		{
-			return vx += speed;
+			return velocity.x += speed;
 		}
 		
 		protected function decYShift() : Number
 		{
-			return vy -= speed;
+			return velocity.y -= speed;
 		}
 		
 		protected function incYShift() : Number
 		{
-			return vy += speed;
+			return velocity.y += speed;
+		}
+		
+		protected function fire() : void
+		{
+			//@EMPTY: переопределяется в наследниках
+		}
+		
+		protected function fireDelay() : void
+		{
+			canFire = false;
+			fireTimer.start();
+		}
+		
+		private function fireTimerHandler(e:TimerEvent) : void
+		{
+			canFire = true;
 		}
 	}
 
