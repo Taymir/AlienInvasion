@@ -23,7 +23,7 @@ package
 			stageRef.addChild(this);
 		}
 		
-		protected function keyHandler(e: Event) : void
+		private function keyHandler(e: Event) : void
 		{
 			if (direction == DOWN && y < stageRef.stageHeight)
 			{
