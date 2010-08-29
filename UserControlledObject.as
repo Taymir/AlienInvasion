@@ -3,23 +3,33 @@ package
 	import com.senocular.utils.KeyObject;
 	import flash.events.Event;
 	import common.Vector2D;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
 	/**
 	 * ...
 	 * @author Taymir
 	 */
 	public class UserControlledObject extends GameObject
 	{
+		protected var fireDelayPeriod : int = 300;
 		protected var key:KeyObject;
 		protected var speed:Number = 1.5;
 		protected var velocity: Vector2D = new Vector2D;
 		protected var friction:Number = 0.93;
 		protected var maxspeed:Number = 15;
 		
+		protected var canFire : Boolean = true;
+		
+		private var fireTimer : Timer;
+		
 		public function UserControlledObject() 
 		{
 			key = new KeyObject(stageRef);
 			
 			addEventListener(Event.ENTER_FRAME, keyHandler, false, 0, true);
+			
+			fireTimer = new Timer(fireDelayPeriod, 1);
+			fireTimer.addEventListener(TimerEvent.TIMER, fireTimerHandler);
 		}
 		
 		protected function keyHandler(e: Event) : void
@@ -123,6 +133,22 @@ package
 		protected function incYShift() : Number
 		{
 			return velocity.y += speed;
+		}
+		
+		protected function fire() : void
+		{
+			//@EMPTY: переопределяется в наследниках
+		}
+		
+		protected function fireDelay() : void
+		{
+			canFire = false;
+			fireTimer.start();
+		}
+		
+		private function fireTimerHandler(e:TimerEvent) : void
+		{
+			canFire = true;
 		}
 	}
 

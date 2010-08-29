@@ -9,7 +9,7 @@
 	 * @author Taymir
 	 */
 	public class UFO extends UserControlledObject
-	{		
+	{
 		protected override function keyHandler(e:Event) : void
 		{
 			// Обработка нажатий
@@ -51,9 +51,13 @@
 			rotation = velocity.x;
 		}
 		
-		public function fire () : void
+		protected override function fire () : void
 		{
-			var missle: Missle = new Missle(x, y, Missle.DOWN);
+			if (canFire)
+			{
+				new Missle(x, y, Missle.DOWN);
+				fireDelay();
+			}
 		}
 	}
 

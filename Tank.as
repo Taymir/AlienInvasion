@@ -6,10 +6,6 @@ package
 	
 	public class Tank extends UserControlledObject
 	{
-		public function Tank()
-		{
-		}
-		
 		protected override function keyHandler(e:Event) : void
 		{
 			// Обработка нажатий
@@ -36,9 +32,13 @@ package
 			checkAndPlaceWithinScreenBounds();
 		}
 		
-		public function fire () : void
+		protected override function fire() : void
 		{
-			var missle: Missle = new Missle(x, y, Missle.UP);
+			if (canFire)
+			{
+				new Missle(x, y, Missle.UP);
+				fireDelay();
+			}
 		}
 	}
 }

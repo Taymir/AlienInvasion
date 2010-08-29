@@ -37,6 +37,7 @@ package
 			{
 				removeEventListener(Event.ENTER_FRAME, keyHandler, false);
 				stageRef.removeChild(this);
+				
 			}
 		}
 		
