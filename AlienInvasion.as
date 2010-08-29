@@ -27,7 +27,7 @@
 			
 			tank = new Tank();
 			tank.x = stage.stageWidth / 2;
-			tank.y = 500;
+			tank.y = 550;
 			
 			stage.addChild(tank);
 		}

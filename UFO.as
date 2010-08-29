@@ -48,7 +48,7 @@
 		
 		private function inertiaDeviation() : void
 		{
-			rotation = vx;
+			rotation = velocity.x;
 		}
 		
 		public function fire () : void
