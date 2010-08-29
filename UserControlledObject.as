@@ -49,7 +49,7 @@ package
 		
 		protected function checkAndPlaceWithinScreenBounds() : void
 		{
-						if (x > stageRef.stageWidth)
+			if (x > stageRef.stageWidth)
 			{
 				x = stageRef.stageWidth;
 				vx = -vx;

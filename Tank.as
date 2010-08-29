@@ -20,6 +20,9 @@ package
 			else
 				slowdownXShift();
 				
+			if (key.isDown(Keyboard.PAGE_UP))
+				fire();
+				
 			// Корректировка малых значений vx и vy
 			correctLowShifts();
 				
@@ -31,6 +34,11 @@ package
 			
 			// Проверка на нахождение в пределах игрового экрана
 			checkAndPlaceWithinScreenBounds();
+		}
+		
+		public function fire () : void
+		{
+			var missle: Missle = new Missle(x, y, Missle.UP);
 		}
 	}
 }

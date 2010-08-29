@@ -31,7 +31,7 @@
 			// Корректировка малых значений vx и vy
 			correctLowShifts();
 				
-			if (this.isStill() && key.isDown(Keyboard.SPACE))
+			if (key.isDown(Keyboard.SPACE))
 				fire();
 				
 			// Обновление положения
@@ -53,7 +53,7 @@
 		
 		public function fire () : void
 		{
-			//@TODO: реализовать стрельбу НЛО
+			var missle: Missle = new Missle(x, y, Missle.DOWN);
 		}
 	}
 
