@@ -22,12 +22,12 @@ package
 			this.y = y;
 			this.direction = direction;
 			
-			addEventListener(Event.ENTER_FRAME, keyHandler, false, 0, true);
+			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
 			
 			stageRef.addChild(this);
 		}
 		
-		private function keyHandler(e: Event) : void
+		private function loop(e: Event) : void
 		{
 			if (direction == DOWN && y < stageRef.stageHeight)
 			{
@@ -46,7 +46,7 @@ package
 				
 				explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
 				
-				removeEventListener(Event.ENTER_FRAME, keyHandler, false);
+				removeEventListener(Event.ENTER_FRAME, loop, false);
 			}
 		}
 		
