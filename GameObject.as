@@ -13,7 +13,6 @@ package
 	{
 		protected var stageRef:Stage;
 		
-		
 		public function GameObject() 
 		{
 			this.stageRef = TRegistry.instance.getValue("stage");

@@ -9,7 +9,7 @@
 	 * @author Taymir
 	 */
 	public class UFO extends UserControlledObject
-	{
+	{		
 		protected override function keyHandler(e:Event) : void
 		{
 			// Обработка нажатий

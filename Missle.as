@@ -3,6 +3,8 @@ package
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
+	import common.TRegistry;
+	
 	/**
 	 * ...
 	 * @author 
@@ -29,25 +31,49 @@ package
 		
 		private function loop(e: Event) : void
 		{
-			if (direction == DOWN && y < stageRef.stageHeight)
+			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition"))
 			{
+				if (this.hitTestObject(TRegistry.instance.getValue("Tank")))
+				{
+					this.Explode();
+					//TRegistry.instance.getValue("Tank").hit();
+					return;
+				} 
+				
 				y += speed;
 			} 
-			else if (direction == UP && y > 0)
+			else if (direction == UP && y > -70)
 			{
+				for each (var enemy in TRegistry.instance.getValue("Enemies"))
+				{
+					if (this.hitTestObject(enemy))
+					{
+						this.Explode();
+						//enemy.hit();
+						return;
+					}
+				}
+				
 				y -= speed;
 			}
 			else 
-			{						
-				explosion.x = x;
-				explosion.y = y;
-				
-				stageRef.addChild(explosion);
-				
-				explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
-				
-				removeEventListener(Event.ENTER_FRAME, loop, false);
+			{			
+				this.Explode();
 			}
+		}
+		
+		private function Explode() : void
+		{
+			explosion.x = x;
+			explosion.y = y;
+				
+			stageRef.addChild(explosion);
+				
+			explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
+				
+			removeEventListener(Event.ENTER_FRAME, loop, false);
+				
+			stageRef.removeChild(this);
 		}
 		
 		private function stopExplosion() : void
@@ -55,7 +81,6 @@ package
 			explosion.stop();
 			
 			stageRef.removeChild(explosion);							
-			stageRef.removeChild(this);
 		}
 		
 	}
