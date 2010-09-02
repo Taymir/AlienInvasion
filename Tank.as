@@ -4,7 +4,7 @@ package
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
 	
-	public class Tank extends UserControlledObject
+	public final class Tank extends UserControlledObject
 	{
 		protected override function keyHandler(e:Event) : void
 		{
@@ -20,13 +20,13 @@ package
 				fire();
 				
 			// Корректировка малых значений vx и vy
-			correctLowShifts();
+			correctLowVelocity();
 				
 			// Обновление положения
-			updatePositionFromShifts();
+			updatePositionWithVelocity();
 			
 			// Ограничение скорости
-			limitShifts();
+			limitVelocity();
 			
 			// Проверка на нахождение в пределах игрового экрана
 			checkAndPlaceWithinScreenBounds();

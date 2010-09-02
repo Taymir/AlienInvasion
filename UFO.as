@@ -8,7 +8,7 @@
 	 * ...
 	 * @author Taymir
 	 */
-	public class UFO extends UserControlledObject
+	public final class UFO extends UserControlledObject
 	{		
 		protected override function keyHandler(e:Event) : void
 		{
@@ -29,16 +29,16 @@
 				
 			//@TODO: избавиться от корректировок
 			// Корректировка малых значений vx и vy
-			correctLowShifts();
+			correctLowVelocity();
 				
 			if (key.isDown(Keyboard.SPACE))
 				fire();
 				
 			// Обновление положения
-			updatePositionFromShifts();
+			updatePositionWithVelocity();
 			
 			// Ограничение скорости
-			limitShifts();
+			limitVelocity();
 			
 			inertiaDeviation();
 			

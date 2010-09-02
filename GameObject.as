@@ -4,6 +4,7 @@ package
 	import flash.display.Stage;
 	import flash.display.MovieClip;
 	import common.TRegistry;
+	import common.Debug;
 	
 	/**
 	 * ...
@@ -11,11 +12,27 @@ package
 	 */
 	public class GameObject extends MovieClip
 	{
+		protected const autoShow : Boolean = true;
 		protected var stageRef:Stage;
 		
 		public function GameObject() 
 		{
+			Debug.assert( TRegistry.instance.getValue("stage") != null, "В реестре TRegistry не установлено значение объекта сцены stage" );
+			
 			this.stageRef = TRegistry.instance.getValue("stage");
+			
+			if (autoShow)
+				show();
+		}
+		
+		protected function show() : void
+		{
+			stageRef.addChild(this);
+		}
+		
+		protected function hide() : void
+		{
+			stageRef.removeChild(this);
 		}
 		
 		// Возвращает угол между граф. объектами

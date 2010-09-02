@@ -27,15 +27,10 @@
 			ufo.x = 300;
 			ufo.y = 300;
 			
-			for each (var enemy in enemies)
-				stage.addChild(enemy);
-			
 			tank = new Tank();
 			TRegistry.instance.setValue("Tank", tank);
 			tank.x = stage.stageWidth / 2;
 			tank.y = TRegistry.instance.getValue("groundPosition") - 100;
-			
-			stage.addChild(tank);
 		}
 	}
 }

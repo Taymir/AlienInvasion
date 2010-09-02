@@ -7,16 +7,17 @@ package
 	
 	/**
 	 * ...
-	 * @author 
+	 * @author Akkarin
 	 */
-	public class Missle extends GameObject
+	public final class Missle extends GameObject
 	{
-		private var speed:Number = 7.5;
-		private var direction:int = 0;
 		public static const UP:int = 0;
 		public static const DOWN:int = 1;
 		
-		private var explosion:Explosion = new Explosion();
+		private var speed:Number = 17;
+		private var direction:int = 0;
+		
+		private var explosion:Explosion;
 		
 		public function Missle(x:Number, y:Number, direction:int) 
 		{
@@ -25,8 +26,6 @@ package
 			this.direction = direction;
 			
 			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
-			
-			stageRef.addChild(this);
 		}
 		
 		private function loop(e: Event) : void
@@ -64,23 +63,23 @@ package
 		
 		private function Explode() : void
 		{
+			removeEventListener(Event.ENTER_FRAME, loop, false);
+			
+			this.explosion = new Explosion();
 			explosion.x = x;
 			explosion.y = y;
 				
+			explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
 			stageRef.addChild(explosion);
 				
-			explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
-				
-			removeEventListener(Event.ENTER_FRAME, loop, false);
-				
-			stageRef.removeChild(this);
+			this.hide();
 		}
 		
 		private function stopExplosion() : void
 		{
 			explosion.stop();
 			
-			stageRef.removeChild(explosion);							
+			stageRef.removeChild(explosion);
 		}
 		
 	}
