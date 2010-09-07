@@ -1,5 +1,7 @@
 ﻿package  
 {
+	import AI.SimpleAI;
+	import common.TRegistry;
 	import flash.events.Event;
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
@@ -8,32 +10,26 @@
 	 * ...
 	 * @author Taymir
 	 */
-	public final class UFO extends UserControlledObject
+	public final class UFO extends ControllableObject
 	{		
-		protected override function keyHandler(e:Event) : void
+		private var ai : SimpleAI;
+		
+		public function UFO() : void
 		{
-			// Обработка нажатий
-			if (key.isDown(Keyboard.LEFT))
-				decXShift();
-			else if (key.isDown(Keyboard.RIGHT))
-				incXShift();
-			else
-				slowdownXShift();
-				
-			if (key.isDown(Keyboard.UP))
-				decYShift();
-			else if (key.isDown(Keyboard.DOWN))
-				incYShift();
-			else
-				slowdownYShift();
-				
+			addEventListener(Event.ENTER_FRAME, update);
+			ai = new SimpleAI(this, TRegistry.instance.getValue("Tank"));
+		}
+		
+		protected function update(e : Event) : void
+		{
+			ai.update();
+			slowdownXShift();
+			slowdownYShift();
+			
 			//@TODO: избавиться от корректировок
 			// Корректировка малых значений vx и vy
 			correctLowVelocity();
-				
-			if (key.isDown(Keyboard.SPACE))
-				fire();
-				
+			
 			// Обновление положения
 			updatePositionWithVelocity();
 			
@@ -51,7 +47,7 @@
 			rotation = velocity.x;
 		}
 		
-		protected override function fire () : void
+		public override function fire () : void
 		{
 			if (canFire)
 			{

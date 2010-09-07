@@ -32,7 +32,7 @@ package
 			checkAndPlaceWithinScreenBounds();
 		}
 		
-		protected override function fire() : void
+		public override function fire() : void
 		{
 			if (canFire)
 			{

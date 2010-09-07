@@ -23,6 +23,7 @@ package FSM
 		
 		private  function changeState(newState: State) : void
 		{
+			//trace(newState.name);
 			currentState = newState;
 			newState.onEnterState();
 		}

@@ -14,6 +14,7 @@ package FSM
 		protected function isTriggered() : Boolean
 		{
 			//@EMPTY
+			return false;
 		}
 		
 		public function initialize():void

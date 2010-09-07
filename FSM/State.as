@@ -12,7 +12,7 @@ package FSM
 		public function onEnterState() : void
 		{
 			// Перебор transition-ов
-			for each(var transition: FSM.Transition in transitions)
+			for each(var transition: Transition in transitions)
 				transition.initialize();
 			
 			action();
@@ -23,21 +23,21 @@ package FSM
 			//@EMPTY
 		}
 		
-		public function update() : void
+		public function update() : State
 		{
-			newState : FSM.State = checkAllTransitions();
+			var newState : State = checkAllTransitions();
 			
-			if (newState = null)
+			if (newState == null)
 				this.action();
 			
 			return newState;
 		}
 		
-		private function checkAllTransitions() : FSM.State
+		private function checkAllTransitions() : State
 		{
-			for each(var transition:FSM.Transition in transitions)
+			for each(var transition:Transition in transitions)
 			{
-				var newState:FSM.State = transition.check();
+				var newState:State = transition.check();
 				
 				if (newState != null)
 					return newState;

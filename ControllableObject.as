@@ -104,27 +104,27 @@ package
 			velocity.y *= friction;
 		}
 		
-		protected function decXShift() : Number
+		public function decXShift() : Number
 		{
 			return velocity.x -= speed;
 		}
 		
-		protected function incXShift() : Number
+		public function incXShift() : Number
 		{
 			return velocity.x += speed;
 		}
 		
-		protected function decYShift() : Number
+		public function decYShift() : Number
 		{
 			return velocity.y -= speed;
 		}
 		
-		protected function incYShift() : Number
+		public function incYShift() : Number
 		{
 			return velocity.y += speed;
 		}
 		
-		protected function fire() : void
+		public function fire() : void
 		{
 			//@EMPTY: переопределяется в наследниках
 		}
