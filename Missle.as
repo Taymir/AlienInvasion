@@ -32,10 +32,12 @@ package
 		{
 			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition"))
 			{
-				if (this.hitTestObject(TRegistry.instance.getValue("Tank")))
+				var tank : Tank = TRegistry.instance.getValue("Tank");
+				
+				if (this.hitTestObject(tank))
 				{
 					this.Explode();
-					//TRegistry.instance.getValue("Tank").hit();
+					tank.hit(1);
 					return;
 				} 
 				
@@ -48,7 +50,7 @@ package
 					if (this.hitTestObject(enemy))
 					{
 						this.Explode();
-						//enemy.hit();
+						enemy.hit(1);
 						return;
 					}
 				}
@@ -63,15 +65,19 @@ package
 		
 		private function Explode() : void
 		{
+			// Завершаем анимацию движения ракеты
 			removeEventListener(Event.ENTER_FRAME, loop, false);
 			
+			// Отображаем анимацию взрыва по координатам ракеты
 			this.explosion = new Explosion();
 			explosion.x = x;
 			explosion.y = y;
-				
+			
+			// Проигрываем анимацию взрыва
 			explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
 			stageRef.addChild(explosion);
-				
+			
+			// Прячем саму ракету
 			this.hide();
 		}
 		

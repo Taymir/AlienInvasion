@@ -55,6 +55,18 @@
 				fireDelay();
 			}
 		}
+		
+		protected override function destroy() : void
+		{
+			//Удаляем НЛО из реестра игровых объектов
+			//(TRegistry.instance.getValue("Enemies") as Array).splice//@TODO: Удаление врага из реестра
+			
+			//Отвязываем все события
+			this.removeEventListener(Event.ENTER_FRAME, update);
+			
+			//Уничтожение продолжается в родительском методе
+			super.destroy();
+		}
 	}
 
 }

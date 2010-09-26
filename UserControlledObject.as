@@ -22,6 +22,15 @@ package
 		{
 			//@EMPTY: переопределяется в наследниках
 		}
+		
+		protected override function destroy() : void
+		{
+			//Отвязываем все события
+			this.removeEventListener(Event.ENTER_FRAME, keyHandler);
+			
+			//Уничтожение продолжается в родительском методе
+			super.destroy();
+		}
 	}
 
 }

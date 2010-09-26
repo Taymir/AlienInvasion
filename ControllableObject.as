@@ -14,7 +14,9 @@ package
 		protected var velocity: Vector2D = new Vector2D;
 		protected var friction:Number = 0.93;
 		protected var maxspeed:Number = 15;
+		protected var maxHitPoints: int = 30;
 		
+		protected var hitPoints: int = maxHitPoints;
 		protected var canFire : Boolean = true;
 		
 		private var fireTimer : Timer;
@@ -127,6 +129,40 @@ package
 		public function fire() : void
 		{
 			//@EMPTY: переопределяется в наследниках
+		}
+		
+		public function hit(hits: int) : void
+		{
+			this.doDamage(hits);
+			
+			if (this.isDead())
+			{
+				//@TODO анимация смерти
+				
+				// Уничтожаем объект
+				this.destroy();
+			}
+		}
+		
+		private function doDamage(hits: int) : void
+		{
+			this.hitPoints -= hits;
+		}
+		
+		private function isDead() : Boolean
+		{
+			return this.hitPoints <= 0;
+		}
+		
+		protected function destroy() : void
+		{
+			//@TODO переопределить у наследников, чтобы отвязать события
+			
+			// Отвязываем все события
+			fireTimer.removeEventListener(TimerEvent.TIMER, fireTimerHandler);
+			
+			// Прячем со сцены
+			hide();
 		}
 		
 		protected function fireDelay() : void

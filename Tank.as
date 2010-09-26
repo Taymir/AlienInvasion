@@ -1,5 +1,6 @@
 package 
 {
+	import common.TRegistry;
 	import flash.events.Event;
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
@@ -39,6 +40,15 @@ package
 				new Missle(x, y, Missle.UP);
 				fireDelay();
 			}
+		}
+		
+		protected override function destroy() : void
+		{
+			//Удаляем танк из реестра игровых объектов
+			TRegistry.instance.setValue("Tank", null);
+			
+			//Уничтожение продолжается в родительском методе
+			super.destroy();
 		}
 	}
 }
