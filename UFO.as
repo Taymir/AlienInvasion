@@ -1,6 +1,7 @@
 ﻿package  
 {
 	import AI.SimpleAI;
+	import common.TList.TList;
 	import common.TRegistry;
 	import flash.events.Event;
 	import flash.text.StyleSheet;
@@ -17,7 +18,10 @@
 		public function UFO() : void
 		{
 			addEventListener(Event.ENTER_FRAME, update);
-			ai = new SimpleAI(this, TRegistry.instance.getValue("Tank"));
+			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"
+			//@REFACTOR: Как-то упростить эти длинные конструкции
+			var tank:Tank = (TRegistry.instance.getValue("player") as TList).Iterator().CurrentItem() as Tank;
+			ai = new SimpleAI(this, tank);
 		}
 		
 		protected function update(e : Event) : void
@@ -59,7 +63,7 @@
 		protected override function destroy() : void
 		{
 			//Удаляем НЛО из реестра игровых объектов
-			//(TRegistry.instance.getValue("Enemies") as Array).splice//@TODO: Удаление врага из реестра
+			(TRegistry.instance.getValue("enemies") as TList).Remove(this);
 			
 			//Отвязываем все события
 			this.removeEventListener(Event.ENTER_FRAME, update);

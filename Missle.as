@@ -1,5 +1,6 @@
 package  
 {
+	import common.TList.TList;
 	import flash.events.Event;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -32,28 +33,13 @@ package
 		{
 			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition"))
 			{
-				var tank : Tank = TRegistry.instance.getValue("Tank");
-				
-				if (this.hitTestObject(tank))
-				{
-					this.Explode();
-					tank.hit(1);
-					return;
-				} 
+				TRegistry.instance.getValue("player").Walk(collision_detection_callback);
 				
 				y += speed;
 			} 
 			else if (direction == UP && y > -70)
 			{
-				for each (var enemy in TRegistry.instance.getValue("Enemies"))
-				{
-					if (this.hitTestObject(enemy))
-					{
-						this.Explode();
-						enemy.hit(1);
-						return;
-					}
-				}
+				TRegistry.instance.getValue("enemies").Walk(collision_detection_callback);
 				
 				y -= speed;
 			}
@@ -61,6 +47,20 @@ package
 			{			
 				this.Explode();
 			}
+		}
+		
+		private function collision_detection_callback(obj: Object) : int
+		{
+			var targetObj: ControllableObject = obj as ControllableObject;
+			
+			if (this.hitTestObject(targetObj))
+			{
+				this.Explode();
+				targetObj.hit(1);
+				return TList.STOP_WALKING;
+			}
+			
+			return TList.CONTINUE_WALKING;
 		}
 		
 		private function Explode() : void

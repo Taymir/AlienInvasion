@@ -1,5 +1,6 @@
 package 
 {
+	import common.TList.TList;
 	import common.TRegistry;
 	import flash.events.Event;
 	import flash.text.StyleSheet;
@@ -44,8 +45,8 @@ package
 		
 		protected override function destroy() : void
 		{
-			//Удаляем танк из реестра игровых объектов
-			TRegistry.instance.setValue("Tank", null);
+			//Удаляем ссылку на танк
+			(TRegistry.instance.getValue("player") as TList).Remove(this);
 			
 			//Уничтожение продолжается в родительском методе
 			super.destroy();

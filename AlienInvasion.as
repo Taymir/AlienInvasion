@@ -1,4 +1,5 @@
 ﻿package {
+	import common.TList.TList;
 	import flash.display.MovieClip;
 	import flash.events.*; 
 	import flash.ui.*;
@@ -6,8 +7,6 @@
 	import tests.*;
 
 	public class AlienInvasion extends MovieClip {
-		private var ufo:UFO;
-		private var tank:Tank;
 		
 		public function AlienInvasion() {		
 			this.initGame();
@@ -24,15 +23,17 @@
 			TRegistry.instance.setValue("stage", stage);
 			TRegistry.instance.setValue("groundPosition", 500);
 			
-			tank = new Tank();
-			TRegistry.instance.setValue("Tank", tank);
+			var player:TList = new TList();
+			TRegistry.instance.setValue("player", player);
+			var tank: Tank = new Tank();
+			player.Add(tank);
 			tank.x = stage.stageWidth / 2;
 			tank.y = TRegistry.instance.getValue("groundPosition") - 100;
 			
-			var enemies:Array = new Array();
-			TRegistry.instance.setValue("Enemies", enemies);
-			var ufo = new UFO()
-			enemies.push(ufo);
+			var enemies:TList = new TList();
+			TRegistry.instance.setValue("enemies", enemies);
+			var ufo = new UFO();
+			enemies.Add(ufo);
 			ufo.x = 100;
 			ufo.y = 100;
 			/*ufo = new UFO()

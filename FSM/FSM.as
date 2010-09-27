@@ -6,6 +6,7 @@ package FSM
 	 */
 	public class FSM
 	{
+		public static var debug_mode: Boolean;
 		private var currentState: State;
 		
 		public function FSM(initialState: State) 
@@ -23,7 +24,9 @@ package FSM
 		
 		private  function changeState(newState: State) : void
 		{
-			//trace(newState.name);
+			if(debug_mode)
+				trace(newState.name);
+			
 			currentState = newState;
 			newState.onEnterState();
 		}
