@@ -3,12 +3,24 @@
 	import flash.events.*; 
 	import flash.ui.*;
 	import common.TRegistry;
+	import tests.*;
 
 	public class AlienInvasion extends MovieClip {
 		private var ufo:UFO;
 		private var tank:Tank;
 		
-		public function AlienInvasion() {			
+		public function AlienInvasion() {		
+			this.initGame();
+			
+			//@DEBUG
+			/*
+			var test: TestTList = new TestTList();
+			test.run();
+			*/
+		}
+		
+		public function initGame() : void
+		{
 			TRegistry.instance.setValue("stage", stage);
 			TRegistry.instance.setValue("groundPosition", 500);
 			

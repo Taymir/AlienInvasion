@@ -9,6 +9,9 @@ package common.TList
 		private var rootNode: TListNode;
 		private var lastNode: TListNode
 		private var size: int;
+		
+		public static const STOP_WALKING: int = 0;
+		public static const CONTINUE_WALKING: int = 1; // Johny walker =)
 			
 		public function TList() 
 		{
@@ -123,6 +126,11 @@ package common.TList
 				
 				arr_iterator++;
 				lst_iterator.Next();
+				
+				//@DEBUG
+				
+				if (arr_iterator > 1000)
+					return arr;
 			}
 			
 			return arr;
@@ -215,13 +223,11 @@ package common.TList
 		
 		/*
 		 * Применяет пользовательскую функцию func к каждому элементу списка
-		 * func(Object): Boolean - принимает элемент списка, 
+		 * func(Object): int - принимает элемент списка, 
 		 * возвращает false для остановки перебора, true для продолжения
 		 */
-		public function Walk(func:Function) : void
-		{
-			const stop_walking = 0;
-			
+		public function Walk(func:Function) : Object
+		{			
 			var it:TListIterator = this.Iterator();
 			var index: int = 0;
 			
@@ -229,15 +235,15 @@ package common.TList
 			while (!it.isAtEnd())
 			{
 				// Применяем функцию к текущему элементу
-				if (func.call(it.CurrentItem()) == stop_walking)
-					return;
+				if (func.call(this, it.CurrentItem()) == STOP_WALKING)
+					return it.CurrentItem();
 				
 				index++;
 				it.Next();
 			}
+			
+			return null;
 		}
-		
-		
 		
 		
 		
@@ -265,17 +271,36 @@ package common.TList
 		public function RemoveNode(curNode: TListNode) : TListNode
 		{
 			if (curNode != null)
-			{
+			{				
 				var prevNode: TListNode = curNode.prev;
 				var nextNode: TListNode = curNode.next;
-				
-				// Перепривязываем предыдущую ноду с текущей
-				prevNode.next = nextNode;
-				nextNode.prev = prevNode;
-				curNode = prevNode;
+				var returnNode: TListNode = prevNode;
+				if (prevNode == null && nextNode == null) {
+					// Если пустой список
+					rootNode = null;
+					lastNode = null;
+					returnNode = null;
+					////////////////////////////
+				} else if (prevNode == null) {
+					// Если начало списка
+					rootNode = nextNode;
+					nextNode.prev = null;
+					returnNode = rootNode;
+				} else if (nextNode == null) {
+					// Если конец списка
+					lastNode = prevNode;
+					prevNode.next = null;
+				} else {
+					// Если середина списка
+					// Перепривязываем предыдущую ноду со следующей
+					prevNode.next = nextNode;
+					nextNode.prev = prevNode;
+				}
 				
 				// Уменьшаем размер списка
 				size--;
+				
+				return returnNode;
 			}
 			
 			return curNode;
@@ -296,6 +321,8 @@ package common.TList
 					prevNode.next = newNode;
 					newNode.prev = prevNode;
 				} else {
+					// Иначе, если мы в начале
+					rootNode = newNode;
 					newNode.prev = null;
 				}
 				
@@ -324,6 +351,8 @@ package common.TList
 					nextNode.prev = newNode;
 					newNode.next = nextNode;
 				} else {
+					// Иначе, если мы в хвосте
+					lastNode = newNode;
 					newNode.next = null;
 				}
 				

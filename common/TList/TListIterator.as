@@ -33,7 +33,7 @@ package common.TList
 		{
 			for (var i: int = 0; i < offset; i++)
 			{
-				if (hasNext())
+				if (curNode != null)
 					curNode = curNode.next;
 			}
 			
@@ -54,7 +54,7 @@ package common.TList
 		{
 			for (var i: int = 0; i < offset; i++)
 			{
-				if (hasPrev())
+				if (curNode != null)
 					curNode = curNode.prev;
 			}
 			
@@ -76,7 +76,7 @@ package common.TList
 		 */
 		public function isAtEnd() : Boolean
 		{
-			if (CurrentItem() == list.End())
+			if (curNode == null)
 				return true;
 			return false;
 		}
@@ -86,7 +86,7 @@ package common.TList
 		 */
 		public function isAtBeginning() : Boolean
 		{
-			if (CurrentItem() == list.Begin())
+			if (curNode == null)
 				return true;
 			return false;
 		}
