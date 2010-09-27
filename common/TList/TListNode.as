@@ -1,7 +1,7 @@
-package common 
+package common.TList  
 {
 	/**
-	 * ...
+	 * Нода списка
 	 * @author Taymir
 	 */
 	public class TListNode

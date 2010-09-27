@@ -6,12 +6,12 @@ package common
 	 */
 	public final class Trigonometry
 	{
-		public function rad2deg(rad:Number) : Number
+		public static function rad2deg(rad:Number) : Number
 		{
 			return rad * 180 / Math.PI;
 		}
 		
-		public function deg2rad(deg:Number) : Number
+		public static function deg2rad(deg:Number) : Number
 		{
 			return deg * Math.PI / 180;
 		}
