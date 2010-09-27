@@ -10,14 +10,14 @@ package
 		protected override function keyHandler(e:Event) : void
 		{
 			// Обработка нажатий
-			if (key.isDown(65))
+			if (key.isDown(Keyboard.LEFT))
 				decXShift();
-			else if (key.isDown(68))
+			else if (key.isDown(Keyboard.RIGHT))
 				incXShift();
 			else
 				slowdownXShift();
 				
-			if (key.isDown(Keyboard.PAGE_UP))
+			if (key.isDown(Keyboard.SPACE))
 				fire();
 				
 			// Корректировка малых значений vx и vy
