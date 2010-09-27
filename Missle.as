@@ -75,7 +75,7 @@ package
 			
 			// Проигрываем анимацию взрыва
 			explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
-			stageRef.addChild(explosion);
+			scene.addChild(explosion);
 			
 			// Прячем саму ракету
 			this.hide();
@@ -85,7 +85,7 @@ package
 		{
 			explosion.stop();
 			
-			stageRef.removeChild(explosion);
+			scene.removeChild(explosion);
 		}
 		
 	}

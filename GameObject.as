@@ -13,13 +13,13 @@ package
 	public class GameObject extends MovieClip
 	{
 		protected const autoShow : Boolean = true;
-		protected var stageRef:Stage;
+		protected var scene : MovieClip;
 		
 		public function GameObject() 
 		{
-			Debug.assert( TRegistry.instance.getValue("stage") != null, "В реестре TRegistry не установлено значение объекта сцены stage" );
+			Debug.assert( TRegistry.instance.getValue("scene") != null, "В реестре TRegistry не установлено значение объекта сцены scene" );
 			
-			this.stageRef = TRegistry.instance.getValue("stage");
+			this.scene = TRegistry.instance.getValue("scene");
 			
 			if (autoShow)
 				show();
@@ -27,12 +27,12 @@ package
 		
 		protected function show() : void
 		{
-			stageRef.addChild(this);
+			scene.addChild(this);
 		}
 		
 		protected function hide() : void
 		{
-			stageRef.removeChild(this);
+			scene.removeChild(this);
 		}
 		
 		// Возвращает угол между граф. объектами

@@ -21,6 +21,8 @@
 		public function initGame() : void
 		{
 			TRegistry.instance.setValue("stage", stage);
+			TRegistry.instance.setValue("uiPanel", uiPanel);
+			TRegistry.instance.setValue("scene", scene);
 			TRegistry.instance.setValue("groundPosition", 500);
 			
 			var player:TList = new TList();

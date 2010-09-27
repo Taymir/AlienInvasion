@@ -49,9 +49,9 @@ package
 		
 		protected function checkAndPlaceWithinScreenBounds() : void
 		{
-			if (x + halfWidth() > stageRef.stageWidth)
+			if (x + halfWidth() > scene.stageWidth)
 			{
-				x = stageRef.stageWidth - halfWidth();
+				x = scene.stageWidth - halfWidth();
 				velocity.x = -velocity.x;
 			}
 			else if (x - halfWidth() < 0)
@@ -60,9 +60,9 @@ package
 				velocity.x = -velocity.x;
 			}
 			
-			if (y + halfHeight() > stageRef.stageHeight)
+			if (y + halfHeight() > scene.stageHeight)
 			{
-				y = stageRef.stageHeight - halfHeight();
+				y = scene.stageHeight - halfHeight();
 				velocity.y = -velocity.y;
 			}
 			else if (y - halfHeight() < 0)
