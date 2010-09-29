@@ -23,6 +23,8 @@
 			TRegistry.instance.setValue("stage", stage);
 			TRegistry.instance.setValue("groundPosition", 500);
 			
+			TRegistry.instance.setValue("debug_cannon_test", true); //@DEBUG
+			
 			var player:TList = new TList();
 			TRegistry.instance.setValue("player", player);
 			var tank: Tank = new Tank();
