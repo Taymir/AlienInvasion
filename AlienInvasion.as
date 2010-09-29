@@ -24,6 +24,7 @@
 			TRegistry.instance.setValue("groundPosition", 500);
 			
 			TRegistry.instance.setValue("debug_cannon_test", true); //@DEBUG
+			TRegistry.instance.setValue("debug_ufo_test", true); //@DEBUG
 			
 			var player:TList = new TList();
 			TRegistry.instance.setValue("player", player);
@@ -34,7 +35,13 @@
 			
 			var enemies:TList = new TList();
 			TRegistry.instance.setValue("enemies", enemies);
-			var ufo = new UFO();
+			
+			var ufo;
+			if (TRegistry.instance.getValue("debug_ufo_test"))
+				ufo = new TesterUFO();//@DEBUG
+			else
+				ufo = new UFO();
+			
 			enemies.Add(ufo);
 			ufo.x = 100;
 			ufo.y = 100;
