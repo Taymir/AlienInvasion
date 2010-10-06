@@ -33,7 +33,11 @@ package
 		{
 			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition"))
 			{
-				TRegistry.instance.getValue("player").Walk(collision_detection_callback);
+				//@DEBUG
+				if (TRegistry.instance.getValue("debug_cannon_test"))
+					TRegistry.instance.getValue("player").Walk(tank_cannon_collision_detection);
+				else
+					TRegistry.instance.getValue("player").Walk(collision_detection_callback);
 				
 				y += speed;
 			} 
@@ -47,6 +51,21 @@ package
 			{			
 				this.Explode();
 			}
+		}
+		
+		//@DEBUG: Test method for Innet
+		private function tank_cannon_collision_detection(obj: Object) : int
+		{
+			var targetObj: Tank = obj as Tank;
+			
+			if (this.hitTestObject(targetObj.cannon))
+			{
+				this.Explode();
+				targetObj.hit(1);
+				return TList.STOP_WALKING;
+			}
+			
+			return TList.CONTINUE_WALKING;
 		}
 		
 		private function collision_detection_callback(obj: Object) : int
