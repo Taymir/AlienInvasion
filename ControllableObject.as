@@ -3,6 +3,9 @@ package
 	import common.Vector2D;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
+	import flash.media.Sound;
+	import common.TRegistry;
+	
 	/**
 	 * ...
 	 * @author Taymir
@@ -134,10 +137,14 @@ package
 		public function hit(hits: int) : void
 		{
 			this.doDamage(hits);
-			
+			this.playSound(TRegistry.instance.getValue("hitSnd"));
+						
 			if (this.isDead())
 			{
 				//@TODO анимация смерти
+				
+				// Звук взрыва
+				this.playSound(TRegistry.instance.getValue("explodeSnd"));
 				
 				// Уничтожаем объект
 				this.destroy();
@@ -174,6 +181,13 @@ package
 		private function fireTimerHandler(e:TimerEvent) : void
 		{
 			canFire = true;
+		}
+		
+		// Воспроизведение звуков
+		private function playSound(sound : Sound) : void
+		{
+			var snd:Sound = sound;
+			snd.play();
 		}
 	}
 

@@ -28,6 +28,10 @@
 			TRegistry.instance.setValue("debug_cannon_test", false); //@DEBUG
 			TRegistry.instance.setValue("debug_ufo_test", false); //@DEBUG
 			
+			// Sounds 
+			TRegistry.instance.setValue("hitSnd", new hitSnd());
+			TRegistry.instance.setValue("explodeSnd", new explodeSnd());
+			
 			var player:TList = new TList();
 			TRegistry.instance.setValue("player", player);
 			var tank: Tank = new Tank();
