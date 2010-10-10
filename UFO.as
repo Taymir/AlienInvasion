@@ -53,12 +53,13 @@
 		
 		public override function fire () : void
 		{
+			//@TODO вынести в отдельный переопределяемый метод тело if-а
 			if (canFire)
 			{
 				new Missle(x, y, Missle.DOWN);
 				fireDelay();
+				super.fire();
 			}
-			super.fire();
 		}
 		
 		protected override function destroy() : void

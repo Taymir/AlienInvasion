@@ -31,6 +31,7 @@
 			// Sounds 
 			TRegistry.instance.setValue("config_play_sounds", true);
 			TRegistry.instance.setValue("shootSnd", new shootSnd());
+			//@TODO: сделать этот звук по-тише, а то крыша съедет от его постоянного воспроизведения
 			TRegistry.instance.setValue("hitSnd", new hitSnd());
 			
 			var player:TList = new TList();
