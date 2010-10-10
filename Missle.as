@@ -33,7 +33,6 @@ package
 		{
 			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition"))
 			{
-				//@DEBUG
 				if (TRegistry.instance.getValue("debug_cannon_test"))
 					TRegistry.instance.getValue("player").Walk(tank_cannon_collision_detection);
 				else
@@ -53,7 +52,7 @@ package
 			}
 		}
 		
-		//@DEBUG: Test method for Innet
+		// Test method for Innet
 		private function tank_cannon_collision_detection(obj: Object) : int
 		{
 			var targetObj: Tank = obj as Tank;

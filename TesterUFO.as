@@ -24,7 +24,6 @@ package
 			if (key.isDown(Keyboard.PAGE_DOWN))
 				fire();
 			
-			//@TODO: избавиться от корректировок
 			// Корректировка малых значений vx и vy
 			correctLowVelocity();
 			

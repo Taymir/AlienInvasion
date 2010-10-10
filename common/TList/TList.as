@@ -126,11 +126,6 @@ package common.TList
 				
 				arr_iterator++;
 				lst_iterator.Next();
-				
-				//@DEBUG
-				
-				if (arr_iterator > 1000)
-					return arr;
 			}
 			
 			return arr;

@@ -25,8 +25,8 @@
 			TRegistry.instance.setValue("scene", scene);
 			TRegistry.instance.setValue("groundPosition", 500);
 			
-			TRegistry.instance.setValue("debug_cannon_test", false); //@DEBUG
-			TRegistry.instance.setValue("debug_ufo_test", false); //@DEBUG
+			TRegistry.instance.setValue("debug_cannon_test", false);
+			TRegistry.instance.setValue("debug_ufo_test", false);
 			
 			// Sounds 
 			TRegistry.instance.setValue("config_play_sounds", true);
@@ -46,7 +46,7 @@
 			
 			var ufo;
 			if (TRegistry.instance.getValue("debug_ufo_test"))
-				ufo = new TesterUFO();//@DEBUG
+				ufo = new TesterUFO();
 			else
 				ufo = new UFO();
 			

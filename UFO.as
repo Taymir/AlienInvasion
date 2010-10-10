@@ -30,7 +30,6 @@
 			slowdownXShift();
 			slowdownYShift();
 			
-			//@TODO: избавиться от корректировок
 			// Корректировка малых значений vx и vy
 			correctLowVelocity();
 			

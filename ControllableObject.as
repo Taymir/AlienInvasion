@@ -90,7 +90,6 @@ package
 			return (velocity.x == 0 && velocity.y == 0);
 		}
 		
-		//@TODO: избавиться от корректировок
 		protected function correctLowVelocity() : void
 		{
 			if (velocity.x < .1 && velocity.x > -.1)
@@ -162,7 +161,7 @@ package
 		
 		protected function destroy() : void
 		{
-			//@TODO переопределить у наследников, чтобы отвязать события
+			// переопределить у наследников, чтобы отвязать события
 			
 			// Отвязываем все события
 			fireTimer.removeEventListener(TimerEvent.TIMER, fireTimerHandler);
