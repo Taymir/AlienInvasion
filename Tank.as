@@ -41,6 +41,7 @@ package
 				new Missle(x, y, Missle.UP);
 				fireDelay();
 			}
+			super.fire();
 		}
 		
 		protected override function destroy() : void

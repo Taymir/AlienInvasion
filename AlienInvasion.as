@@ -29,8 +29,9 @@
 			TRegistry.instance.setValue("debug_ufo_test", false); //@DEBUG
 			
 			// Sounds 
+			TRegistry.instance.setValue("config_play_sounds", true);
+			TRegistry.instance.setValue("shootSnd", new shootSnd());
 			TRegistry.instance.setValue("hitSnd", new hitSnd());
-			TRegistry.instance.setValue("explodeSnd", new explodeSnd());
 			
 			var player:TList = new TList();
 			TRegistry.instance.setValue("player", player);

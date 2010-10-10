@@ -131,7 +131,9 @@ package
 		
 		public function fire() : void
 		{
-			//@EMPTY: переопределяется в наследниках
+			// переопределяется в наследниках
+			
+			this.playSound(TRegistry.instance.getValue("shootSnd"));
 		}
 		
 		public function hit(hits: int) : void
@@ -142,9 +144,6 @@ package
 			if (this.isDead())
 			{
 				//@TODO анимация смерти
-				
-				// Звук взрыва
-				this.playSound(TRegistry.instance.getValue("explodeSnd"));
 				
 				// Уничтожаем объект
 				this.destroy();
@@ -186,8 +185,11 @@ package
 		// Воспроизведение звуков
 		private function playSound(sound : Sound) : void
 		{
-			var snd:Sound = sound;
-			snd.play();
+			if (TRegistry.instance.getValue("config_play_sounds"))
+			{
+				var snd:Sound = sound;
+				snd.play();
+			}
 		}
 	}
 

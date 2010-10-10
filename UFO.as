@@ -58,6 +58,7 @@
 				new Missle(x, y, Missle.DOWN);
 				fireDelay();
 			}
+			super.fire();
 		}
 		
 		protected override function destroy() : void
