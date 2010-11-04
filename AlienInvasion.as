@@ -2,6 +2,7 @@
 	import common.TList.TList;
 	import flash.display.MovieClip;
 	import flash.events.*; 
+	import flash.filters.DisplacementMapFilterMode;
 	import flash.ui.*;
 	import common.TRegistry;
 	import tests.*;
@@ -23,24 +24,20 @@
 			TRegistry.instance.setValue("stage", stage);
 			TRegistry.instance.setValue("userHp", uiPanel.userHp);
 			TRegistry.instance.setValue("scene", scene);
-			TRegistry.instance.setValue("groundPosition", 500);
+			TRegistry.instance.setValue("groundPosition", 410);
 			
 			TRegistry.instance.setValue("debug_cannon_test", false);
 			TRegistry.instance.setValue("debug_ufo_test", false);
 			
-			// Sounds 
 			TRegistry.instance.setValue("config_play_sounds", true);
 			TRegistry.instance.setValue("config_play_music", true);
-			
-			TRegistry.instance.setValue("shootSnd", new shootSnd());
-			TRegistry.instance.setValue("hitSnd", new hitSnd());
 			
 			var player:TList = new TList();
 			TRegistry.instance.setValue("player", player);
 			var tank: Tank = new Tank();
 			player.Add(tank);
 			tank.x = stage.stageWidth / 2;
-			tank.y = TRegistry.instance.getValue("groundPosition") - 100;
+			tank.y = TRegistry.instance.getValue("groundPosition") - 20; //@TMP: Надо поправить координаты муви-клипов
 			
 			var enemies:TList = new TList();
 			TRegistry.instance.setValue("enemies", enemies);
@@ -66,18 +63,18 @@
 			// Настройка музыки
 			var music : MusicManager = new MusicManager();
 			TRegistry.instance.setValue("music_manager", music);
-			music.addTrack("track1", new track1);
-			music.addTrack("track2", new track2);
-			music.addTrack("track3", new track3);
-			music.addTrack("track4", new track4);
-			music.addTrack("track5", new track5);
-			
-			music.addTrack("track_lobby", new track_lobby);
-			
-			music.play("track1");
+			music.loadTrack("track1", "music/track1.mp3", true);
+			music.loadTrack("track2", "music/track2.mp3");
+			music.loadTrack("track3", "music/track3.mp3");
+			music.loadTrack("track4", "music/track4.mp3");
+			music.loadTrack("track5", "music/track5.mp3");
+			music.loadTrack("track_lobby", "music/track_lobby.mp3");
 			
 			// Настройка звуков
-			//@TODO
+			var sounds: SoundManager = new SoundManager();
+			TRegistry.instance.setValue("sound_manager", sounds);
+			sounds.addSound("shoot", new shootSnd);
+			sounds.addSound("hit", new hitSnd);
 		}
 	}
 }

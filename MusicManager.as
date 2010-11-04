@@ -5,6 +5,7 @@ package
 	import flash.media.SoundChannel;
 	import flash.media.SoundTransform;
 	import common.TRegistry;
+	import flash.net.URLRequest;
 	import flash.utils.Dictionary;
 	/**
 	 * ...
@@ -47,6 +48,20 @@ package
 		public function addTrack(trackName: String, track: Sound)
 		{
 			tracks[trackName] = track;
+		}
+		
+		public function loadTrack(trackName: String, trackUrl: String, autoplay: Boolean = false)
+		{
+			var track:Sound = new Sound();
+			track.load(new URLRequest(trackUrl));
+			track.addEventListener(Event.COMPLETE, 
+			function(e:Event): void {
+				addTrack(trackName, track);
+				
+				if (autoplay)
+					play(trackName);
+			}
+			);
 		}
 		
 		public function play(trackName:String)

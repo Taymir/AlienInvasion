@@ -31,7 +31,7 @@ package
 		
 		private function loop(e: Event) : void
 		{
-			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition"))
+			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition") + this.height / 2)
 			{
 				if (TRegistry.instance.getValue("debug_cannon_test"))
 					TRegistry.instance.getValue("player").Walk(tank_cannon_collision_detection);

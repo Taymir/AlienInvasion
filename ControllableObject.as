@@ -132,13 +132,13 @@ package
 		{
 			// переопределяется в наследниках
 			
-			this.playSound(TRegistry.instance.getValue("shootSnd"));
+			this.playSound("shoot");
 		}
 		
 		public function hit(hits: int) : void
 		{
 			this.doDamage(hits);
-			this.playSound(TRegistry.instance.getValue("hitSnd"));
+			this.playSound("hit");
 						
 			if (this.isDead())
 			{
@@ -182,13 +182,9 @@ package
 		}
 		
 		// Воспроизведение звуков
-		private function playSound(sound : Sound) : void
+		private function playSound(soundName : String) : void
 		{
-			if (TRegistry.instance.getValue("config_play_sounds"))
-			{
-				var snd:Sound = sound;
-				snd.play();
-			}
+			(TRegistry.instance.getValue("sound_manager") as SoundManager).play(soundName);
 		}
 	}
 
