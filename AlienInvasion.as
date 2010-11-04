@@ -30,8 +30,9 @@
 			
 			// Sounds 
 			TRegistry.instance.setValue("config_play_sounds", true);
+			TRegistry.instance.setValue("config_play_music", true);
+			
 			TRegistry.instance.setValue("shootSnd", new shootSnd());
-			//@TODO: сделать этот звук по-тише, а то крыша съедет от его постоянного воспроизведения
 			TRegistry.instance.setValue("hitSnd", new hitSnd());
 			
 			var player:TList = new TList();
@@ -61,6 +62,22 @@
 			enemies.push(ufo);
 			ufo.x = 300;
 			ufo.y = 300;*/
+			
+			// Настройка музыки
+			var music : MusicManager = new MusicManager();
+			TRegistry.instance.setValue("music_manager", music);
+			music.addTrack("track1", new track1);
+			music.addTrack("track2", new track2);
+			music.addTrack("track3", new track3);
+			music.addTrack("track4", new track4);
+			music.addTrack("track5", new track5);
+			
+			music.addTrack("track_lobby", new track_lobby);
+			
+			music.play("track1");
+			
+			// Настройка звуков
+			//@TODO
 		}
 	}
 }

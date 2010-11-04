@@ -156,7 +156,7 @@ package
 		
 		private function isDead() : Boolean
 		{
-			return this.hitPoints <= 0;
+			return (this.hitPoints <= 0);
 		}
 		
 		protected function destroy() : void
