@@ -17,15 +17,17 @@
 		
 		public function UFO() : void
 		{
-			addEventListener(Event.ENTER_FRAME, update);
+			// Привязываемся к глобальному обновлятору
+			TRegistry.instance.getValue("globalEnterFrame").Add(update);
+			
 			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"
 			//@REFACTOR: Как-то упростить эти длинные конструкции
 			var tank:Tank = (TRegistry.instance.getValue("player") as TList).Iterator().CurrentItem() as Tank;
 			ai = new SimpleAI(this, tank);
 		}
 		
-		protected function update(e : Event) : void
-		{
+		protected function update() : void
+		{	
 			ai.update();
 			slowdownXShift();
 			slowdownYShift();
@@ -67,7 +69,8 @@
 			(TRegistry.instance.getValue("enemies") as TList).Remove(this);
 			
 			//Отвязываем все события
-			this.removeEventListener(Event.ENTER_FRAME, update);
+			//this.removeEventListener(TRegistry.instance.getValue("globalEnterFrame").Add, update);
+			TRegistry.instance.getValue("globalEnterFrame").Remove(update);
 			
 			//Уничтожение продолжается в родительском методе
 			super.destroy();

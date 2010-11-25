@@ -8,7 +8,7 @@ package
 	
 	public final class Tank extends UserControlledObject
 	{
-		protected override function keyHandler(e:Event) : void
+		protected override function keyHandler() : void
 		{
 			// Обработка нажатий
 			if (key.isDown(Keyboard.LEFT))

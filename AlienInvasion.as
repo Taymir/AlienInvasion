@@ -8,6 +8,7 @@
 	import tests.*;
 
 	public class AlienInvasion extends MovieClip {
+		private var gameStateManager:GameStateManager;
 		
 		public function AlienInvasion() {		
 			this.initGame();
@@ -32,33 +33,11 @@
 			TRegistry.instance.setValue("config_play_sounds", true);
 			TRegistry.instance.setValue("config_play_music", true);
 			
-			var player:TList = new TList();
-			TRegistry.instance.setValue("player", player);
-			var tank: Tank = new Tank();
-			player.Add(tank);
-			tank.x = stage.stageWidth / 2;
-			tank.y = TRegistry.instance.getValue("groundPosition") - 20; //@TMP: Надо поправить координаты муви-клипов
-			
-			var enemies:TList = new TList();
-			TRegistry.instance.setValue("enemies", enemies);
-			
-			var ufo;
-			if (TRegistry.instance.getValue("debug_ufo_test"))
-				ufo = new TesterUFO();
-			else
-				ufo = new UFO();
-			
-			enemies.Add(ufo);
-			ufo.x = 100;
-			ufo.y = 100;
-			/*ufo = new UFO()
-			enemies.push(ufo);
-			ufo.x = 200;
-			ufo.y = 200;
-			ufo = new UFO()
-			enemies.push(ufo);
-			ufo.x = 300;
-			ufo.y = 300;*/
+			stage.addEventListener(KeyboardEvent.KEY_UP, Pause);			
+			var globalEnterFrame:GlobalEnterFrame = new GlobalEnterFrame();
+			TRegistry.instance.setValue("globalEnterFrame", globalEnterFrame);			
+			gameStateManager = new GameStateManager();
+			gameStateManager.startGame();			
 			
 			// Настройка музыки
 			var music : MusicManager = new MusicManager();
@@ -75,6 +54,12 @@
 			TRegistry.instance.setValue("sound_manager", sounds);
 			sounds.addSound("shoot", new shootSnd);
 			sounds.addSound("hit", new hitSnd);
+		}
+		
+		private function Pause(e:KeyboardEvent)
+		{
+			if (e.keyCode == 80)
+				gameStateManager.pauseGame();
 		}
 	}
 }

@@ -11,7 +11,7 @@ package
 	 */
 	public final class TesterUFO extends UserControlledObject
 	{
-		protected override function keyHandler(e:Event) : void
+		protected override function keyHandler() : void
 		{
 			// Обработка нажатий
 			if (key.isDown(65))
