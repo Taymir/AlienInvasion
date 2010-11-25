@@ -22,14 +22,35 @@
 		public function initGame() : void
 		{
 			TRegistry.instance.setValue("stage", stage);
+			TRegistry.instance.setValue("groundPosition", 415);
 			
+			/* инициализация сцены */
 			var scene:MovieClip = new Scene();
 			this.addChild(scene);
-
 			this.swapChildren(scene, uiPanel);
+			
+			/* инициализация препятствий */
+			var left_rocks = new rocks();
+			var right_rocks = new rocks();
+			
+			scene.addChild(left_rocks);
+			scene.addChild(right_rocks);
+			
+			left_rocks.y = TRegistry.instance.getValue("groundPosition") + left_rocks.height / 2;
+			left_rocks.x = scene.bounds.x + left_rocks.width / 2;
+			
+			right_rocks.y = TRegistry.instance.getValue("groundPosition") + right_rocks.height / 2;
+			right_rocks.x = scene.bounds.width + scene.bounds.x - right_rocks.width / 2;
+			
+			var obstacles:TList = new TList();
+			obstacles.Add(left_rocks);
+			obstacles.Add(right_rocks);
+			TRegistry.instance.setValue("obstacles", obstacles);
+			
+			
 			TRegistry.instance.setValue("userHp", uiPanel.userHp);
 			TRegistry.instance.setValue("scene", scene);
-			TRegistry.instance.setValue("groundPosition", 415);
+
 			
 			TRegistry.instance.setValue("debug_cannon_test", false);
 			TRegistry.instance.setValue("debug_ufo_test", false);

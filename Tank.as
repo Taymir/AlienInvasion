@@ -2,6 +2,7 @@ package
 {
 	import common.TList.TList;
 	import common.TRegistry;
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
@@ -32,6 +33,32 @@ package
 			
 			// Проверка на нахождение в пределах игрового экрана
 			checkAndPlaceWithinScreenBounds();
+			
+			// Проверка на столкновения с препятствиями
+			collisionDetection();
+		}
+		
+		private function collisionDetection() : void
+		{
+			/*
+			 * Если среди списка препятствий имеется hitTest=true
+			 * то reflectXVelocity (прозводим отталкивание от препятствия)
+			 */
+			TRegistry.instance.getValue("obstacles").Walk(collision_test_with);
+		}
+		
+		private function collision_test_with(obj: Object) : int
+		{
+			var obstacle:MovieClip = obj as MovieClip;
+			
+			if (this.hitTestObject(obstacle))
+			{
+				this.reflectXVelocity();
+				 //@TOTHINK: а надо ли останавливать поиск после первого столкновения?
+				return TList.STOP_WALKING;
+			}
+			
+			return TList.CONTINUE_WALKING;
 		}
 		
 		public override function fire() : void

@@ -55,24 +55,34 @@ package
 			if (x + halfWidth() > scene.bounds.width)
 			{
 				x = scene.bounds.width - halfWidth();
-				velocity.x = -velocity.x;
+				reflectXVelocity();
 			}
 			else if (x - halfWidth() < 0)
 			{
 				x = halfWidth();
-				velocity.x = -velocity.x;
+				reflectXVelocity();
 			}
 			
 			if (y + halfHeight() > scene.bounds.height)
 			{
 				y = scene.bounds.height - halfHeight();
-				velocity.y = -velocity.y;
+				reflectYVelocity();
 			}
 			else if (y - halfHeight() < 0)
 			{
 				y = halfHeight();
-				velocity.y = -velocity.y;
+				reflectYVelocity();
 			}
+		}
+		
+		protected function reflectXVelocity()
+		{
+			velocity.x = -velocity.x;
+		}
+		
+		protected function reflectYVelocity()
+		{
+			velocity.y = -velocity.y;
 		}
 		
 		private function halfWidth() : Number

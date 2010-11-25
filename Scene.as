@@ -32,7 +32,6 @@ package
 			if (player.Count() > 0)
 			{
 				var tank = player.Get(0) as Tank;
-				//this.x = tank.x;
 				this.x = -1 * (tank.x - 400);
 			}
 		}
