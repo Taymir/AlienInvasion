@@ -22,21 +22,26 @@
 		public function initGame() : void
 		{
 			TRegistry.instance.setValue("stage", stage);
+			
+			var scene:MovieClip = new Scene();
+			this.addChild(scene);
+
+			this.swapChildren(scene, uiPanel);
 			TRegistry.instance.setValue("userHp", uiPanel.userHp);
 			TRegistry.instance.setValue("scene", scene);
-			TRegistry.instance.setValue("groundPosition", 410);
+			TRegistry.instance.setValue("groundPosition", 415);
 			
 			TRegistry.instance.setValue("debug_cannon_test", false);
 			TRegistry.instance.setValue("debug_ufo_test", false);
 			
-			TRegistry.instance.setValue("config_play_sounds", true);
-			TRegistry.instance.setValue("config_play_music", true);
+			TRegistry.instance.setValue("config_play_sounds", false);
+			TRegistry.instance.setValue("config_play_music", false);
 			
 			var player:TList = new TList();
 			TRegistry.instance.setValue("player", player);
 			var tank: Tank = new Tank();
 			player.Add(tank);
-			tank.x = stage.stageWidth / 2;
+			tank.x = 400;
 			tank.y = TRegistry.instance.getValue("groundPosition") - 20; //@TMP: Надо поправить координаты муви-клипов
 			
 			var enemies:TList = new TList();

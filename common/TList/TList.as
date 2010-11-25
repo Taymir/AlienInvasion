@@ -240,6 +240,28 @@ package common.TList
 			return null;
 		}
 		
+		/*
+		 * Возвращает элемент под индексом num
+		 */
+		public function Get(num: int) : Object
+		{
+			var it:TListIterator = this.Iterator();
+			var index: int = 0;
+			
+			// Перебираем список
+			while (!it.isAtEnd())
+			{
+				// Применяем функцию к текущему элементу
+				if (num == index)
+					return it.CurrentItem();
+				
+				index++;
+				it.Next();
+			}
+			
+			return null;
+		}
+		
 		
 		
 		/*              РАБОТА С НОДАМИ (ДЛЯ ИТЕРАТОРА)                   */

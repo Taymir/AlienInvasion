@@ -52,9 +52,9 @@ package
 		
 		protected function checkAndPlaceWithinScreenBounds() : void
 		{
-			if (x + halfWidth() > scene.background.width)
+			if (x + halfWidth() > scene.bounds.width)
 			{
-				x = scene.background.width - halfWidth();
+				x = scene.bounds.width - halfWidth();
 				velocity.x = -velocity.x;
 			}
 			else if (x - halfWidth() < 0)
@@ -63,9 +63,9 @@ package
 				velocity.x = -velocity.x;
 			}
 			
-			if (y + halfHeight() > scene.background.height)
+			if (y + halfHeight() > scene.bounds.height)
 			{
-				y = scene.background.height - halfHeight();
+				y = scene.bounds.height - halfHeight();
 				velocity.y = -velocity.y;
 			}
 			else if (y - halfHeight() < 0)
