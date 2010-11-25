@@ -23,10 +23,11 @@ package
 			Debug.assert( TRegistry.instance.getValue("stage") != null, "В реестре TRegistry не установлено значение объекта сцены stage" );
 			stageRef = TRegistry.instance.getValue("stage");
 			
-			addEventListener(Event.ENTER_FRAME, trackTank, false, 0, true);
+			// Привязываемся к глобальному обновлятору
+			TRegistry.instance.getValue("globalEnterFrame").Add(trackTank);
 		}
 		
-		protected function trackTank(e: Event)
+		protected function trackTank()
 		{
 			var player:TList = TRegistry.instance.getValue("player");
 			if (player.Count() > 0)

@@ -26,10 +26,11 @@ package
 			this.y = y;
 			this.direction = direction;
 			
-			addEventListener(Event.ENTER_FRAME, loop, false, 0, true);
+			// Привязываемся к глобальному обновлятору
+			TRegistry.instance.getValue("globalEnterFrame").Add(loop);
 		}
 		
-		private function loop(e: Event) : void
+		private function loop() : void
 		{
 			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition") + this.height / 2)
 			{
@@ -84,7 +85,8 @@ package
 		private function Explode() : void
 		{
 			// Завершаем анимацию движения ракеты
-			removeEventListener(Event.ENTER_FRAME, loop, false);
+			//removeEventListener(TRegistry.instance.getValue("globalEnterFrame").Add, loop, false);
+			TRegistry.instance.getValue("globalEnterFrame").Remove(loop);
 			
 			// Отображаем анимацию взрыва по координатам ракеты
 			this.explosion = new Explosion();
