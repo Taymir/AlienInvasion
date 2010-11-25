@@ -63,7 +63,10 @@ package
 			updateMethods.Remove(func);
 		}
 		
-		
+		public function RemoveAll()
+		{
+			updateMethods.Clear();
+		}
 		
 	}
 
