@@ -79,6 +79,10 @@ package
 			
 			//Уничтожение продолжается в родительском методе
 			super.destroy();
+			
+			//Показываем месадж бокс и ставим на паузу
+			TRegistry.instance.getValue("gameDialog").MessageBox("<p align=\"center\"><b><font size=\"14\" color=\"#ffffff\">Конец игры, смерть всем человекам!</font></b><p>", 0xFF0000, 0.5, 20, 350, 1);
+			TRegistry.instance.getValue("gameStateManager").pauseGame();
 		}
 	}
 }
