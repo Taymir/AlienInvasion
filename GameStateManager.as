@@ -54,7 +54,7 @@ package
 			else
 			{
 				TRegistry.instance.getValue("stage").removeEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
-				isPause = true;
+				isPause = true;		
 			}
 		}
 	}

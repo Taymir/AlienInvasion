@@ -8,7 +8,6 @@
 	import tests.*;
 
 	public class AlienInvasion extends MovieClip {
-		private var gameStateManager:GameStateManager;
 		
 		public function AlienInvasion() {		
 			this.initGame();
@@ -36,8 +35,15 @@
 			stage.addEventListener(KeyboardEvent.KEY_UP, Pause);			
 			var globalEnterFrame:GlobalEnterFrame = new GlobalEnterFrame();
 			TRegistry.instance.setValue("globalEnterFrame", globalEnterFrame);			
-			gameStateManager = new GameStateManager();
+			
+			var gameStateManager:GameStateManager = new GameStateManager();
+			TRegistry.instance.setValue("gameStateManager", gameStateManager);
 			gameStateManager.startGame();			
+						
+			// Testing message box
+			var gd:GameDialog = new GameDialog();
+			TRegistry.instance.setValue("gameDialog", gd);			
+			//gd.MessageBox("<p align=\"center\"><b><font size=\"20\" color=\"#ffffff\">Самый охуенный Месаджбокс!!!</font></b><p>", 0xFF0000, 0.5, 20, 350, 1);
 			
 			// Настройка музыки
 			var music : MusicManager = new MusicManager();
@@ -59,7 +65,7 @@
 		private function Pause(e:KeyboardEvent)
 		{
 			if (e.keyCode == 80)
-				gameStateManager.pauseGame();
+				TRegistry.instance.getValue("gameStateManager").pauseGame();
 		}
 	}
 }
