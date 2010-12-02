@@ -6,6 +6,7 @@ package
 	import flash.events.Event;
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
+	import Missles.BaseMissle;
 	
 	public final class Tank extends UserControlledObject
 	{
@@ -66,7 +67,7 @@ package
 			//@TODO вынести в отдельный переопределяемый метод тело if-а
 			if (canFire)
 			{
-				new Missle(x, y, Missle.UP);
+				new Missle(x, y, BaseMissle.UP);
 				fireDelay();
 				super.fire();
 			}

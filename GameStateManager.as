@@ -1,6 +1,7 @@
 package  
 {
 	import common.TList.TList;
+	import Enemies.small_ship;
 	import flash.display.MovieClip;
 	import common.TRegistry;
 	import flash.events.Event;
@@ -64,14 +65,31 @@ package
 			TRegistry.instance.setValue("enemies", enemies);
 			
 			var ufo;
-			if (TRegistry.instance.getValue("debug_ufo_test"))
+			/*if (TRegistry.instance.getValue("debug_ufo_test"))
 				ufo = new TesterUFO();
 			else
 				ufo = new UFO();
 			
 			enemies.Add(ufo);
 			ufo.x = 100;
-			ufo.y = 100;
+			ufo.y = 100;*/
+			
+			ufo = new small_ship();
+			ufo.x = 200;
+			ufo.y = 150;
+			enemies.Add(ufo);
+			
+			ufo = new small_ship();
+			ufo.x = 300;
+			ufo.y = 150;
+			enemies.Add(ufo);
+		
+			ufo = new small_ship();
+			ufo.x = 400;
+			ufo.y = 150;
+			enemies.Add(ufo);
+
+			enemies.Add(ufo);
 			
 			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
 		}

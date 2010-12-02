@@ -4,6 +4,7 @@ package
 	import common.TList.TList;
 	import flash.events.Event;
 	import flash.ui.Keyboard;
+	import Missles.BaseMissle;
 	
 	/**
 	 * ...
@@ -48,7 +49,7 @@ package
 		{
 			if (canFire)
 			{
-				new Missle(x, y, Missle.DOWN);
+				new Missle(x, y, BaseMissle.DOWN);
 				fireDelay();
 			}
 		}
