@@ -25,19 +25,23 @@ package
 		public function MessageBox(str:String, color:uint, alpha:Number, padding:Number, width:Number, buttons:uint)
 		{
 			// Создаём текстовое поле
-			var text:TextField = makeTextField(str, 10, 10, width);
+			var text:TextField = makeTextField(str, padding, padding, width);
 					
 			switch(buttons)
 			{
-				case 0:
+				case CLOSE_DIALOG:
 					// Создаём кнопку
 					var button:SimpleButton = new SimpleButton();
-					button = makeButton("Закрыть", 0xFFFFFF, 0xFF0000, 1, 100, 100, onCloseDialog);
+					button = makeButton("Закрыть", 0xFFFFFF, 0xFF0000, 1, padding, text.y + text.height + padding, onCloseDialog);
 					break;
 			}
 			
 			// Создаём окно и добавляем туда текстовое поле и кнопку
-			var window:MovieClip = makeWindow(0, 0, 400, 400, 0xFF0000, 0.5);
+			var windowWidth = text.width + padding * 2;
+			var windowHeight = text.height + padding * 3 + button.height;
+			var windowX = TRegistry.instance.getValue("stage").stageWidth / 2 - windowWidth / 2;
+			var windowY = TRegistry.instance.getValue("stage").stageHeight / 2 - (windowHeight) / 2;
+			var window:MovieClip = makeWindow(windowX, windowY, windowWidth, windowHeight, 0xFF0000, 0.5);
 			window.addChild(text);
 			window.addChild(button);
 			
@@ -76,8 +80,8 @@ package
 			button.overState = movieClip;
 			button.downState = movieClip;
 			button.hitTestState = movieClip;
-			button.y = x;
-			button.x = y;
+			button.y = y;
+			button.x = x;
 			button.addEventListener(MouseEvent.CLICK, funcEvent);
 			
 			return button;
