@@ -17,7 +17,7 @@ package
 		protected var velocity: Vector2D = new Vector2D;
 		protected var friction:Number = 0.93;
 		protected var maxspeed:Number = 15;
-		protected var maxHitPoints: int = 10;
+		protected var maxHitPoints: int = 100;
 		
 		protected var hitPoints: int = maxHitPoints;
 		protected var canFire : Boolean = true;

@@ -88,6 +88,11 @@ package
 			ufo.x = 400;
 			ufo.y = 150;
 			enemies.Add(ufo);
+			
+			ufo = new small_ship();
+			ufo.x = 500;
+			ufo.y = 150;
+			enemies.Add(ufo);
 
 			enemies.Add(ufo);
 			

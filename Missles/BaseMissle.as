@@ -15,8 +15,9 @@ package Missles
 		public static const UP:int = 0;
 		public static const DOWN:int = 1;
 		
-		private var speed:Number = 17;
-		private var direction:int = 0;
+		protected var speed:Number = 17;
+		protected var damage: Number = 10;
+		protected var direction:int = 0;
 		
 		private var explosion:Explosion;
 		
@@ -61,7 +62,7 @@ package Missles
 			if (this.hitTestObject(targetObj.cannon))
 			{
 				this.Explode();
-				targetObj.hit(1);
+				targetObj.hit(this.damage);
 				return TList.STOP_WALKING;
 			}
 			
@@ -75,7 +76,7 @@ package Missles
 			if (this.hitTestObject(targetObj))
 			{
 				this.Explode();
-				targetObj.hit(1);
+				targetObj.hit(damage);
 				return TList.STOP_WALKING;
 			}
 			

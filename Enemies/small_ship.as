@@ -1,6 +1,8 @@
 package Enemies 
 {
 	import Enemies.BaseEnemy;
+	import Missles.BaseMissle;
+	import Missles.laser_arrows;
 	
 	/**
 	 * ...
@@ -18,7 +20,16 @@ package Enemies
 			this.hitPoints = this.maxHitPoints;
 		}
 		
-		
+		public override function fire():void
+		{
+			//@TODO вынести в отдельный переопределяемый метод тело if-а
+			if (canFire)
+			{
+				new laser_arrows(x, y, BaseMissle.DOWN);
+				fireDelay();
+				super.fire();
+			}
+		}
 	}
 
 }
