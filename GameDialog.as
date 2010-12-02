@@ -15,78 +15,105 @@ package
 	 */
 	public class GameDialog
 	{
-		private var msgBox:MovieClip;
-		private var btn:SimpleButton;
+		public static const CLOSE_DIALOG = 0;
 		
 		public function GameDialog() 
 		{
 			
 		}
 		
-		public function MessageBox(str:String, color:uint, alpha:Number, padding:Number, width:Number, button:Number)
+		public function MessageBox(str:String, color:uint, alpha:Number, padding:Number, width:Number, buttons:uint)
 		{
 			// Создаём текстовое поле
-			var textField:TextField = new TextField();
-			textField.htmlText = str;
-			textField.wordWrap = true;
-			textField.multiline = true;
-			textField.autoSize = TextFieldAutoSize.LEFT;
-			textField.x = padding;
-			textField.y = padding;
-			textField.width = width;
-			
-			// Создаём кнопку
-			btn = new SimpleButton();
-			
-			switch(button)
+			var text:TextField = makeTextField(str, 10, 10, width);
+					
+			switch(buttons)
 			{
 				case 0:
-					break;
-				case 1:
-					var textBtn:TextField = new TextField();
-					textBtn.text = "Закрыть";
-					textBtn.autoSize = TextFieldAutoSize.LEFT;
-				
-					var shapeBtn:Shape = new Shape();
-					shapeBtn.graphics.beginFill(0xffffff, alpha);
-					shapeBtn.graphics.drawRect(0, 0, textBtn.width, textBtn.height);
-					shapeBtn.graphics.endFill();
-					
-					var movieBtn:MovieClip = new MovieClip;
-					movieBtn.addChild(shapeBtn);
-					movieBtn.addChild(textBtn);
-					
-					btn.upState = movieBtn;
-					btn.overState = movieBtn;
-					btn.downState = movieBtn;
-					btn.y = textField.height + padding;
-					btn.x = padding;
-					btn.hitTestState = shapeBtn;
-					btn.addEventListener(MouseEvent.CLICK, onCloseDialog);
+					// Создаём кнопку
+					var button:SimpleButton = new SimpleButton();
+					button = makeButton("Закрыть", 0xFFFFFF, 0xFF0000, 1, 100, 100, onCloseDialog);
 					break;
 			}
 			
-			// Создаём окно
-			var shape:Shape = new Shape();
-			shape.graphics.beginFill(color, alpha);
-			shape.graphics.drawRect(0, 0, textField.width + padding * 2, textField.height + padding * 2 + btn.height);
-			shape.graphics.endFill();
+			// Создаём окно и добавляем туда текстовое поле и кнопку
+			var window:MovieClip = makeWindow(0, 0, 400, 400, 0xFF0000, 0.5);
+			window.addChild(text);
+			window.addChild(button);
 			
-			// Создаём мувиклип и добавляем туда ранее созданные поле и окно
-			msgBox = new MovieClip();
-			msgBox.addChild(shape);
-			msgBox.addChild(textField);
-			msgBox.x = TRegistry.instance.getValue("stage").stageWidth / 2 - msgBox.width / 2;
-			msgBox.y = TRegistry.instance.getValue("stage").stageHeight / 2 - msgBox.height / 2;
-			msgBox.addChild(btn);
-			
-			TRegistry.instance.getValue("stage").addChild(msgBox);
+			TRegistry.instance.getValue("stage").addChild(window);
 		}		
 		
 		public function onCloseDialog(e:Event)
 		{
-			TRegistry.instance.getValue("stage").removeChild(msgBox);
-			btn.removeEventListener(MouseEvent.CLICK, onCloseDialog);
+			TRegistry.instance.getValue("stage").removeChild(e.currentTarget.parent);
+			e.currentTarget.removeEventListener(MouseEvent.CLICK, onCloseDialog);
+		}
+		
+		// Создание кнопки
+		private function makeButton(title:String, colorText:uint, colorBackground:uint, alpha:Number, x:Number, y:Number, funcEvent:Function) : SimpleButton
+		{
+			// Создаём текстовое поле для надписи на кнопке
+			var textField:TextField = new TextField();
+			textField.text = title;
+			textField.textColor = colorText;
+			textField.autoSize = TextFieldAutoSize.LEFT;
+			
+			// Создаём тело кнопки (фигуру "прямоугольник")
+			var shapeBody:Shape = new Shape();
+			shapeBody.graphics.beginFill(colorBackground, alpha);
+			shapeBody.graphics.drawRect(0, 0, textField.width, textField.height);
+			shapeBody.graphics.endFill();
+			
+			// Создаём мувиклип, что бы объединить текстовое поле и тело			
+			var movieClip:MovieClip = new MovieClip;
+			movieClip.addChild(shapeBody);
+			movieClip.addChild(textField);
+					
+			// Создаём кнопку и добавляем туда ранее созданый мувиклип
+			var button:SimpleButton = new SimpleButton();
+			button.upState = movieClip;
+			button.overState = movieClip;
+			button.downState = movieClip;
+			button.hitTestState = movieClip;
+			button.y = x;
+			button.x = y;
+			button.addEventListener(MouseEvent.CLICK, funcEvent);
+			
+			return button;
+		}
+		
+		// Создание окна
+		private function makeWindow(x:Number, y:Number, width:uint, height:uint, colorBackground:uint, alpha:Number) : MovieClip
+		{
+			// Создаём прямоугольник (как бы тело окна)
+			var shapeBody:Shape = new Shape();
+			shapeBody.graphics.beginFill(colorBackground, alpha);
+			shapeBody.graphics.drawRect(0, 0, width, height);
+			shapeBody.graphics.endFill();
+			
+			// Создаём контейнер и суём туда тело окна
+			var window:MovieClip = new MovieClip();
+			window.addChild(shapeBody);
+			window.x = x;
+			window.y = y;
+			
+			return window;
+		}
+		
+		// Создание текстового поля
+		private function makeTextField(text:String, x:Number, y:Number, width:uint) : TextField
+		{
+			var textField:TextField = new TextField();
+			textField.htmlText = text;
+			textField.wordWrap = true;
+			textField.multiline = true;
+			textField.autoSize = TextFieldAutoSize.LEFT;
+			textField.x = x;
+			textField.y = y;
+			textField.width = width;
+			
+			return textField;
 		}
 	}
 
