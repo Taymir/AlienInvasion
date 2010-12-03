@@ -10,12 +10,13 @@ package AI
 	{
 		private var self : GameObject;
 		private var target : GameObject;
-		private const reachDistance : int = 20;
+		public var reachDistance : int;
 		
-		public function ReachedTransition(self : GameObject, target : GameObject) 
+		public function ReachedTransition(self : GameObject, target : GameObject, reachDistance:int = 20) 
 		{
 			this.self = self;
 			this.target = target;
+			this.reachDistance = reachDistance;
 		}
 		
 		protected override function isTriggered() : Boolean

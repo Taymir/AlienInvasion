@@ -30,8 +30,8 @@
 			// Настройки
 			TRegistry.instance.setValue("debug_cannon_test", false);
 			TRegistry.instance.setValue("debug_ufo_test", false);
-			TRegistry.instance.setValue("config_play_sounds", false);
-			TRegistry.instance.setValue("config_play_music", false);
+			TRegistry.instance.setValue("config_play_sounds", true);
+			TRegistry.instance.setValue("config_play_music", true);
 			
 			// Инициализаци UI
 			uiPanel.fps.visible = true; //@DEBUG

@@ -73,28 +73,18 @@ package
 			enemies.Add(ufo);
 			ufo.x = 100;
 			ufo.y = 100;*/
-			
-			ufo = new small_ship();
-			ufo.x = 200;
-			ufo.y = 150;
-			enemies.Add(ufo);
-			
-			ufo = new small_ship();
-			ufo.x = 300;
-			ufo.y = 150;
-			enemies.Add(ufo);
-		
-			ufo = new small_ship();
-			ufo.x = 400;
-			ufo.y = 150;
-			enemies.Add(ufo);
-			
-			ufo = new small_ship();
-			ufo.x = 500;
-			ufo.y = 150;
-			enemies.Add(ufo);
 
-			enemies.Add(ufo);
+            
+            var maxEnemies: int = 5;
+            for(var i:int = 0; i < maxEnemies; i++)
+            {
+                ufo = new small_ship();
+                ufo.x = 0 + 100 * i;
+                ufo.y = 150;
+                enemies.Add(ufo);
+            }
+
+			
 			
 			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
 		}
@@ -137,6 +127,22 @@ package
 			//@TODO: Не работает: Танк не удаляется, Нло не удаляется... Где остаются ссылки на них?
 			/*this.endGame();
 			this.startGame();*/
+		}
+		
+		public function checkEndGame()
+		{
+			if (TRegistry.instance.getValue("player").Count() == 0)
+			{
+				// Игрок погиб, конец игры
+				// Показываем месадж бокс и ставим на паузу
+				TRegistry.instance.getValue("gameDialog").MessageBox("<p align=\"center\"><b><font size=\"14\" color=\"#ffffff\">Конец игры, смерть всем человекам!</font></b><p>", 0xFF0000, 0.5, 20, 350, GameDialog.CLOSE_DIALOG);
+				this.pauseGame();
+			} else if (TRegistry.instance.getValue("enemies").Count() == 0) {
+				// Враги Повержены, конец игры
+				// Показываем месадж бокс и ставим на паузу
+				TRegistry.instance.getValue("gameDialog").MessageBox("<p align=\"center\"><b><font size=\"14\" color=\"#ffffff\">Инопланетные захватчики повержены! УРА! УРА! УРА!</font></b><p>", 0xFF0000, 0.5, 20, 350, GameDialog.CLOSE_DIALOG);
+				this.pauseGame();
+			}
 		}
 	}
 

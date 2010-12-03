@@ -16,7 +16,7 @@ package AI
 		{
 			this.self = self;
 			this.target = target;
-			name = "Избегаю манула";
+			name = "Избежание";
 		}
 		
 		protected override function action () : void

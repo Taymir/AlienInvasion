@@ -16,7 +16,7 @@ package AI
 		{
 			this.self = self;
 			this.target = target;
-			name = "Преследую манула";
+			name = "Преследование";
 		}
 		
 		protected override function action () : void
@@ -25,9 +25,11 @@ package AI
 			{
 				// Танк находится справа
 				if (self.x < target.x)
+				{
 					self.incXShift();
-				else
+				} else {
 					self.decXShift();
+				}
 			}
 		}
 	}

@@ -27,6 +27,7 @@ package AI
 			lostTransition.nextFalseState = pursueState; // false state
 			attackTimeoutTransition.nextTrueState = avoidState;
 			
+			FSM.FSM.debug_mode = false;
 			fsm = new FSM.FSM(avoidState);
 		}
 		

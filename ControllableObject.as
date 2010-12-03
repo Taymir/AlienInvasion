@@ -192,7 +192,7 @@ package
 		}
 		
 		// Воспроизведение звуков
-		private function playSound(soundName : String) : void
+		protected function playSound(soundName : String) : void
 		{
 			(TRegistry.instance.getValue("sound_manager") as SoundManager).play(soundName);
 		}

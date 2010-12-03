@@ -15,7 +15,7 @@ package Enemies
 	 */
 	public class BaseEnemy extends ControllableObject
 	{
-		private var ai : SimpleAI;
+		//private var ai : SimpleAI;//@REFACTOR: вынести в UFO
 		
 		public function BaseEnemy() : void
 		{
@@ -24,13 +24,13 @@ package Enemies
 			
 			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"
 			//@REFACTOR: Как-то упростить эти длинные конструкции
-			var tank:Tank = (TRegistry.instance.getValue("player") as TList).Iterator().CurrentItem() as Tank;
-			ai = new SimpleAI(this, tank);
+			/*var tank:Tank = (TRegistry.instance.getValue("player") as TList).Get(0) as Tank;
+			ai = new SimpleAI(this, tank);*///@REFACTOR: вынести в UFO
 		}
 		
 		protected function update() : void
 		{	
-			ai.update();
+			//ai.update();//@REFACTOR: вынести в UFO
 			slowdownXShift();
 			slowdownYShift();
 			
@@ -49,19 +49,19 @@ package Enemies
 			checkAndPlaceWithinScreenBounds();
 		}
 		
-		private function inertiaDeviation() : void
+		private function inertiaDeviation() : void//@REFACTOR: вынести в UFO
 		{
 			rotation = velocity.x;
 		}
 		
 		public override function fire () : void
 		{
-			//@TODO вынести в отдельный переопределяемый метод тело if-а
+			//@REFACTOR вынести в отдельный переопределяемый метод тело if-а
 			if (canFire)
 			{
-				new Missle(x, y, BaseMissle.DOWN);
+				new Missle(x, y, BaseMissle.DOWN);//@REFACTOR: вынести в UFO
 				fireDelay();
-				super.fire();
+				this.playSound("shoot");//@HARDFIX: не работали звуки стрельбы
 			}
 		}
 		
@@ -76,6 +76,9 @@ package Enemies
 			
 			//Уничтожение продолжается в родительском методе
 			super.destroy();
+			
+			// Проверка конца игры
+			TRegistry.instance.getValue("gameStateManager").checkEndGame();
 		}
 		
 	}
