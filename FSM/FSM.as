@@ -11,7 +11,7 @@ package FSM
 		
 		public function FSM(initialState: State) 
 		{
-			this.currentState = initialState;
+			this.changeState(initialState);
 		}
 		
 		public function update() : void

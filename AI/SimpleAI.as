@@ -1,6 +1,8 @@
 package AI 
 {
 	import FSM.FSM;
+	import AI.State.*;
+	import AI.Transition.*;
 	/**
 	 * ...
 	 * @author Akkarin

@@ -1,4 +1,4 @@
-package AI 
+package AI.Transition
 {
 	import Enemies.small_ship;
 	import FSM.Transition;

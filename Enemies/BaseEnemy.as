@@ -8,6 +8,7 @@ package Enemies
 	import flash.ui.Keyboard;
 	import ControllableObject;
 	import Missles.BaseMissle;
+	import Missles.Missle;
 	
 	/**
 	 * ...

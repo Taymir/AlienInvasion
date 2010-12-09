@@ -1,4 +1,4 @@
-package AI 
+package AI.State
 {
 	import common.Debug;
 	import FSM.State;

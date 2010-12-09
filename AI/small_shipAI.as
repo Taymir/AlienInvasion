@@ -3,6 +3,8 @@ package AI
 	import common.TRegistry;
 	import Enemies.small_ship;
 	import FSM.FSM;
+	import AI.State.*;
+	import AI.Transition.*;
 	/**
 	 * ...
 	 * @author Taymir
@@ -29,7 +31,6 @@ package AI
 			var canNotSeeTransition : InSightTransition = new InSightTransition(self, target, 300);
 			var canNotShootTransition : ReachedTransition = new ReachedTransition(self, target, 70);
 			
-			
 			climbState.transitions = new Array(canSeeTransition);
 			canSeeTransition.nextTrueState = descentState;
 			descentState.transitions = new Array(canShootTransition, canNotSeeTransition);
@@ -38,7 +39,6 @@ package AI
 			atackState.transitions = new Array(canNotShootTransition);
 			canNotShootTransition.nextFalseState = climbState;
 			
-			FSM.FSM.debug_mode = false;
 			fsm = new FSM.FSM(climbState);
 		}
 		

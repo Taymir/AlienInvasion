@@ -1,5 +1,7 @@
-package AI 
+package AI.Transition
 {
+	import common.MathExtra;
+	import FSM.State;
 	import FSM.Transition;
 	
 	/**
@@ -21,7 +23,7 @@ package AI
 		public override function initialize():void
 		{
 			var timeDelay : int;
-			timeDelay = Math.floor((maxTimeDelay - minTimeDelay) * Math.random() + minTimeDelay);
+			timeDelay = MathExtra.RandomInt(minTimeDelay, maxTimeDelay);
 			endTime = new Date();
 			endTime.milliseconds += timeDelay;
 		}

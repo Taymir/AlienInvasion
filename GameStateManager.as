@@ -1,6 +1,7 @@
 package  
 {
 	import common.TList.TList;
+	import Enemies.large_ship;
 	import Enemies.small_ship;
 	import flash.display.MovieClip;
 	import common.TRegistry;
@@ -75,14 +76,19 @@ package
 			ufo.y = 100;*/
 
             
-            var maxEnemies: int = 5;
+            /*var maxEnemies: int = 5;
             for(var i:int = 0; i < maxEnemies; i++)
             {
                 ufo = new small_ship();
                 ufo.x = 0 + 100 * i;
                 ufo.y = 150;
                 enemies.Add(ufo);
-            }
+            }*/
+			
+			ufo = new large_ship();
+			ufo.x = 800;
+			ufo.y = 50;
+			enemies.Add(ufo);
 
 			
 			

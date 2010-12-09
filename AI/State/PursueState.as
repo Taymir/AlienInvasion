@@ -1,4 +1,4 @@
-package AI 
+package AI.State
 {
 	import FSM.State;
 	
@@ -8,9 +8,8 @@ package AI
 	 */
 	public class PursueState extends State
 	{
-		private var self : ControllableObject;
-		private var target : GameObject;
-		private const reachDistance : int = 20;
+		protected var self : ControllableObject;
+		protected var target : GameObject;
 		
 		public function PursueState(self : ControllableObject, target : GameObject) 
 		{
@@ -21,15 +20,12 @@ package AI
 		
 		protected override function action () : void
 		{
-			if (Math.abs(self.x - target.x) > reachDistance)
+			// Танк находится справа
+			if (self.x < target.x)
 			{
-				// Танк находится справа
-				if (self.x < target.x)
-				{
-					self.incXShift();
-				} else {
-					self.decXShift();
-				}
+				self.incXShift();
+			} else {
+				self.decXShift();
 			}
 		}
 	}

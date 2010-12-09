@@ -1,5 +1,6 @@
 package 
 {
+	import AI.Transition.MissleDangerTransition;
 	import common.TList.TList;
 	import common.TRegistry;
 	import flash.display.MovieClip;
@@ -7,6 +8,7 @@ package
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
 	import Missles.BaseMissle;
+	import Missles.Missle;
 	
 	public final class Tank extends UserControlledObject
 	{
@@ -68,6 +70,11 @@ package
 			if (canFire)
 			{
 				new Missle(x, y, BaseMissle.UP);
+				
+				// Это сделанно для возможности некоторыми нлошками "засечь" стрельбу игрока... 
+				//возможно, существует более элегантное решение для этого...
+				MissleDangerTransition.reportMissleLunch(x, y); 
+
 				fireDelay();
 				super.fire();
 			}
