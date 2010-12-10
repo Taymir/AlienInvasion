@@ -33,10 +33,10 @@ package AI
 			var atackState: AttackState = new AttackState(self);
 			var evasiveManeuver: EvasiveManeuver = new EvasiveManeuver(self, tactical_position);
 			
-			var timeoutTransition: TimeoutTransition = new TimeoutTransition(5000, 7000);
+			var timeoutTransition: TimeoutTransition = new TimeoutTransition(500*1000, 600*1000);
 			var canSeeTransition: ReachedTransition = new ReachedTransition(self, target, shortPursueState.pursueDistance);
-			var canShootTransition: ReachedTransition = new ReachedTransition(self, target, 30);
-			var canNotShootTransition: ReachedTransition = new ReachedTransition(self, target, 30);
+			var canShootTransition: ReachedTransition = new ReachedTransition(self, target, 50);
+			var canNotShootTransition: ReachedTransition = new ReachedTransition(self, target, 50);
 			var canNotSeeTransition: ReachedTransition = new ReachedTransition(self, target, shortPursueState.pursueDistance);
 			var missleDangerTransition: MissleDangerTransition = new MissleDangerTransition(self);
 			var maneuverCompleteTransition: completeTransition = new completeTransition(evasiveManeuver);

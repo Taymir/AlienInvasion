@@ -15,7 +15,7 @@ package Enemies
 		public function large_ship() 
 		{
 			this.fireDelayPeriod = 400;
-			this.speed = 3;
+			this.speed = 3.5;
 			this.friction = 0.7;
 			this.maxspeed = 15;
 			this.maxHitPoints = 30;

@@ -25,18 +25,24 @@ package AI.State
 		protected override function action() : void
 		{
 			// Если до position > minDistance пикселей
-			if (MathExtra.isDistanceMoreThen(self.x, self.y, position.x, position.y, minDistance))
+			if (Math.abs(self.x - position.x) > minDistance)
+			{
+				if(self.x > position.x)
+					self.decXShift();
+				else if(self.x < position.x)
+					self.incXShift();
+			} else {
+				self.slowdownXShift();
+			}
+			
+			if (Math.abs(self.y - position.y) > minDistance)
 			{
 				if (self.y > position.y)
 					self.decYShift();
 				else if(self.y < position.y)
 					self.incYShift();
-				else if(self.x > position.x)
-					self.decXShift();
-				else if(self.x < position.x)
-					self.incXShift();
-				
-
+			} else {
+				self.slowdownYShift();
 			}
 		}
 		

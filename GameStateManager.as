@@ -81,7 +81,7 @@ package
             {
                 ufo = new small_ship();
                 ufo.x = 0 + 100 * i;
-                ufo.y = 150;
+                ufo.y = 170;
                 enemies.Add(ufo);
             }*/
 			

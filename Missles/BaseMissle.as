@@ -49,13 +49,18 @@ package Missles
 				y -= speed;
 			}
 			else 
-			{			
-				this.Explode();
+			{
+				this.groundExplosion();
 			}
 		}
 		
+		protected function groundExplosion()
+		{
+			this.Explode();
+		}
+		
 		// Test method for Innet
-		private function tank_cannon_collision_detection(obj: Object) : int
+		protected function tank_cannon_collision_detection(obj: Object) : int
 		{
 			var targetObj: Tank = obj as Tank;
 			
@@ -69,7 +74,7 @@ package Missles
 			return TList.CONTINUE_WALKING;
 		}
 		
-		private function collision_detection_callback(obj: Object) : int
+		protected function collision_detection_callback(obj: Object) : int
 		{
 			var targetObj: ControllableObject = obj as ControllableObject;
 			
@@ -83,14 +88,14 @@ package Missles
 			return TList.CONTINUE_WALKING;
 		}
 		
-		private function Explode() : void
+		protected function Explode() : void
 		{
 			// Завершаем анимацию движения ракеты
 			//removeEventListener(TRegistry.instance.getValue("globalEnterFrame").Add, loop, false);
 			TRegistry.instance.getValue("globalEnterFrame").Remove(loop);
 			
 			// Отображаем анимацию взрыва по координатам ракеты
-			this.explosion = new Explosion();
+			this.explosion = new Explosion();//@REFACTOR: вынести все настройки взрыва в класс взрыва
 			explosion.x = x;
 			explosion.y = y;
 			
@@ -102,7 +107,7 @@ package Missles
 			this.hide();
 		}
 		
-		private function stopExplosion() : void
+		protected function stopExplosion() : void//@REFACTOR: вынести все настройки взрыва в класс взрыва
 		{
 			explosion.stop();
 			

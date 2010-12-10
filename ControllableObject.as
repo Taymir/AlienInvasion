@@ -108,12 +108,12 @@ package
 				velocity.y = 0;
 		}
 		
-		protected function slowdownXShift() : void
+		public function slowdownXShift() : void
 		{
 			velocity.x *= friction;
 		}
 		
-		protected function slowdownYShift() : void
+		public function slowdownYShift() : void
 		{
 			velocity.y *= friction;
 		}

@@ -16,7 +16,6 @@ package AI.Transition
 			lastMisslePositionX = x;//@TOTHINK: может заменить на подписку на событие стрельбы танка??
 		}
 		
-		private const reachDistance: int = 20;
 		private var self:GameObject;
 		
 		public function MissleDangerTransition(self: GameObject) 
@@ -28,7 +27,7 @@ package AI.Transition
 		{
 			if (isNaN(lastMisslePositionX)) return false;
 			
-			if (Math.abs(self.x - lastMisslePositionX) <= reachDistance)
+			if (Math.abs(self.x - lastMisslePositionX) <= self.width / 2)
 			{
 				lastMisslePositionX = NaN;
 				return true;

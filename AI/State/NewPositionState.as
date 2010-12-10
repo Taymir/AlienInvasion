@@ -10,8 +10,8 @@ package AI.State
 	 */
 	public final class NewPositionState extends OneTickState
 	{
-		public var minY: int = 50;
-		public var maxY: int = 100;
+		public var minY: int = 40;
+		public var maxY: int = 150;
 		public var minX: int = 240;
 		public var maxX: int = 1240;
 		

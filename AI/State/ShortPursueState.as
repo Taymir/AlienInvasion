@@ -8,7 +8,7 @@ package AI.State
 	 */
 	public class ShortPursueState extends PursueState
 	{
-		public var pursueDistance : int = 100;
+		public var pursueDistance : int = 200;
 		private var position: Point;
 		
 		public function ShortPursueState(self:ControllableObject, target:GameObject, position: Point) 
