@@ -9,7 +9,7 @@ package Missles
 	//@TODO: Добавить повреждение не только  при прямом попадании
 	public final class grenades extends BaseMissle
 	{
-		private const explosionWaveRadius = 70;
+		private const explosionWaveRadius = 200;
 		
 		public function grenades(x:Number, y:Number, direction:int) 
 		{
@@ -31,24 +31,13 @@ package Missles
 			
 			if (Math.abs(targetObj.x - targetObj.width / 2 - this.x) <= explosionWaveRadius)
 			{
-				//@TODO: не работает, т.к. stopExplosion обрабатывает другой взрыв...
 				// Отображаем взрыв на танке
-				/*explosion = new Explosion();//@REFACTOR: вынести все настройки взрыва в класс взрыва
-				
 				if (targetObj.x < this.x)
-				{
 					// Удар по правому боку танка
-					explosion.x = targetObj.x + targetObj.width / 2;
-					explosion.y = targetObj.y;
-				} else {
+					new Explosion(targetObj.x + targetObj.width / 2, targetObj.y);
+				else
 					// Удар по правому боку танка
-					explosion.x = targetObj.x - targetObj.width / 2;
-					explosion.y = targetObj.y;
-				}
-				
-				// Проигрываем анимацию взрыва
-				explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
-				scene.addChild(explosion);*/
+					new Explosion(targetObj.x - targetObj.width / 2, targetObj.y);
 				
 				// Наносим повреждение танку
 				targetObj.hit(damage);

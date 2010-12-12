@@ -19,8 +19,6 @@ package Missles
 		protected var damage: Number = 10;
 		protected var direction:int = 0;
 		
-		private var explosion:Explosion;
-		
 		public function BaseMissle(x:Number, y:Number, direction:int) 
 		{
 			this.x = x;
@@ -35,10 +33,7 @@ package Missles
 		{
 			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition") + this.height / 2)
 			{
-				if (TRegistry.instance.getValue("debug_cannon_test"))
-					TRegistry.instance.getValue("player").Walk(tank_cannon_collision_detection);
-				else
-					TRegistry.instance.getValue("player").Walk(collision_detection_callback);
+				TRegistry.instance.getValue("player").Walk(collision_detection_callback);
 				
 				y += speed;
 			} 
@@ -59,21 +54,6 @@ package Missles
 			this.Explode();
 		}
 		
-		// Test method for Innet
-		protected function tank_cannon_collision_detection(obj: Object) : int
-		{
-			var targetObj: Tank = obj as Tank;
-			
-			if (this.hitTestObject(targetObj.cannon))
-			{
-				this.Explode();
-				targetObj.hit(this.damage);
-				return TList.STOP_WALKING;
-			}
-			
-			return TList.CONTINUE_WALKING;
-		}
-		
 		protected function collision_detection_callback(obj: Object) : int
 		{
 			var targetObj: ControllableObject = obj as ControllableObject;
@@ -91,27 +71,12 @@ package Missles
 		protected function Explode() : void
 		{
 			// Завершаем анимацию движения ракеты
-			//removeEventListener(TRegistry.instance.getValue("globalEnterFrame").Add, loop, false);
 			TRegistry.instance.getValue("globalEnterFrame").Remove(loop);
 			
-			// Отображаем анимацию взрыва по координатам ракеты
-			this.explosion = new Explosion();//@REFACTOR: вынести все настройки взрыва в класс взрыва
-			explosion.x = x;
-			explosion.y = y;
-			
-			// Проигрываем анимацию взрыва
-			explosion.addFrameScript(explosion.totalFrames - 1, stopExplosion);
-			scene.addChild(explosion);
+			new Explosion(x, y);
 			
 			// Прячем саму ракету
 			this.hide();
-		}
-		
-		protected function stopExplosion() : void//@REFACTOR: вынести все настройки взрыва в класс взрыва
-		{
-			explosion.stop();
-			
-			scene.removeChild(explosion);
 		}
 		
 	}

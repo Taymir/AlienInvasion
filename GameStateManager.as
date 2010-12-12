@@ -66,24 +66,14 @@ package
 			TRegistry.instance.setValue("enemies", enemies);
 			
 			var ufo;
-			/*if (TRegistry.instance.getValue("debug_ufo_test"))
-				ufo = new TesterUFO();
-			else
-				ufo = new UFO();
-			
-			enemies.Add(ufo);
-			ufo.x = 100;
-			ufo.y = 100;*/
-
-            
-            /*var maxEnemies: int = 5;
+            const maxEnemies: int = 5;
             for(var i:int = 0; i < maxEnemies; i++)
             {
                 ufo = new small_ship();
                 ufo.x = 0 + 100 * i;
                 ufo.y = 170;
                 enemies.Add(ufo);
-            }*/
+            }
 			
 			ufo = new large_ship();
 			ufo.x = 800;

@@ -23,8 +23,6 @@ package AI
 		
 		public function large_shipAI(self : ControllableObject, target : GameObject) 
 		{
-			// МНОГО БАГОВ: тряска нло, преследование не доходит до конца
-			//@TODO гранаты
 			//@TODO энергопоток
 			tactical_position = new Point(self.x, self.y);
 			var newPositionState: NewPositionState = new NewPositionState(self, tactical_position);
@@ -33,10 +31,10 @@ package AI
 			var atackState: AttackState = new AttackState(self);
 			var evasiveManeuver: EvasiveManeuver = new EvasiveManeuver(self, tactical_position);
 			
-			var timeoutTransition: TimeoutTransition = new TimeoutTransition(500*1000, 600*1000);
+			var timeoutTransition: TimeoutTransition = new TimeoutTransition(10*1000, 15*1000);
 			var canSeeTransition: ReachedTransition = new ReachedTransition(self, target, shortPursueState.pursueDistance);
-			var canShootTransition: ReachedTransition = new ReachedTransition(self, target, 50);
-			var canNotShootTransition: ReachedTransition = new ReachedTransition(self, target, 50);
+			var canShootTransition: ReachedTransition = new ReachedTransition(self, target, 100);
+			var canNotShootTransition: ReachedTransition = new ReachedTransition(self, target, 100);
 			var canNotSeeTransition: ReachedTransition = new ReachedTransition(self, target, shortPursueState.pursueDistance);
 			var missleDangerTransition: MissleDangerTransition = new MissleDangerTransition(self);
 			var maneuverCompleteTransition: completeTransition = new completeTransition(evasiveManeuver);
