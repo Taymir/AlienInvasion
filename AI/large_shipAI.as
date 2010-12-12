@@ -52,7 +52,6 @@ package AI
 			evasiveManeuver.transitions = new Array(maneuverCompleteTransition);
 			maneuverCompleteTransition.nextTrueState = atackState;
 			
-			FSM.FSM.debug_mode = true;
 			fsm = new FSM.FSM(newPositionState);
 		}
 		
