@@ -5,6 +5,7 @@ package
 	import common.TRegistry;
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.geom.Rectangle;
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
 	import Missles.BaseMissle;
@@ -14,6 +15,8 @@ package
 	{
 		protected override function keyHandler() : void
 		{
+			// Проверка на столкновения с препятствиями
+			collisionDetection();
 			// Обработка нажатий
 			if (key.isDown(Keyboard.LEFT))
 				decXShift();
@@ -37,8 +40,7 @@ package
 			// Проверка на нахождение в пределах игрового экрана
 			checkAndPlaceWithinScreenBounds();
 			
-			// Проверка на столкновения с препятствиями
-			collisionDetection();
+			
 		}
 		
 		private function collisionDetection() : void
@@ -57,11 +59,26 @@ package
 			if (this.hitTestObject(obstacle))
 			{
 				this.reflectXVelocity();
+				throw_me_out_of_obstacle(obstacle);
+				
 				 //@TOTHINK: а надо ли останавливать поиск после первого столкновения?
 				return TList.STOP_WALKING;
 			}
 			
 			return TList.CONTINUE_WALKING;
+		}
+		
+		//BUGFIX: чтобы танк не застревал в камне, насильно выбрасываем его из него
+		private function throw_me_out_of_obstacle(obstacle: MovieClip) : void
+		{
+			var bounds:Rectangle = obstacle.getBounds(this.scene);
+			if (this.x > obstacle.x)
+			{
+				this.x = bounds.right + this.width / 2;
+			} else {
+				this.x = bounds.left - this.width / 2;
+			}
+			
 		}
 		
 		public override function fire() : void

@@ -29,7 +29,6 @@ package AI.State
 		{
 			position.x = MathExtra.RandomInt(minX, maxX);
 			position.y = MathExtra.RandomInt(minY, maxY);
-			trace(position);
 		}
 		
 	}

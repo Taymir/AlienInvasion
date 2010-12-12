@@ -5,7 +5,7 @@
 	import flash.filters.DisplacementMapFilterMode;
 	import flash.ui.*;
 	import common.TRegistry;
-	import tests.*;
+	import tests.*
 
 	public class AlienInvasion extends MovieClip {
 		
@@ -13,10 +13,13 @@
 			this.initGame();
 			
 			//@DEBUG
-			/*
+			//this.runTests();
+		}
+		
+		public function runTests() : void
+		{
 			var test: TestTList = new TestTList();
 			test.run();
-			*/
 		}
 		
 		public function initGame() : void
@@ -30,6 +33,7 @@
 			// Настройки
 			TRegistry.instance.setValue("config_play_sounds", true);
 			TRegistry.instance.setValue("config_play_music", true);
+			TRegistry.instance.setValue("debug_no_enemies", false);
 			
 			// Инициализаци UI
 			uiPanel.fps.visible = true; //@DEBUG

@@ -6,7 +6,6 @@ package Missles
 	 * ...
 	 * @author Taymir
 	 */
-	//@TODO: Добавить повреждение не только  при прямом попадании
 	public final class grenades extends BaseMissle
 	{
 		private const explosionWaveRadius = 200;

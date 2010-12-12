@@ -3,6 +3,8 @@ package
 	import common.TList.TList;
 	import Enemies.large_ship;
 	import Enemies.small_ship;
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import common.TRegistry;
 	import flash.events.Event;
@@ -21,14 +23,37 @@ package
 			this.documentObj = document;
 		}
 		
+		//@REFACTOR: вынести из главной
+		private function rasterize(source: MovieClip): BitmapData
+		{
+			var buffer: BitmapData = new BitmapData(source.width, source.height, true);
+			buffer.draw(source);
+			return buffer;
+		}
+		
 		public function startGame() 
 		{
 			// Положение земли
-			TRegistry.instance.setValue("groundPosition", 415);
+			TRegistry.instance.setValue("groundPosition", 410);
 			
 			/* инициализация сцены */
 			var scene:MovieClip = new Scene();
 			scene.name = 'scene';
+			
+			var BackBMP: BitmapData = rasterize(new Background());
+			
+			var left_back = new Bitmap(BackBMP);
+			left_back.x = 0 - left_back.width + 30;
+			left_back.y = 0;
+			var right_back = new Bitmap(BackBMP);
+			right_back.x = scene.bounds.width - 34;
+			right_back.y = 0;
+			var center_back = new Bitmap(BackBMP);
+			center_back.x = 0;
+			center_back.y = 0;
+			scene.addChild(left_back);
+			scene.addChild(right_back);
+			scene.addChild(center_back);
 			documentObj.addChild(scene);
 			documentObj.swapChildren(scene, documentObj.uiPanel);
 			
@@ -65,22 +90,22 @@ package
 			var enemies:TList = new TList();
 			TRegistry.instance.setValue("enemies", enemies);
 			
-			var ufo;
-            const maxEnemies: int = 5;
-            for(var i:int = 0; i < maxEnemies; i++)
-            {
-                ufo = new small_ship();
-                ufo.x = 0 + 100 * i;
-                ufo.y = 170;
-                enemies.Add(ufo);
-            }
-			
-			ufo = new large_ship();
-			ufo.x = 800;
-			ufo.y = 50;
-			enemies.Add(ufo);
-
-			
+			if(!TRegistry.instance.getValue("debug_no_enemies")) {
+				var ufo;
+				const maxEnemies: int = 5;
+				for(var i:int = 0; i < maxEnemies; i++)
+				{
+					ufo = new small_ship();
+					ufo.x = 0 + 100 * i;
+					ufo.y = 170;
+					enemies.Add(ufo);
+				}
+				
+				ufo = new large_ship();
+				ufo.x = 800;
+				ufo.y = 50;
+				enemies.Add(ufo);
+			}
 			
 			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
 		}
