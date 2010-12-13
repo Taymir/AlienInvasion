@@ -3,6 +3,7 @@ package Enemies
 	import AI.large_shipAI;
 	import common.TRegistry;
 	import Missles.BaseMissle;
+	import Missles.energy_stream;
 	import Missles.grenades;
 	/**
 	 * ...

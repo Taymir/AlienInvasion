@@ -31,8 +31,8 @@
 			TRegistry.instance.setValue("stage", stage);
 			
 			// Настройки
-			TRegistry.instance.setValue("config_play_sounds", true);
-			TRegistry.instance.setValue("config_play_music", true);
+			TRegistry.instance.setValue("config_play_sounds", false);
+			TRegistry.instance.setValue("config_play_music", false);
 			TRegistry.instance.setValue("debug_no_enemies", false);
 			
 			// Инициализаци UI
