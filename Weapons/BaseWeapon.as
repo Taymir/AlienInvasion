@@ -44,6 +44,11 @@ package Weapons
 			}
 		}
 		
+		public function isReady() : Boolean
+		{
+			return canFire;
+		}
+		
 		protected function launch(x: int, y: int) : void
 		{
 			//@EMPTY

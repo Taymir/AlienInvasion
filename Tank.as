@@ -96,5 +96,13 @@ package
 			// Проверка конца игры
 			TRegistry.instance.getValue("gameStateManager").checkEndGame();
 		}
+		
+		
+		override protected function doDamage(hits: int) : void
+		{
+			if(!TRegistry.instance.getValue("debug_god_mode"))
+				super.doDamage(hits);
+		}
+		
 	}
 }

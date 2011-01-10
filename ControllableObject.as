@@ -152,7 +152,7 @@ package
 			}
 		}
 		
-		private function doDamage(hits: int) : void
+		protected function doDamage(hits: int) : void
 		{
 			this.hitPoints -= hits;
 		}

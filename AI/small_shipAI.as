@@ -17,7 +17,6 @@ package AI
 		public function small_shipAI(self : small_ship, target : GameObject) 
 		{
 			// init small ship
-			//@TODO: randomize direction
 			self.direction = small_ship.DIRECTION_RIGHT;
 			self.y = 150;//@TMP
 			
