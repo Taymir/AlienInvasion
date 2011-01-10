@@ -8,11 +8,15 @@ package
 	import flash.geom.Rectangle;
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
-	import Missles.BaseMissle;
-	import Missles.Missle;
+	import Weapons.TankCannonWeapon;
 	
 	public final class Tank extends UserControlledObject
 	{
+		public function Tank(): void
+		{
+			this.primaryWeapon = new TankCannonWeapon(this);
+		}
+		
 		protected override function keyHandler() : void
 		{
 			// Проверка на столкновения с препятствиями
@@ -79,22 +83,6 @@ package
 				this.x = bounds.left - this.width / 2;
 			}
 			
-		}
-		
-		public override function fire() : void
-		{
-			//@TODO вынести в отдельный переопределяемый метод тело if-а
-			if (canFire)
-			{
-				new Missle(x, y, BaseMissle.UP);
-				
-				// Это сделанно для возможности некоторыми нлошками "засечь" стрельбу игрока... 
-				//возможно, существует более элегантное решение для этого...
-				MissleDangerTransition.reportMissleLunch(x, y); 
-
-				fireDelay();
-				super.fire();
-			}
 		}
 		
 		protected override function destroy() : void

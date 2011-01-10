@@ -7,6 +7,8 @@ package Effects
 	 */
 	public class FreezeEffect extends TemporaryEffect
 	{	
+		public var speedReduction: Number = 0.5;
+		
 		public function FreezeEffect(duration: int)
 		{
 			super(duration);
@@ -15,7 +17,7 @@ package Effects
 		override public function beginEffect(targetObject:ControllableObject) : void 
 		{
 			// Изменение скорости
-			targetObject.maxspeed *= 0.75;
+			targetObject.maxspeed *= speedReduction;
 			
 			// Изменение цвета
 			var colTransf:ColorTransform = targetObject.transform.colorTransform;
@@ -30,7 +32,7 @@ package Effects
 		override protected function endEffect() : void
 		{
 			//Восстановление скорости
-			targetObject.maxspeed /= 0.75;
+			targetObject.maxspeed /= speedReduction;
 			
 			// Восстановление цвета
 			var colTransf:ColorTransform = targetObject.transform.colorTransform;

@@ -55,17 +55,6 @@ package Enemies
 			rotation = velocity.x;
 		}
 		
-		public override function fire () : void
-		{
-			//@REFACTOR вынести в отдельный переопределяемый метод тело if-а
-			if (canFire)
-			{
-				new Missle(x, y, BaseMissle.DOWN);//@REFACTOR: вынести в UFO
-				fireDelay();
-				this.playSound("shoot");//@HARDFIX: не работали звуки стрельбы
-			}
-		}
-		
 		protected override function destroy() : void
 		{
 			//Удаляем НЛО из реестра игровых объектов

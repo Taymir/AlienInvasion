@@ -1,11 +1,13 @@
 package  
 {
+	import common.Debug;
 	import common.Vector2D;
 	import Effects.TemporaryEffect;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import flash.media.Sound;
 	import common.TRegistry;
+	import Weapons.BaseWeapon;
 	
 	/**
 	 * ...
@@ -13,7 +15,6 @@ package
 	 */
 	public class ControllableObject extends GameObject
 	{
-		public var fireDelayPeriod : int = 300;
 		public var speed:Number = 1.5;
 		public var velocity: Vector2D = new Vector2D;
 		public var friction:Number = 0.93;
@@ -21,16 +22,7 @@ package
 		public var maxHitPoints: int = 100;
 		
 		public var hitPoints: int = maxHitPoints;
-		protected var canFire : Boolean = true;
-		
-		private var fireTimer : Timer;
-		
-		
-		public function ControllableObject ()
-		{
-			fireTimer = new Timer(fireDelayPeriod, 1);
-			fireTimer.addEventListener(TimerEvent.TIMER, fireTimerHandler);
-		}
+		protected var primaryWeapon: BaseWeapon;
 		
 		protected function updatePositionWithVelocity() : void
 		{
@@ -141,9 +133,9 @@ package
 		
 		public function fire() : void
 		{
-			// переопределяется в наследниках
+			Debug.assert(primaryWeapon != null, "Орудие не определенно");
 			
-			this.playSound("shoot");
+			primaryWeapon.fire();
 		}
 		
 		public function hit(hits: int) : void
@@ -174,22 +166,13 @@ package
 		{
 			// переопределить у наследников, чтобы отвязать события
 			
-			// Отвязываем все события
-			fireTimer.removeEventListener(TimerEvent.TIMER, fireTimerHandler);
+			//@TOTHINK: надо ли уничтожать оружие: т.е. отвязывать у него все события и ссылки на
+			// shooterObj? Если я правильно понимаю, то сейчас controllableObject всегда остается
+			// в памяти из-за ссылок на него из чужого и своего AI, из BaseWeapon (при том, что ссылки
+			// эти кольцевые... 
 			
 			// Прячем со сцены
-			hide();
-		}
-		
-		protected function fireDelay() : void
-		{
-			canFire = false;
-			fireTimer.start();
-		}
-		
-		private function fireTimerHandler(e:TimerEvent) : void
-		{
-			canFire = true;
+			hide();//@TODO: перенести на уровень ниже??
 		}
 		
 		// Воспроизведение звуков
