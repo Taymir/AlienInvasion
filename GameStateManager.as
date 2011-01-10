@@ -92,7 +92,7 @@ package
 			
 			if(!TRegistry.instance.getValue("debug_no_enemies")) {
 				var ufo;
-				const maxEnemies: int = 5;
+				const maxEnemies: int = 0;//@TMP
 				for(var i:int = 0; i < maxEnemies; i++)
 				{
 					ufo = new small_ship();

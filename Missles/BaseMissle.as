@@ -45,13 +45,20 @@ package Missles
 			}
 			else 
 			{
-				this.groundExplosion();
+				this.hitGround();
+				this.Destroy();
 			}
 		}
 		
-		protected function groundExplosion()
+		protected function hitGround()
 		{
 			this.Explode();
+		}
+		
+		protected function hitTarget(targetObj: ControllableObject)
+		{
+			this.Explode();
+			targetObj.hit(damage);
 		}
 		
 		protected function collision_detection_callback(obj: Object) : int
@@ -60,23 +67,27 @@ package Missles
 			
 			if (this.hitTestObject(targetObj))
 			{
-				this.Explode();
-				targetObj.hit(damage);
+				hitTarget(targetObj);
+				this.Destroy();
+				
 				return TList.STOP_WALKING;
 			}
 			
 			return TList.CONTINUE_WALKING;
 		}
 		
-		protected function Explode() : void
+		protected function Destroy() : void
 		{
 			// Завершаем анимацию движения ракеты
 			TRegistry.instance.getValue("globalEnterFrame").Remove(loop);
 			
-			new Explosion(x, y);
-			
 			// Прячем саму ракету
 			this.hide();
+		}
+		
+		protected function Explode() : void
+		{
+			new Explosion(x, y);
 		}
 		
 	}

@@ -18,10 +18,10 @@ package Missles
 			this.damage = 10;
 		}
 		
-		protected override function groundExplosion()
+		protected override function hitGround()
 		{
 			TRegistry.instance.getValue("player").Walk(tank_explosion_wave_collision_detection);
-			super.groundExplosion();
+			super.hitGround();
 		}
 		
 		private function tank_explosion_wave_collision_detection(obj: Object) : int

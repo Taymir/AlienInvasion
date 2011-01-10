@@ -32,7 +32,8 @@ package Enemies
 			//@REFACTOR вынести в отдельный переопределяемый метод тело if-а
 			if (canFire)
 			{
-				new grenades(x, y, BaseMissle.DOWN);
+				//new grenades(x, y, BaseMissle.DOWN);
+				new energy_stream(x, y, BaseMissle.DOWN);
 				fireDelay();
 				this.playSound("shoot");//@HARDFIX: не работали звуки стрельбы
 			}

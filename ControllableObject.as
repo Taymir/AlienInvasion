@@ -1,6 +1,7 @@
 package  
 {
 	import common.Vector2D;
+	import Effects.TemporaryEffect;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import flash.media.Sound;
@@ -12,14 +13,14 @@ package
 	 */
 	public class ControllableObject extends GameObject
 	{
-		protected var fireDelayPeriod : int = 300;
-		protected var speed:Number = 1.5;
-		protected var velocity: Vector2D = new Vector2D;
-		protected var friction:Number = 0.93;
-		protected var maxspeed:Number = 15;
-		protected var maxHitPoints: int = 100;
+		public var fireDelayPeriod : int = 300;
+		public var speed:Number = 1.5;
+		public var velocity: Vector2D = new Vector2D;
+		public var friction:Number = 0.93;
+		public var maxspeed:Number = 15;
+		public var maxHitPoints: int = 100;
 		
-		protected var hitPoints: int = maxHitPoints;
+		public var hitPoints: int = maxHitPoints;
 		protected var canFire : Boolean = true;
 		
 		private var fireTimer : Timer;
@@ -195,6 +196,12 @@ package
 		protected function playSound(soundName : String) : void
 		{
 			(TRegistry.instance.getValue("sound_manager") as SoundManager).play(soundName);
+		}
+		
+		public function applyEffect(effect: TemporaryEffect)
+		{
+			effect.beginEffect(this);
+			//@TOTHINK: Надо ли вести список всех примененных к объекту эффектов?
 		}
 	}
 
