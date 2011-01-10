@@ -1,8 +1,10 @@
 package  
 {
 	import common.TList.TList;
+	import Enemies.guard_ship;
 	import Enemies.large_ship;
 	import Enemies.small_ship;
+	import Enemies.transport_ship;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
@@ -101,9 +103,22 @@ package
 					enemies.Add(ufo);
 				}
 				
-				ufo = new large_ship();
+				/*ufo = new large_ship();
+				ufo.x = 800;
+				ufo.y = 50;*/
+				
+				ufo = new transport_ship();
 				ufo.x = 800;
 				ufo.y = 50;
+				
+				ufo = new guard_ship();
+				ufo.x = 850;
+				ufo.y = 100;
+				
+				ufo = new guard_ship();
+				ufo.x = 750;
+				ufo.y = 100;
+				
 				enemies.Add(ufo);
 			}
 			
