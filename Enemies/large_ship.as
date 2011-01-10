@@ -3,11 +3,8 @@ package Enemies
 	import AI.large_shipAI;
 	import common.Debug;
 	import common.TRegistry;
-	import Missles.BaseMissle;
-	import Missles.energy_stream;
-	import Missles.grenades;
 	import Weapons.BaseWeapon;
-	import Weapons.EnergyStreamWeapon;
+	import Weapons.FreezerWeapon;
 	import Weapons.GrenadesWeapon;
 	/**
 	 * ...
@@ -27,7 +24,7 @@ package Enemies
 			this.hitPoints = this.maxHitPoints;
 			
 			primaryWeapon = new GrenadesWeapon(this);
-			secondaryWeapon = new EnergyStreamWeapon(this);
+			secondaryWeapon = new FreezerWeapon(this);
 			
 			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"
 			var tank:Tank = TRegistry.instance.getValue("player").Get(0);

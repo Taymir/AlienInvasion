@@ -10,10 +10,10 @@ package Missles
 	 * так что, логично было бы наследовать его от более абстрактного класса нежели BaseMissle,
 	 * но пока это допустимое нарушение
 	 */
-	public final class energy_stream extends BaseMissle
+	public final class freezer extends BaseMissle
 	{
 		
-		public function energy_stream(x:Number, y:Number, direction:int) 
+		public function freezer(x:Number, y:Number, direction:int) 
 		{
 			this.speed = 12;
 			super(x, y, direction);

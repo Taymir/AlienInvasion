@@ -1,22 +1,22 @@
 package Weapons 
 {
 	import Missles.BaseMissle;
-	import Missles.energy_stream;
+	import Missles.freezer;
 	/**
 	 * ...
 	 * @author Taymir
 	 */
-	public class EnergyStreamWeapon extends BaseWeapon
+	public class FreezerWeapon extends BaseWeapon
 	{
 		
-		public function EnergyStreamWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 6000) 
+		public function FreezerWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 6000) 
 		{
 			super(shooterObj, fireDelayPeriod);
 		}
 		
 		override protected function launch(x: int, y: int): void
 		{
-			new energy_stream(x, y, BaseMissle.DOWN);
+			new freezer(x, y, BaseMissle.DOWN);
 			
 			super.launch(x, y);
 		}
