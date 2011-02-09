@@ -4,6 +4,7 @@ package Enemies
 	import common.Debug;
 	import common.TRegistry;
 	import Weapons.BaseWeapon;
+	import Weapons.DeathRayWeapon;
 	import Weapons.FreezerWeapon;
 	import Weapons.GrenadesWeapon;
 	/**
@@ -23,7 +24,7 @@ package Enemies
 			this.maxHitPoints = 30;
 			this.hitPoints = this.maxHitPoints;
 			
-			primaryWeapon = new GrenadesWeapon(this);
+			primaryWeapon = new DeathRayWeapon(this);//new GrenadesWeapon(this);//@TMP
 			secondaryWeapon = new FreezerWeapon(this);
 			
 			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"

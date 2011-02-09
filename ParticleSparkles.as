@@ -9,15 +9,22 @@ package
 	 */
 	public class ParticleSparkles 
 	{
+		protected var particlesCount: int;
+		protected var distance: Number;
+		protected var size: Number;
+		protected var alpha: Number;
 		
-		public function ParticleSparkles(x: int, y: int) : void
+		public function ParticleSparkles(x: int, y: int, particlesCount:int = 3, distance: Number = 30, size: Number = 1.5, alpha: Number = 60) : void
 		{
-			this.startExplosionAnimation(x, y, 15, 30, 2.0, 75);
+			this.particlesCount = particlesCount;
+			this.distance = distance;
+			this.size = size;
+			this.alpha = alpha;
+			
+			this.startSparklesAnimation(x, y);
 		}
 		
-		private function startExplosionAnimation(x: int, y:int,
-			particlesCount: int, distance: Number,
-			size: Number, alpha: Number) : void
+		private function startSparklesAnimation(x: int, y:int) : void
 		{
 			//run a for loop based on amount of explosion particles
 			for (var i = 0; i < particlesCount; i++)

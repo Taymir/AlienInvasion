@@ -36,7 +36,7 @@ package
 		public function startGame() 
 		{
 			// Положение земли
-			TRegistry.instance.setValue("groundPosition", 410);
+			TRegistry.instance.setValue("groundPosition", 451);
 			
 			/* инициализация сцены */
 			var scene:MovieClip = new Scene();
@@ -63,10 +63,10 @@ package
 			var left_rocks = new rocks();
 			var right_rocks = new rocks();
 			
-			left_rocks.y = TRegistry.instance.getValue("groundPosition") + left_rocks.height / 2;
+			left_rocks.y = TRegistry.instance.getValue("groundPosition") + 3;
 			left_rocks.x = scene.bounds.x + left_rocks.width / 2;
 			
-			right_rocks.y = TRegistry.instance.getValue("groundPosition") + right_rocks.height / 2;
+			right_rocks.y = TRegistry.instance.getValue("groundPosition") + 3;
 			right_rocks.x = scene.bounds.width + scene.bounds.x - right_rocks.width / 2;
 			
 			scene.addChild(left_rocks);
@@ -85,8 +85,7 @@ package
 			var tank: Tank = new Tank();
 			player.Add(tank);
 			tank.x = TRegistry.instance.getValue("stage").stageWidth / 2;
-			//@TMP: Надо поправить координаты муви-клипов
-			tank.y = TRegistry.instance.getValue("groundPosition") - 20;
+			tank.y = TRegistry.instance.getValue("groundPosition") - tank.height;
 			
 			// Создаём НЛОшки
 			var enemies:TList = new TList();
