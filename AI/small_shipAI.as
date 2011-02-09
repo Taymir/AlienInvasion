@@ -13,15 +13,17 @@ package AI
 	{
 		
 		private var fsm : FSM.FSM;
+		private var self: small_ship;
 		
 		public function small_shipAI(self : small_ship, target : GameObject) 
 		{
 			// init small ship
+			this.self = self;
 			self.direction = small_ship.DIRECTION_RIGHT;
 			self.y = 150;//@TMP
 			
 			// init AI
-			var atackState: AttackState = new AttackState(self);
+			var attackState: AttackState = new AttackState(self);
 			var descentState: ChangeHeightState = new ChangeHeightState(self, ChangeHeightState.DIRECTION_DOWN, 300); descentState.name = "Снижение";//@TMP Жестко забитые значения...
 			var climbState: ChangeHeightState = new ChangeHeightState(self, ChangeHeightState.DIRECTION_UP, 170); climbState.name = "Повышение";//@TMP Жестко забитые значения...
 			
@@ -34,8 +36,8 @@ package AI
 			canSeeTransition.nextTrueState = descentState;
 			descentState.transitions = new Array(canShootTransition, canNotSeeTransition);
 			canNotSeeTransition.nextFalseState = climbState;
-			canShootTransition.nextTrueState = atackState;
-			atackState.transitions = new Array(canNotShootTransition);
+			canShootTransition.nextTrueState = attackState;
+			attackState.transitions = new Array(canNotShootTransition);
 			canNotShootTransition.nextFalseState = climbState;
 			
 			fsm = new FSM.FSM(climbState);
@@ -44,6 +46,7 @@ package AI
 		public function update() : void
 		{
 			fsm.update();
+			self.followDirection();
 		}
 		
 	}

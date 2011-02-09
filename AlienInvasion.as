@@ -41,16 +41,6 @@
 			TRegistry.instance.setValue("fps", uiPanel.fps);
 			TRegistry.instance.setValue("userHp", uiPanel.userHp);
 			
-			// Инициализация GameStateManager		
-			var gameStateManager:GameStateManager = new GameStateManager(this);
-			TRegistry.instance.setValue("gameStateManager", gameStateManager);
-			gameStateManager.startGame();
-			
-			// Testing message box
-			var gd:GameDialog = new GameDialog();
-			TRegistry.instance.setValue("gameDialog", gd);			
-
-			
 			// Инициализация музыки
 			var music : MusicManager = new MusicManager();
 			TRegistry.instance.setValue("music_manager", music);
@@ -66,6 +56,15 @@
 			TRegistry.instance.setValue("sound_manager", sounds);
 			sounds.addSound("shoot", new shootSnd);
 			sounds.addSound("hit", new hitSnd);
+			
+			// Инициализация GameStateManager		
+			var gameStateManager:GameStateManager = new GameStateManager(this);
+			TRegistry.instance.setValue("gameStateManager", gameStateManager);
+			gameStateManager.startGame();
+			
+			// Testing message box
+			var gd:GameDialog = new GameDialog();
+			TRegistry.instance.setValue("gameDialog", gd);
 		}
 		
 		private function Pause(e:KeyboardEvent)

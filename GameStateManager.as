@@ -102,13 +102,14 @@ package
 					enemies.Add(ufo);
 				}
 				
-				ufo = new large_ship();
+				/*ufo = new large_ship(); //@TMP
 				ufo.x = 800;
 				ufo.y = 50;
-				/* //@TMP
+				*/
+				
 				ufo = new transport_ship();
 				ufo.x = 800;
-				ufo.y = 50;*/
+				ufo.y = 50;
 				/* //@TMP
 				ufo = new guard_ship();
 				ufo.x = 850;

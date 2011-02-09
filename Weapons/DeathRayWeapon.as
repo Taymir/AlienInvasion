@@ -25,35 +25,52 @@ package Weapons
 		{
 			if (ray == null)
 			{
+				// Работаем напрямую с мувиклипом. Возможно вынести работу с графикой на отдельный уровень 
+				// абстракции: класс RAY
+				// Но пока в этом не вижу необходимости
 				ray = new death_ray();
 				firingTimer.start();
 				
-				ray.x = shooterObj.x;
-				ray.y = shooterObj.y;
+				this.updateRayPosition();
 				
-				//@TMP working with scene
-				ray.height = TRegistry.instance.getValue("groundPosition") - shooterObj.y;
-				var scene : MovieClip = TRegistry.instance.getValue("scene");
-				scene.addChild(ray);
+				getScene().addChild(ray);
 				
-				//@TMP working with enter frame
-				TRegistry.instance.getValue("globalEnterFrame").Add(update);
+				getGlobalEnterFrame().Add(update);
 				
 				
 				super.launch(x, y);
 			}
 		}
 		
-		protected function update() : void
+		private function getScene() : MovieClip
 		{
-			// Луч следует за кораблем
+			return  TRegistry.instance.getValue("scene")
+		}
+		
+		private function getGlobalEnterFrame() : GlobalEnterFrame
+		{
+			return TRegistry.instance.getValue("globalEnterFrame");
+		}
+		
+		private function updateRayPosition()
+		{
 			ray.x = shooterObj.x;
 			ray.y = shooterObj.y;
 			
-			// Луч создает искры
-			var sparkles: ParticleSparkles = new ParticleSparkles(ray.x, ray.y + ray.height, 300, 300, 1, 100); //@BUG при большой скорости движения корабля, искры запаздывают
+			//@TODO проверка на пересечение с игроком / препятствиями
+			// Если пересечение существует:
+			// * Для луча: уменьшить высоту до высоты препятсивя / игрока
+			// * Для игрока: получить повреждения
+			ray.height = TRegistry.instance.getValue("groundPosition") - shooterObj.y
+		}
+		
+		protected function update() : void
+		{
+			// Луч следует за кораблем
+			this.updateRayPosition();
 			
-			//@BUG //@TODO Если транспортник будет менять высоту, то надо обновлять высоту луча здесь.
+			// Луч создает искры
+			var sparkles: ParticleSparkles = new ParticleSparkles(ray.x, ray.y + ray.height); //@BUG при большой скорости движения корабля, искры запаздывают
 		}
 		
 		protected function stopFire(e: TimerEvent) : void

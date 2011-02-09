@@ -24,7 +24,7 @@ package Enemies
 			this.maxHitPoints = 30;
 			this.hitPoints = this.maxHitPoints;
 			
-			primaryWeapon = new DeathRayWeapon(this);//new GrenadesWeapon(this);//@TMP
+			primaryWeapon = new GrenadesWeapon(this);
 			secondaryWeapon = new FreezerWeapon(this);
 			
 			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"

@@ -1,5 +1,6 @@
 package  
 {
+	import common.Debug;
 	import common.TRegistry;
 	import flash.media.Sound;
 	import flash.media.SoundTransform;
@@ -44,6 +45,8 @@ package
 		
 		public function play(soundName:String)
 		{
+			Debug.assert(sounds[soundName] != null, "Звук не найден");
+			
 			(sounds[soundName] as Sound).play(0, 0, this.sndTransform);
 		}
 	}

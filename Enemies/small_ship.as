@@ -39,7 +39,6 @@ package Enemies
 		protected override function update() : void
 		{
 			ai.update();
-			this.followDirection();
 			super.update();
 		}
 		
@@ -49,7 +48,7 @@ package Enemies
 			super.reflectXVelocity();
 		}
 		
-		private function followDirection() : void
+		public function followDirection() : void
 		{
 			// Увеличиваем скорость движения в заданном направлении
 			this.velocity.x += this.speed * this.direction;
