@@ -102,6 +102,9 @@ package
 		{
 			if(!TRegistry.instance.getValue("debug_god_mode"))
 				super.doDamage(hits);
+				
+			//@EXPERIMENT Торможение танка при попадании
+			slowdownXShift(2);
 		}
 		
 	}

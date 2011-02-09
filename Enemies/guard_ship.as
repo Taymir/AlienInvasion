@@ -1,5 +1,7 @@
 package Enemies 
 {
+	import AI.guard_shipAI;
+	import common.TRegistry;
 	import Weapons.BaseWeapon;
 	import Weapons.GuardLasersWeapon;
 	/**
@@ -8,6 +10,7 @@ package Enemies
 	 */
 	public class guard_ship extends BaseEnemy
 	{
+		private var ai: guard_shipAI;
 		
 		public function guard_ship() 
 		{
@@ -18,11 +21,14 @@ package Enemies
 			this.hitPoints = this.maxHitPoints;
 			
 			primaryWeapon = new GuardLasersWeapon(this);
+			
+			var tank: Tank = TRegistry.instance.getValue("player").Get(0);
+			ai = new guard_shipAI(this, tank);
 		}
 		
 		override protected function update() : void
 		{
-			//@TODO: update AI
+			ai.update();
 			super.update();
 		}
 	}

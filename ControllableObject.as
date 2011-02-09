@@ -101,14 +101,14 @@ package
 				velocity.y = 0;
 		}
 		
-		public function slowdownXShift() : void
+		public function slowdownXShift(multiplier: Number = 1.0) : void
 		{
-			velocity.x *= friction;
+			velocity.x *= friction / multiplier;
 		}
 		
-		public function slowdownYShift() : void
+		public function slowdownYShift(multiplier: Number = 1.0) : void
 		{
-			velocity.y *= friction;
+			velocity.y *= friction / multiplier;
 		}
 		
 		public function decXShift() : Number
