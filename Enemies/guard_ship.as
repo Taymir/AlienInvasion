@@ -1,6 +1,7 @@
 package Enemies 
 {
 	import Weapons.BaseWeapon;
+	import Weapons.GuardLasersWeapon;
 	/**
 	 * ...
 	 * @author Taymir
@@ -16,7 +17,7 @@ package Enemies
 			this.maxHitPoints = 40;
 			this.hitPoints = this.maxHitPoints;
 			
-			primaryWeapon = new BaseWeapon(this);//@TMP
+			primaryWeapon = new GuardLasersWeapon(this);
 		}
 		
 		override protected function update() : void
