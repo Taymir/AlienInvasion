@@ -10,9 +10,12 @@ package Enemies
 	 */
 	public class guard_ship extends BaseEnemy
 	{
+		public static const LEFT_POSITION: int = -1;
+		public static const RIGHT_POSITION: int = +1;
+		
 		private var ai: guard_shipAI;
 		
-		public function guard_ship() 
+		public function guard_ship(transport: transport_ship, left_or_right: int = LEFT_POSITION) 
 		{
 			this.speed = 4;
 			this.friction = 0.7;
@@ -23,7 +26,7 @@ package Enemies
 			primaryWeapon = new GuardLasersWeapon(this);
 			
 			var tank: Tank = TRegistry.instance.getValue("player").Get(0);
-			ai = new guard_shipAI(this, tank);
+			ai = new guard_shipAI(this, tank, transport, left_or_right);
 		}
 		
 		override protected function update() : void

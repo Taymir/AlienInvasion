@@ -19,11 +19,14 @@ package AI
 			var self = self;
 			self.direction = transport_ship.DIRECTION_LEFT;
 			
+			// Данные:
+			// 1) Ссылки на охрану
+			
 			// init AI
 			var inactiveState: InactivityState = new InactivityState();
 			var moveAndAttackState: MoveAndAtackState = new MoveAndAtackState(self);
 			
-			var timeoutTransition: TimeoutTransition = new TimeoutTransition(100, 200);
+			var timeoutTransition: TimeoutTransition = new TimeoutTransition(100000, 200000);
 			
 			inactiveState.transitions = new Array(timeoutTransition);
 			timeoutTransition.nextTrueState = moveAndAttackState;

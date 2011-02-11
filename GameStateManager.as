@@ -107,20 +107,19 @@ package
 				ufo.y = 50;
 				*/
 				
-				/*ufo = new transport_ship();
-				ufo.x = 800;
-				ufo.y = 50;*/
+				var transp = new transport_ship();
+				transp.x = 800;
+				transp.y = 50;
+				enemies.Add(transp);
 				
-				ufo = new guard_ship();
+				ufo = new guard_ship(transp, guard_ship.RIGHT_POSITION);
 				ufo.x = 850;
 				ufo.y = 100;
-				
 				enemies.Add(ufo);
 				
-				ufo = new guard_ship();
+				ufo = new guard_ship(transp, guard_ship.LEFT_POSITION);
 				ufo.x = 750;
 				ufo.y = 100;
-				
 				enemies.Add(ufo);
 			}
 			

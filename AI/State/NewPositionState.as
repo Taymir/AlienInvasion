@@ -18,7 +18,7 @@ package AI.State
 		private var self: ControllableObject;
 		private var position: Point;
 		
-		public function NewPositionState(self: ControllableObject, position: Point) 
+		public function NewPositionState(self: ControllableObject, position: Point)
 		{
 			this.self = self;
 			this.position = position;
@@ -30,7 +30,6 @@ package AI.State
 			position.x = MathExtra.RandomInt(minX, maxX);
 			position.y = MathExtra.RandomInt(minY, maxY);
 		}
-		
 	}
 
 }
