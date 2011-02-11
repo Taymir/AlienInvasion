@@ -22,6 +22,11 @@ package FSM
 				changeState(newState);
 		}
 		
+		public function getCurrentState() : FSM.State
+		{
+			return currentState;
+		}
+		
 		private  function changeState(newState: State) : void
 		{
 			if(debug_mode)
@@ -30,7 +35,6 @@ package FSM
 			currentState = newState;
 			newState.onEnterState();
 		}
-		
 	}
 
 }

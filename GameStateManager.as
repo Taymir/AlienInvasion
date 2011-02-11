@@ -107,20 +107,22 @@ package
 				ufo.y = 50;
 				*/
 				
-				var transp = new transport_ship();
+				var transp: transport_ship = new transport_ship();
 				transp.x = 800;
 				transp.y = 50;
 				enemies.Add(transp);
 				
-				ufo = new guard_ship(transp, guard_ship.RIGHT_POSITION);
-				ufo.x = 850;
-				ufo.y = 100;
-				enemies.Add(ufo);
+				var guard1 = new guard_ship(transp, guard_ship.RIGHT_POSITION);
+				guard1.x = 850;
+				guard1.y = 100;
+				enemies.Add(guard1);
 				
-				ufo = new guard_ship(transp, guard_ship.LEFT_POSITION);
-				ufo.x = 750;
-				ufo.y = 100;
-				enemies.Add(ufo);
+				var guard2 = new guard_ship(transp, guard_ship.LEFT_POSITION);
+				guard2.x = 750;
+				guard2.y = 100;
+				enemies.Add(guard2);
+				
+				transp.attach_guards(guard1, guard2);
 			}
 			
 			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);

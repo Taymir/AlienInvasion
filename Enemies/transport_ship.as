@@ -31,6 +31,11 @@ package Enemies
 			ai = new transport_shipAI(this, tank);
 		}
 		
+		public function attach_guards(guard_one: ControllableObject, guard_two: ControllableObject)
+		{
+			ai.attach_guards(guard_one, guard_two);
+		}
+		
 		override protected function update() : void
 		{
 			ai.update();

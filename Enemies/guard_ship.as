@@ -20,7 +20,7 @@ package Enemies
 			this.speed = 4;
 			this.friction = 0.7;
 			this.maxspeed = 13;
-			this.maxHitPoints = 40;
+			this.maxHitPoints = 25;
 			this.hitPoints = this.maxHitPoints;
 			
 			primaryWeapon = new GuardLasersWeapon(this);

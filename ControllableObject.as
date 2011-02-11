@@ -157,7 +157,7 @@ package
 			this.hitPoints -= hits;
 		}
 		
-		private function isDead() : Boolean
+		public function isDead() : Boolean
 		{
 			return (this.hitPoints <= 0);
 		}
