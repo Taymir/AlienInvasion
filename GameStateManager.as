@@ -177,14 +177,22 @@ package
 			{
 				// Игрок погиб, конец игры
 				// Показываем месадж бокс и ставим на паузу
-				TRegistry.instance.getValue("gameDialog").MessageBox("<p align=\"center\"><b><font size=\"14\" color=\"#ffffff\">Конец игры, смерть всем человекам!</font></b><p>", 0xFF0000, 0.5, 20, 350, GameDialog.CLOSE_DIALOG);
+				showEndGameDialog("Конец игры, смерть всем человекам!");
+				
 				this.pauseGame();
 			} else if (TRegistry.instance.getValue("enemies").Count() == 0) {
 				// Враги Повержены, конец игры
 				// Показываем месадж бокс и ставим на паузу
-				TRegistry.instance.getValue("gameDialog").MessageBox("<p align=\"center\"><b><font size=\"14\" color=\"#ffffff\">Инопланетные захватчики повержены! УРА! УРА! УРА!</font></b><p>", 0xFF0000, 0.5, 20, 350, GameDialog.CLOSE_DIALOG);
+				showEndGameDialog("Инопланетные захватчики повержены! УРА! УРА! УРА!");
+				
 				this.pauseGame();
 			}
+		}
+		
+		private function showEndGameDialog(message: String) : void
+		{
+			var dialog: GameDialog = new GameDialog();
+			dialog.MessageBox("<p align=\"center\"><b><font size=\"14\" color=\"#ffffff\">" + message + "</font></b><p>", 0xFF0000, 0.5, 20, 350, GameDialog.CLOSE_DIALOG);
 		}
 	}
 

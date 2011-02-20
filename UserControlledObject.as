@@ -14,11 +14,9 @@ package
 	{
 		protected var key:KeyObject;
 		private var stageRef:Stage;
-		private var userHp : TextField;
 		
 		public function UserControlledObject() 
 		{
-			userHp = TRegistry.instance.getValue("userHp");
 			this.updateUi();
 			
 			Debug.assert( TRegistry.instance.getValue("stage") != null, "В реестре TRegistry не установлено значение объекта сцены stage" );
@@ -45,8 +43,8 @@ package
 		
 		private function updateUi() : void
 		{
-			// Выводим на экран хп юзера
-			this.userHp.text = hitPoints.toString();
+			// Обновляем информацию о жизни
+			(TRegistry.instance.getValue("UI") as UserInterfaceManager).setHitPoints(this.hitPoints);
 		}
 		
 		public override function hit(hits : int) : void

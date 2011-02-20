@@ -12,8 +12,7 @@
 		public function AlienInvasion() {		
 			this.initGame();
 			
-			//@DEBUG
-			//this.runTests();
+			//this.runTests(); //@DEBUG
 		}
 		
 		public function runTests() : void
@@ -24,22 +23,21 @@
 		
 		public function initGame() : void
 		{
-			// Инициализация globalEnterFrame
-			stage.addEventListener(KeyboardEvent.KEY_UP, Pause);			
-			var globalEnterFrame:GlobalEnterFrame = new GlobalEnterFrame();
-			TRegistry.instance.setValue("globalEnterFrame", globalEnterFrame);	
-			TRegistry.instance.setValue("stage", stage);
-			
 			// Настройки
 			TRegistry.instance.setValue("config_play_sounds", false);
 			TRegistry.instance.setValue("config_play_music", false);
 			TRegistry.instance.setValue("debug_no_enemies", false);
 			TRegistry.instance.setValue("debug_god_mode", false);
+			TRegistry.instance.setValue("debug_show_fps", true);
+			
+			// Инициализация globalEnterFrame
+			var globalEnterFrame:GlobalEnterFrame = new GlobalEnterFrame();
+			TRegistry.instance.setValue("globalEnterFrame", globalEnterFrame);	
+			TRegistry.instance.setValue("stage", stage);
 			
 			// Инициализаци UI
-			uiPanel.fps.visible = true; //@DEBUG
-			TRegistry.instance.setValue("fps", uiPanel.fps);
-			TRegistry.instance.setValue("userHp", uiPanel.userHp);
+			var userInterfaceManager: UserInterfaceManager = new UserInterfaceManager(uiPanel);
+			TRegistry.instance.setValue("UI", userInterfaceManager);
 			
 			// Инициализация музыки
 			var music : MusicManager = new MusicManager();
@@ -60,14 +58,11 @@
 			// Инициализация GameStateManager		
 			var gameStateManager:GameStateManager = new GameStateManager(this);
 			TRegistry.instance.setValue("gameStateManager", gameStateManager);
+			stage.addEventListener(KeyboardEvent.KEY_UP, keyHandler);
 			gameStateManager.startGame();
-			
-			// Testing message box
-			var gd:GameDialog = new GameDialog();
-			TRegistry.instance.setValue("gameDialog", gd);
 		}
 		
-		private function Pause(e:KeyboardEvent)
+		private function keyHandler(e:KeyboardEvent)
 		{
 			if (e.keyCode == 80) // P
 				TRegistry.instance.getValue("gameStateManager").pauseGame();

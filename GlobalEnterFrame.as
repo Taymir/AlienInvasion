@@ -45,7 +45,8 @@ package
 			if (currentTime > 1)
 			{
 				// Update UI
-				TRegistry.instance.getValue("fps").text = (Math.floor( (framesNumber / currentTime) * 10.0 ) / 10.0);
+				var fps: Number = Math.floor( (framesNumber / currentTime) * 10.0 ) / 10.0;
+				(TRegistry.instance.getValue("UI") as UserInterfaceManager).setFps(fps);
 				
 				startTime = getTimer();
 				framesNumber = 0;
