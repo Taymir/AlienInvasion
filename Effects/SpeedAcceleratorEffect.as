@@ -7,7 +7,7 @@ package Effects
 	public class SpeedAcceleratorEffect extends TemporaryEffect 
 	{
 		
-		public function SpeedAcceleratorEffect(duration) 
+		public function SpeedAcceleratorEffect(duration = 5000) 
 		{
 			super(duration);
 		}

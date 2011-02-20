@@ -3,6 +3,8 @@ package
 	import AI.Transition.MissleDangerTransition;
 	import common.TList.TList;
 	import common.TRegistry;
+	import Effects.FireAcceleratorEffect;
+	import Effects.SpeedAcceleratorEffect;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
@@ -15,8 +17,7 @@ package
 	{
 		public function Tank(): void
 		{
-			//this.primaryWeapon = new TankCannonWeapon(this);//@TMP
-			this.primaryWeapon = new TankReflectorWeapon(this);
+			this.activateLaser();
 		}
 		
 		protected override function keyHandler() : void
@@ -110,5 +111,26 @@ package
 			slowdownXShift(2);
 		}
 		
+		//* USER CONTROLLED ACTION *//
+		//@BUG наверное, не надо создавать заново экземпляр класса при каждой смене орудия
+		public function activateLaser() : void
+		{
+			this.primaryWeapon = new TankCannonWeapon(this); //@TMP: поменять название на laser 
+		}
+		
+		public function activateReflector() : void
+		{
+			this.primaryWeapon = new TankReflectorWeapon(this);
+		}
+		
+		public function activateFireAccelerator() : void
+		{
+			this.applyEffect(new FireAcceleratorEffect());
+		}
+		
+		public function activateSpeedAccelerator() : void
+		{
+			this.applyEffect(new SpeedAcceleratorEffect());
+		}
 	}
 }

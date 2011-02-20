@@ -128,6 +128,19 @@ package
 				transp.attach_guards(guard1, guard2);
 			}
 			
+			// Добавление UI-ярлыков
+			var UI:UserInterfaceManager = TRegistry.instance.getValue("UI");
+			UI.addWeaponIcon(new self_guided_missles_icon(), 0, null);
+			UI.addWeaponIcon(new bombs_icon(), 1, null);
+			UI.addWeaponIcon(new laser_icon(), 2, tank.activateLaser);
+			UI.addWeaponIcon(new reflector_icon(), 3, tank.activateReflector);
+			
+			UI.addProtectionIcon(new metal_shield_icon(), 0, null);
+			UI.addProtectionIcon(new energy_shield_icon(), 1, null);
+			UI.addProtectionIcon(new fire_accelerator_icon(), 2, tank.activateFireAccelerator);
+			UI.addProtectionIcon(new speed_accelerator_icon(), 3, tank.activateSpeedAccelerator);
+			UI.addProtectionIcon(new invisability_icon(), 4, null);
+			
 			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
 		}
 		

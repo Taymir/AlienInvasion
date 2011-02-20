@@ -9,7 +9,7 @@ package Effects
 	{
 		private var weapon:BaseWeapon;
 		
-		public function FireAcceleratorEffect(duration) 
+		public function FireAcceleratorEffect(duration = 5000) 
 		{
 			super(duration);
 			
@@ -21,7 +21,7 @@ package Effects
 			// сохраняем в переменной ссылку на изменяемое оружие, т.к. за время
 			// действия игрок может сменить оружие на другое
 			this.weapon = targetObject.primaryWeapon;
-			this.weapon.changeFireDelayPeriod(2.0);
+			this.weapon.changeFireDelayPeriod(0.5);
 			
 			super.beginEffect(targetObject);
 		}
@@ -29,7 +29,7 @@ package Effects
 		override protected function endEffect():void 
 		{
 			// Уменьшение скорости стрельбы
-			this.weapon.changeFireDelayPeriod(0.5);
+			this.weapon.changeFireDelayPeriod(2.0);
 			
 			super.endEffect();
 		}
