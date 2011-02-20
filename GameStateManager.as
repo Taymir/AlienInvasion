@@ -77,6 +77,9 @@ package
 			obstacles.Add(right_rocks);
 			TRegistry.instance.setValue("obstacles", obstacles);
 			
+			var tmp_obstacles: TList = new TList();
+			TRegistry.instance.setValue("tmp_obstacles", tmp_obstacles);
+			
 			TRegistry.instance.setValue("scene", scene);
 			
 			// Создаём танк
@@ -93,7 +96,7 @@ package
 			
 			if(!TRegistry.instance.getValue("debug_no_enemies")) {
 				var ufo;
-				const maxEnemies: int = 0;//@TMP
+				const maxEnemies: int = 0;
 				for(var i:int = 0; i < maxEnemies; i++)
 				{
 					ufo = new small_ship();
@@ -101,12 +104,12 @@ package
 					ufo.y = 170;
 					enemies.Add(ufo);
 				}
-				
-				/*ufo = new large_ship(); //@TMP
+				/*
+				ufo = new large_ship();
 				ufo.x = 800;
 				ufo.y = 50;
+				enemies.Add(ufo);
 				*/
-				
 				var transp: transport_ship = new transport_ship();
 				transp.x = 800;
 				transp.y = 50;

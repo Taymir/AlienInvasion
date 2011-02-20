@@ -138,6 +138,13 @@ package
 			primaryWeapon.fire();
 		}
 		
+		public function stopFire() : void
+		{
+			Debug.assert(primaryWeapon != null, "Орудие не определенно");
+			
+			primaryWeapon.stopFire();
+		}
+		
 		public function hit(hits: int) : void
 		{
 			this.doDamage(hits);
@@ -162,7 +169,7 @@ package
 			return (this.hitPoints <= 0);
 		}
 		
-		protected function destroy() : void
+		public override function destroy() : void
 		{
 			// переопределить у наследников, чтобы отвязать события
 			
@@ -170,9 +177,8 @@ package
 			// shooterObj? Если я правильно понимаю, то сейчас controllableObject всегда остается
 			// в памяти из-за ссылок на него из чужого и своего AI, из BaseWeapon (при том, что ссылки
 			// эти кольцевые... 
-			
-			// Прячем со сцены
-			hide();//@TOTHINK: перенести на уровень ниже??
+			// Имхо, надо!
+			super.destroy();
 		}
 		
 		// Воспроизведение звуков

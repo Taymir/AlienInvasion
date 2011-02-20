@@ -21,7 +21,7 @@ package Enemies
 		public function BaseEnemy() : void
 		{
 			// Привязываемся к глобальному обновлятору
-			TRegistry.instance.getValue("globalEnterFrame").Add(update);
+			addToGlobalEnterFrame(update);
 			
 			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"
 			//@REFACTOR: Как-то упростить эти длинные конструкции
@@ -55,14 +55,13 @@ package Enemies
 			rotation = velocity.x;
 		}
 		
-		protected override function destroy() : void
+		public override function destroy() : void
 		{
 			//Удаляем НЛО из реестра игровых объектов
 			(TRegistry.instance.getValue("enemies") as TList).Remove(this);
 			
 			//Отвязываем все события
-			//this.removeEventListener(TRegistry.instance.getValue("globalEnterFrame").Add, update);
-			TRegistry.instance.getValue("globalEnterFrame").Remove(update);
+			removeFromGlobalEnterFrame(update);
 			
 			//Уничтожение продолжается в родительском методе
 			super.destroy();

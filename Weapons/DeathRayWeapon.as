@@ -21,7 +21,7 @@ package Weapons
 		public function DeathRayWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 60000, firingPeriod:int = 30000) 
 		{
 			firingTimer = new Timer(firingPeriod, 1);
-			firingTimer.addEventListener(TimerEvent.TIMER_COMPLETE, stopFire);
+			firingTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onRayComplete);
 			
 			super(shooterObj, fireDelayPeriod);
 		}
@@ -30,9 +30,8 @@ package Weapons
 		{
 			if (ray == null)
 			{
-				// Работаем напрямую с мувиклипом. Возможно вынести работу с графикой на отдельный уровень 
+				//@TODO: Работаем напрямую с мувиклипом. Возможно вынести работу с графикой на отдельный уровень 
 				// абстракции: класс RAY
-				// Но пока в этом не вижу необходимости
 				ray = new death_ray();
 				firingTimer.start();
 				
@@ -129,14 +128,18 @@ package Weapons
 			new Explosion(x, y);
 		}
 		
-		protected function stopFire(e: TimerEvent) : void
+		protected function onRayComplete(e: TimerEvent) : void
+		{
+			this.stopFire();
+		}
+		
+		public override function stopFire() : void
 		{
 			if (ray != null)
 			{
 				ray.parent.removeChild(ray);
 				
-				//@TMP working with enter frame
-				TRegistry.instance.getValue("globalEnterFrame").Remove(update);
+				getGlobalEnterFrame().Remove(update);
 				
 				ray = null;
 			}

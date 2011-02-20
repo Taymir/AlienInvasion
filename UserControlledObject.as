@@ -26,8 +26,7 @@ package
 							
 			key = new KeyObject(stageRef);
 			
-			// Привязываемся к глобальному обновлятору
-			TRegistry.instance.getValue("globalEnterFrame").Add(keyHandler);
+			addToGlobalEnterFrame(keyHandler);
 		}
 		
 		protected function keyHandler() : void
@@ -35,11 +34,10 @@ package
 			//@EMPTY: переопределяется в наследниках
 		}
 		
-		protected override function destroy() : void
+		public override function destroy() : void
 		{
 			//Отвязываем все события
-			//this.removeEventListener(TRegistry.instance.getValue("globalEnterFrame").Add, keyHandler);
-			TRegistry.instance.getValue("globalEnterFrame").Remove(keyHandler);
+			removeFromGlobalEnterFrame(keyHandler);
 			
 			//Уничтожение продолжается в родительском методе
 			super.destroy();

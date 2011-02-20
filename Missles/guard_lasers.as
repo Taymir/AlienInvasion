@@ -15,6 +15,12 @@ package Missles
 			this.damage = 6;
 		}
 		
+		public override function switchDirection() : void
+		{
+			this.rotation = 180;
+			super.switchDirection();
+		}
+		
 	}
 
 }

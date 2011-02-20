@@ -34,6 +34,26 @@ package
 		{
 			scene.removeChild(this);
 		}
+		
+		public function destroy() : void
+		{
+			// Прячем со сцены
+			hide();
+		}
+		
+		protected function addToGlobalEnterFrame(f: Function)
+		{
+			Debug.assert( TRegistry.instance.getValue("globalEnterFrame") != null, "В реестре TRegistry не установлена ссылка на глобальный обновлятор" );
+			
+			(TRegistry.instance.getValue("globalEnterFrame") as GlobalEnterFrame).Add(f);
+		}
+		
+		protected function removeFromGlobalEnterFrame(f: Function)
+		{
+			Debug.assert( TRegistry.instance.getValue("globalEnterFrame") != null, "В реестре TRegistry не установлена ссылка на глобальный обновлятор" );
+			
+			(TRegistry.instance.getValue("globalEnterFrame") as GlobalEnterFrame).Remove(f);
+		}
 	}
 
 }

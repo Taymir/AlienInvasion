@@ -9,12 +9,14 @@ package
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
 	import Weapons.TankCannonWeapon;
+	import Weapons.TankReflectorWeapon;
 	
 	public final class Tank extends UserControlledObject
 	{
 		public function Tank(): void
 		{
-			this.primaryWeapon = new TankCannonWeapon(this);
+			//this.primaryWeapon = new TankCannonWeapon(this);//@TMP
+			this.primaryWeapon = new TankReflectorWeapon(this);
 		}
 		
 		protected override function keyHandler() : void
@@ -31,6 +33,8 @@ package
 				
 			if (key.isDown(Keyboard.SPACE))
 				fire();
+			else
+				stopFire();
 				
 			// Корректировка малых значений vx и vy
 			correctLowVelocity();
@@ -85,7 +89,7 @@ package
 			
 		}
 		
-		protected override function destroy() : void
+		public override function destroy() : void
 		{
 			//Удаляем ссылку на танк
 			(TRegistry.instance.getValue("player") as TList).Remove(this);
@@ -97,12 +101,11 @@ package
 			TRegistry.instance.getValue("gameStateManager").checkEndGame();
 		}
 		
-		
 		override protected function doDamage(hits: int) : void
 		{
 			if(!TRegistry.instance.getValue("debug_god_mode"))
 				super.doDamage(hits);
-				
+			
 			//@EXPERIMENT Торможение танка при попадании
 			slowdownXShift(2);
 		}

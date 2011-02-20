@@ -44,6 +44,11 @@ package Weapons
 			}
 		}
 		
+		public function stopFire() : void
+		{
+			//@EMPTY
+		}
+		
 		public function isReady() : Boolean
 		{
 			return canFire;
