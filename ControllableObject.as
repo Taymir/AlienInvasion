@@ -22,7 +22,7 @@ package
 		public var maxHitPoints: int = 100;
 		
 		public var hitPoints: int = maxHitPoints;
-		protected var primaryWeapon: BaseWeapon;
+		public var primaryWeapon: BaseWeapon;
 		
 		protected function updatePositionWithVelocity() : void
 		{

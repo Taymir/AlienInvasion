@@ -24,6 +24,11 @@ package Weapons
 			this.shooterObj = shooterObj;
 		}
 		
+		public function changeFireDelayPeriod(fireDelayPeriodMultiplicator: Number = 1.0)
+		{
+			fireTimer.delay *= fireDelayPeriodMultiplicator;
+		}
+		
 		private function fireTimerHandler(e:TimerEvent) : void
 		{
 			canFire = true;
