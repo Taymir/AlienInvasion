@@ -96,7 +96,7 @@ package
 			
 			if(!TRegistry.instance.getValue("debug_no_enemies")) {
 				var ufo;
-				const maxEnemies: int = 0;
+				const maxEnemies: int = 5;
 				for(var i:int = 0; i < maxEnemies; i++)
 				{
 					ufo = new small_ship();
@@ -104,12 +104,12 @@ package
 					ufo.y = 170;
 					enemies.Add(ufo);
 				}
-				/*
+				
 				ufo = new large_ship();
 				ufo.x = 800;
 				ufo.y = 50;
 				enemies.Add(ufo);
-				*/
+				
 				var transp: transport_ship = new transport_ship();
 				transp.x = 800;
 				transp.y = 50;
@@ -130,10 +130,11 @@ package
 			
 			// Добавление UI-ярлыков
 			var UI:UserInterfaceManager = TRegistry.instance.getValue("UI");
-			UI.addWeaponIcon(new self_guided_missles_icon(), 0, null);
-			UI.addWeaponIcon(new bombs_icon(), 1, null);
-			UI.addWeaponIcon(new laser_icon(), 2, tank.activateLaser);
-			UI.addWeaponIcon(new reflector_icon(), 3, tank.activateReflector);
+			UI.addWeaponIcon(new base_weapon_icon(), 0, tank.activateBaseWeapon);
+			UI.addWeaponIcon(new laser_icon(), 1, tank.activateLaser);
+			UI.addWeaponIcon(new self_guided_missles_icon(), 2, null);
+			UI.addWeaponIcon(new bombs_icon(), 3, null);
+			UI.addWeaponIcon(new reflector_icon(), 4, tank.activateReflector);
 			
 			UI.addProtectionIcon(new metal_shield_icon(), 0, null);
 			UI.addProtectionIcon(new energy_shield_icon(), 1, null);

@@ -11,13 +11,14 @@ package
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
 	import Weapons.TankCannonWeapon;
+	import Weapons.TankLaserWeapon;
 	import Weapons.TankReflectorWeapon;
 	
 	public final class Tank extends UserControlledObject
 	{
 		public function Tank(): void
 		{
-			this.activateLaser();
+			this.activateBaseWeapon();
 		}
 		
 		protected override function keyHandler() : void
@@ -115,7 +116,12 @@ package
 		//@BUG наверное, не надо создавать заново экземпляр класса при каждой смене орудия
 		public function activateLaser() : void
 		{
-			this.primaryWeapon = new TankCannonWeapon(this); //@TMP: поменять название на laser 
+			this.primaryWeapon = new TankLaserWeapon(this);
+		}
+		
+		public function activateBaseWeapon() : void
+		{
+			this.primaryWeapon = new TankCannonWeapon(this);
 		}
 		
 		public function activateReflector() : void

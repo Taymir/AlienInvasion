@@ -11,9 +11,9 @@ package Missles
 	 * ...
 	 * @author Akkarin
 	 */
-	public final class Missle extends BaseMissle
+	public final class laser_missle extends BaseMissle
 	{
-		public function Missle(x: Number, y: Number, direction: int)
+		public function laser_missle(x: Number, y: Number, direction: int)
 		{
 			super(x, y, direction);
 		}

@@ -2,14 +2,15 @@ package Weapons
 {
 	import AI.Transition.MissleDangerTransition;
 	import Missles.BaseMissle;
-	import Missles.tank_ball;
+	import Missles.laser_missle;
 	/**
 	 * ...
 	 * @author Taymir
 	 */
-	public class TankCannonWeapon extends BaseWeapon
+	public class TankLaserWeapon extends BaseWeapon 
 	{
-		public function TankCannonWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 300) 
+		
+		public function TankLaserWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 300) 
 		{
 			super(shooterObj, fireDelayPeriod);
 			
@@ -17,7 +18,7 @@ package Weapons
 		
 		override protected function launch(x: int, y: int): void
 		{
-			new tank_ball(x, y, BaseMissle.UP);
+			new laser_missle(x, y, BaseMissle.UP);
 			
 			// Это сделанно для возможности некоторыми нлошками "засечь" стрельбу игрока... 
 			//возможно, существует более элегантное решение для этого...
@@ -25,6 +26,7 @@ package Weapons
 			
 			super.launch(x, y);
 		}
+		
 	}
 
 }

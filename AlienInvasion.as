@@ -27,7 +27,7 @@
 			TRegistry.instance.setValue("config_play_sounds", false);
 			TRegistry.instance.setValue("config_play_music", false);
 			TRegistry.instance.setValue("debug_no_enemies", false);
-			TRegistry.instance.setValue("debug_god_mode", false);
+			TRegistry.instance.setValue("debug_god_mode", true);
 			TRegistry.instance.setValue("debug_show_fps", true);
 			
 			// Инициализация globalEnterFrame

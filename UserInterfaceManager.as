@@ -39,7 +39,10 @@ package
 		
 		public function setHitPoints(hp: int)
 		{
-			this.uiPanel.userHp.text = hp.toString();
+			if (TRegistry.instance.getValue("debug_god_mode") == true)
+				this.uiPanel.userHp.text = "∞";
+			else
+				this.uiPanel.userHp.text = hp.toString();
 		}
 		
 		public function setFps(fps: Number)
@@ -114,7 +117,6 @@ package
 
 			if (evt.stageY < 0)//@HARDFIX: применяем действие, если иконка отпущена выше UIPanel
 			{
-				trace("applied");
 				(evt.target.action as Function).call();
 			}
 		}
