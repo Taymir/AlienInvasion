@@ -1,5 +1,6 @@
 package  
 {
+	import common.TList.TList;
 	import common.TRegistry;
 	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
@@ -26,6 +27,10 @@ package
 		private const EQUIPMENTS_OFFSET: int = 566;
 		
 		private const Y_OFFSET: int = 20;
+		
+		private var weaponIcons: TList = new TList();
+		private var protectionIcons: TList = new TList();
+		private var equipmentIcons: TList = new TList();
 		
 		public function UserInterfaceManager(uiPanel: MovieClip) 
 		{
@@ -57,17 +62,37 @@ package
 		
 		public function addWeaponIcon(icon:MovieClip, position: int, action: Function)
 		{
+			weaponIcons.Add(icon);
 			this.addIcon(icon, this.WEAPONS_OFFSET, position, action);
 		}
 		
 		public function addProtectionIcon(icon:MovieClip, position: int, action: Function)
 		{
+			protectionIcons.Add(icon);
 			this.addIcon(icon, this.PROTECTIONS_OFFSET, position, action);
 		}
 		
 		public function addEquipmentIcon(icon:MovieClip, position: int, action: Function)
 		{
+			equipmentIcons.Add(icon);
 			this.addIcon(icon, this.EQUIPMENTS_OFFSET, position, action);
+		}
+		
+		public function clearIcons()
+		{
+			weaponIcons.Walk(hide_callback);
+			weaponIcons.Clear();
+			
+			protectionIcons.Walk(hide_callback);
+			protectionIcons.Clear();
+			
+			equipmentIcons.Walk(hide_callback);
+			equipmentIcons.Clear();
+		}
+		
+		private function hide_callback(obj: Object)
+		{
+			(obj as MovieClip).parent.removeChild(obj as MovieClip);
 		}
 		
 		private function addIcon(icon: MovieClip, offset: int, position: int, action: Function)

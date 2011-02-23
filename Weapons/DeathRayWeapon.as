@@ -21,7 +21,7 @@ package Weapons
 		public function DeathRayWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 60000, firingPeriod:int = 30000) 
 		{
 			firingTimer = new Timer(firingPeriod, 1);
-			firingTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onRayComplete);
+			firingTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onRayComplete, false, 0, true);
 			
 			super(shooterObj, fireDelayPeriod);
 		}

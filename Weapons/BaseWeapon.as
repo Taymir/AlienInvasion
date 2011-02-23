@@ -19,7 +19,7 @@ package Weapons
 			this.fireDelayPeriod = fireDelayPeriod;
 			
 			fireTimer = new Timer(fireDelayPeriod, 1);
-			fireTimer.addEventListener(TimerEvent.TIMER_COMPLETE, fireTimerHandler);
+			fireTimer.addEventListener(TimerEvent.TIMER_COMPLETE, fireTimerHandler, false, 0, true);
 			
 			this.shooterObj = shooterObj;
 		}

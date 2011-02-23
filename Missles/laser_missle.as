@@ -2,8 +2,6 @@ package Missles
 {
 	import common.TList.TList;
 	import flash.events.Event;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 	import common.TRegistry;
 	import Missles.BaseMissle;
 	

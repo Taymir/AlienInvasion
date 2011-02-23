@@ -17,7 +17,7 @@ package Weapons
 		public function TankReflectorWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 3000, firingPeriod:int = 2000)
 		{
 			firingTimer = new Timer(firingPeriod, 1);
-			firingTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onFireComplete);
+			firingTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onFireComplete, false, 0, true);
 			
 			super(shooterObj, fireDelayPeriod);
 			

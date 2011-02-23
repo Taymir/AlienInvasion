@@ -1,8 +1,10 @@
 ﻿package {
+	import com.flashdynamix.utils.SWFProfiler;
 	import common.TList.TList;
 	import flash.display.MovieClip;
 	import flash.events.*; 
 	import flash.filters.DisplacementMapFilterMode;
+	import flash.system.System;
 	import flash.ui.*;
 	import common.TRegistry;
 	import tests.*
@@ -27,8 +29,9 @@
 			TRegistry.instance.setValue("config_play_sounds", true);
 			TRegistry.instance.setValue("config_play_music", true);
 			TRegistry.instance.setValue("debug_no_enemies", false);
-			TRegistry.instance.setValue("debug_god_mode", true);
+			TRegistry.instance.setValue("debug_god_mode", false);
 			TRegistry.instance.setValue("debug_show_fps", true);
+			TRegistry.instance.setValue("debug_profiler", true);
 			
 			// Инициализация globalEnterFrame
 			var globalEnterFrame:GlobalEnterFrame = new GlobalEnterFrame();
@@ -39,15 +42,18 @@
 			var userInterfaceManager: UserInterfaceManager = new UserInterfaceManager(uiPanel);
 			TRegistry.instance.setValue("UI", userInterfaceManager);
 			
+			if(TRegistry.instance.getValue("debug_profiler"))
+				SWFProfiler.init(TRegistry.instance.getValue("stage"), this);
+			
 			// Инициализация музыки
 			var music : MusicManager = new MusicManager();
 			TRegistry.instance.setValue("music_manager", music);
-			music.loadTrack("track1", "music/track1.mp3", true);
-			music.loadTrack("track2", "music/track2.mp3");
-			music.loadTrack("track3", "music/track3.mp3");
-			music.loadTrack("track4", "music/track4.mp3");
-			music.loadTrack("track5", "music/track5.mp3");
-			music.loadTrack("track_lobby", "music/track_lobby.mp3");
+			music.loadTrack("track1", "music/track1.mp3");
+			//music.loadTrack("track2", "music/track2.mp3");//@TMP
+			//music.loadTrack("track3", "music/track3.mp3");
+			//music.loadTrack("track4", "music/track4.mp3");
+			//music.loadTrack("track5", "music/track5.mp3");
+			//music.loadTrack("track_lobby", "music/track_lobby.mp3");
 			
 			// Инициализация звуков
 			var sounds: SoundManager = new SoundManager();

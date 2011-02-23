@@ -16,6 +16,7 @@ package
 		private var sndTransform: SoundTransform;
 		private var tracks: Dictionary = new Dictionary();
 		private var currentChannel: SoundChannel;
+		private var autoplay: String = "";
 		
 		public function MusicManager(sndTransform: SoundTransform = null) 
 		{
@@ -50,7 +51,7 @@ package
 			tracks[trackName] = track;
 		}
 		
-		public function loadTrack(trackName: String, trackUrl: String, autoplay: Boolean = false)
+		public function loadTrack(trackName: String, trackUrl: String)
 		{
 			var track:Sound = new Sound();
 			track.load(new URLRequest(trackUrl));
@@ -58,7 +59,7 @@ package
 			function(e:Event): void {
 				addTrack(trackName, track);
 				
-				if (autoplay)
+				if (autoplay == trackName)
 					play(trackName);
 			}
 			);
@@ -66,7 +67,16 @@ package
 		
 		public function play(trackName:String)
 		{
-			currentChannel = (tracks[trackName] as Sound).play(0, int.MAX_VALUE, this.sndTransform);
+			if (tracks[trackName] == undefined)
+			{
+				autoplay = trackName;
+			}
+			else
+			{
+				if (currentChannel != null)
+					currentChannel.stop();
+				currentChannel = (tracks[trackName] as Sound).play(0, int.MAX_VALUE, this.sndTransform);
+			}
 		}
 		
 	}

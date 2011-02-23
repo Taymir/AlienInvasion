@@ -3,8 +3,6 @@ package Missles
 	import common.TList.TList;
 	import flash.display.MovieClip;
 	import flash.events.Event;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 	import common.TRegistry;
 	import TmpObstacles.BaseTmpObstacle;
 	

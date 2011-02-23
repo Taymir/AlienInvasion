@@ -18,9 +18,10 @@ package
 	 */
 	public class GameStateManager
 	{
-		private var isPause:Boolean = false;
+		private var isPause:Boolean = false;//@TMP: в этом отпадет необходимость, когда у игровых объектов появится метод destuctor()
 		private var isGameEnded = false;
 		private var documentObj: MovieClip;
+		private var BackBMP: BitmapData;// Изображение фона //@REFACTOR впоследствии уйдет на нижний уровень абстракции, что-то типа LevelLoader
 		
 		public function GameStateManager(document: MovieClip)
 		{
@@ -41,6 +42,7 @@ package
 			var player = this.initPlayer();
 			this.initEnemies();
 			this.initUI(player);
+			(TRegistry.instance.getValue("music_manager") as MusicManager).play("track1");
 			
 			this.startGameLoop();
 		}
@@ -54,7 +56,7 @@ package
 			var scene:MovieClip = new Scene();
 			scene.name = 'scene';
 			
-			var BackBMP: BitmapData = rasterize(new Background());
+			BackBMP = rasterize(new Background());
 			
 			var left_back = new Bitmap(BackBMP);
 			left_back.x = 0 - left_back.width + 30;
@@ -65,6 +67,7 @@ package
 			var center_back = new Bitmap(BackBMP);
 			center_back.x = 0;
 			center_back.y = 0;
+			
 			scene.addChild(left_back);
 			scene.addChild(right_back);
 			scene.addChild(center_back);
@@ -191,6 +194,8 @@ package
 		{
 			isGameEnded = true;
 			
+			BackBMP.dispose();
+			BackBMP = null;
 			// Удаление всех инициализированных объектов
 			/* Очистка массивов */
 			(TRegistry.instance.getValue("obstacles") as TList).Walk(destroyer_callback);
@@ -201,6 +206,9 @@ package
 			(TRegistry.instance.getValue("player") as TList).Clear();// Не требуется
 			(TRegistry.instance.getValue("enemies") as TList).Walk(destroyer_callback);
 			(TRegistry.instance.getValue("enemies") as TList).Clear();// Не трубуется
+			
+			/* Очищаем интерфейс */
+			(TRegistry.instance.getValue("UI") as UserInterfaceManager).clearIcons();
 			
 			/* Отвязка всех событий */
 			(TRegistry.instance.getValue("stage") as Stage).removeEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
@@ -223,9 +231,8 @@ package
 		
 		public function restartGame()
 		{
-			//@TODO: Не работает: Танк не удаляется, Нло не удаляется... Где остаются ссылки на них?
 			this.endGame();
-			//this.startGame();
+			this.startGame();
 		}
 		
 		public function checkEndGame()

@@ -3,8 +3,6 @@ package
 	import common.Debug;
 	import common.Vector2D;
 	import Effects.TemporaryEffect;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 	import flash.media.Sound;
 	import common.TRegistry;
 	import Weapons.BaseWeapon;

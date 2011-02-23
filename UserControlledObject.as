@@ -36,9 +36,13 @@ package
 		{
 			//Отвязываем все события
 			removeFromGlobalEnterFrame(keyHandler);
+			key.deconstruct();
 			
 			//Уничтожение продолжается в родительском методе
 			super.destroy();
+			
+			// Обнулям дополнительные переменные
+			stageRef = null;
 		}
 		
 		private function updateUi() : void

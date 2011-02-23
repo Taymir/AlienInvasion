@@ -6,7 +6,6 @@ package
 	import flash.events.Event;
 	import common.TRegistry;
 	import common.Debug;
-	import com.senocular.utils.KeyObject;
 	import flash.ui.Keyboard;
 	
 	/**
@@ -15,7 +14,6 @@ package
 	 */
 	public class Scene extends MovieClip
 	{
-		private var key:KeyObject;
 		private var stageRef:Stage;
 		
 		public function Scene() 
@@ -27,6 +25,7 @@ package
 			TRegistry.instance.getValue("globalEnterFrame").Add(trackTank);
 		}
 		
+		// Камера следует за танком
 		protected function trackTank()
 		{
 			var player:TList = TRegistry.instance.getValue("player");

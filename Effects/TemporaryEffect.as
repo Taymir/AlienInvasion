@@ -18,7 +18,7 @@ package Effects
 			this.duration = duration;
 			
 			effectTimer = new Timer(duration, 1);
-			effectTimer.addEventListener(TimerEvent.TIMER_COMPLETE, effectComplete)
+			effectTimer.addEventListener(TimerEvent.TIMER_COMPLETE, effectComplete, false, 0, true);
 		}
 		
 		public function beginEffect(targetObject: ControllableObject) : void
@@ -31,6 +31,7 @@ package Effects
 		private function effectComplete(e: TimerEvent) : void
 		{
 			this.endEffect();
+			this.targetObject = null;
 		}
 		
 		protected function endEffect() : void
