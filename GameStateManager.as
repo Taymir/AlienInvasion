@@ -9,6 +9,7 @@ package
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import common.TRegistry;
+	import flash.display.Stage;
 	import flash.events.Event;
 	
 	/**
@@ -18,6 +19,7 @@ package
 	public class GameStateManager
 	{
 		private var isPause:Boolean = false;
+		private var isGameEnded = false;
 		private var documentObj: MovieClip;
 		
 		public function GameStateManager(document: MovieClip)
@@ -34,6 +36,16 @@ package
 		}
 		
 		public function startGame() 
+		{
+			this.initLevel();
+			var player = this.initPlayer();
+			this.initEnemies();
+			this.initUI(player);
+			
+			this.startGameLoop();
+		}
+		
+		private function initLevel()
 		{
 			// Положение земли
 			TRegistry.instance.setValue("groundPosition", 451);
@@ -81,7 +93,10 @@ package
 			TRegistry.instance.setValue("tmp_obstacles", tmp_obstacles);
 			
 			TRegistry.instance.setValue("scene", scene);
-			
+		}
+		
+		private function initPlayer() : Tank
+		{
 			// Создаём танк
 			var player:TList = new TList();
 			TRegistry.instance.setValue("player", player);
@@ -90,6 +105,11 @@ package
 			tank.x = TRegistry.instance.getValue("stage").stageWidth / 2;
 			tank.y = TRegistry.instance.getValue("groundPosition") - tank.height;
 			
+			return tank;
+		}
+		
+		private function initEnemies()
+		{
 			// Создаём НЛОшки
 			var enemies:TList = new TList();
 			TRegistry.instance.setValue("enemies", enemies);
@@ -127,23 +147,31 @@ package
 				
 				transp.attach_guards(guard1, guard2);
 			}
-			
+		}
+		
+		private function initUI(player: Tank)
+		{
 			// Добавление UI-ярлыков
 			var UI:UserInterfaceManager = TRegistry.instance.getValue("UI");
-			UI.addWeaponIcon(new base_weapon_icon(), 0, tank.activateBaseWeapon);
-			UI.addWeaponIcon(new laser_icon(), 1, tank.activateLaser);
+			UI.addWeaponIcon(new base_weapon_icon(), 0, player.activateBaseWeapon);
+			UI.addWeaponIcon(new laser_icon(), 1, player.activateLaser);
 			UI.addWeaponIcon(new self_guided_missles_icon(), 2, null);
 			UI.addWeaponIcon(new bombs_icon(), 3, null);
-			UI.addWeaponIcon(new reflector_icon(), 4, tank.activateReflector);
+			UI.addWeaponIcon(new reflector_icon(), 4, player.activateReflector);
 			
 			UI.addProtectionIcon(new metal_shield_icon(), 0, null);
 			UI.addProtectionIcon(new energy_shield_icon(), 1, null);
-			UI.addProtectionIcon(new fire_accelerator_icon(), 2, tank.activateFireAccelerator);
-			UI.addProtectionIcon(new speed_accelerator_icon(), 3, tank.activateSpeedAccelerator);
+			UI.addProtectionIcon(new fire_accelerator_icon(), 2, player.activateFireAccelerator);
+			UI.addProtectionIcon(new speed_accelerator_icon(), 3, player.activateSpeedAccelerator);
 			UI.addProtectionIcon(new invisability_icon(), 4, null);
-			
-			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
 		}
+		
+		private function startGameLoop()
+		{
+			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
+			isGameEnded = false;
+		}
+		
 		
 		public function pauseGame()
 		{
@@ -161,45 +189,65 @@ package
 		
 		private function endGame()
 		{
+			isGameEnded = true;
 			
-			// Удаление всех инициализированных
+			// Удаление всех инициализированных объектов
+			/* Очистка массивов */
+			(TRegistry.instance.getValue("obstacles") as TList).Walk(destroyer_callback);
+			(TRegistry.instance.getValue("obstacles") as TList).Clear();
+			(TRegistry.instance.getValue("tmp_obstacles") as TList).Walk(destroyer_callback);
+			(TRegistry.instance.getValue("tmp_obstacles") as TList).Clear();
+			(TRegistry.instance.getValue("player") as TList).Walk(destroyer_callback);
+			(TRegistry.instance.getValue("player") as TList).Clear();// Не требуется
+			(TRegistry.instance.getValue("enemies") as TList).Walk(destroyer_callback);
+			(TRegistry.instance.getValue("enemies") as TList).Clear();// Не трубуется
+			
+			/* Отвязка всех событий */
+			(TRegistry.instance.getValue("stage") as Stage).removeEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
+			(TRegistry.instance.getValue("globalEnterFrame") as GlobalEnterFrame).RemoveAll();
+			
 			/* Удаление сцены */
 			var scene = documentObj.getChildByName("scene");
 			documentObj.removeChild(scene);
 			
-			/* Очистка массивов */
-			TRegistry.instance.getValue("obstacles").Clear();
-			TRegistry.instance.getValue("player").Clear();
-			TRegistry.instance.getValue("enemies").Clear();
-			
-			/* Отвязка всех событий */
-			TRegistry.instance.getValue("globalEnterFrame");
-			
 			//@TODO Возможны утечки памяти! (Мог забыть что-то отвязать)
+		}
+		
+		private function destroyer_callback(obj: Object)
+		{
+			//@TODO: в будущем /предположительно/ все игровые объекты будут экземплярами GameObject,
+			// но сейчас присутствуют и простые MovieClip
+			if(obj is GameObject)
+				(obj as GameObject).destroy();
 		}
 		
 		public function restartGame()
 		{
 			//@TODO: Не работает: Танк не удаляется, Нло не удаляется... Где остаются ссылки на них?
-			/*this.endGame();
-			this.startGame();*/
+			this.endGame();
+			//this.startGame();
 		}
 		
 		public function checkEndGame()
 		{
-			if (TRegistry.instance.getValue("player").Count() == 0)
+			if (!isGameEnded)
 			{
-				// Игрок погиб, конец игры
-				// Показываем месадж бокс и ставим на паузу
-				showEndGameDialog("Конец игры, смерть всем человекам!");
-				
-				this.pauseGame();
-			} else if (TRegistry.instance.getValue("enemies").Count() == 0) {
-				// Враги Повержены, конец игры
-				// Показываем месадж бокс и ставим на паузу
-				showEndGameDialog("Инопланетные захватчики повержены! УРА! УРА! УРА!");
-				
-				this.pauseGame();
+				if (TRegistry.instance.getValue("player").Count() == 0)
+				{
+					// Игрок погиб, конец игры
+					// Показываем месадж бокс и ставим на паузу
+					showEndGameDialog("Конец игры, смерть всем человекам!");
+					
+					this.pauseGame();
+					isGameEnded = true;
+				} else if (TRegistry.instance.getValue("enemies").Count() == 0) {
+					// Враги Повержены, конец игры
+					// Показываем месадж бокс и ставим на паузу
+					showEndGameDialog("Инопланетные захватчики повержены! УРА! УРА! УРА!");
+					
+					this.pauseGame();
+					isGameEnded = true;
+				}
 			}
 		}
 		

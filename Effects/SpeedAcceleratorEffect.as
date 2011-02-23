@@ -23,7 +23,7 @@ package Effects
 		override protected function endEffect():void 
 		{
 			// Уменьшение скорости перемещения
-			targetObject.maxspeed += 7;
+			targetObject.maxspeed -= 7;
 			
 			super.endEffect();
 		}

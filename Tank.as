@@ -33,7 +33,7 @@ package
 			else
 				slowdownXShift();
 				
-			if (key.isDown(Keyboard.SPACE))
+			if (key.isDown(Keyboard.UP))
 				fire();
 			else
 				stopFire();
