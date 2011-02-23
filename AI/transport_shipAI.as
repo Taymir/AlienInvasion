@@ -13,13 +13,15 @@ package AI
 	public class transport_shipAI 
 	{
 		private var self: transport_ship;
+		private var target: GameObject;
 		private var fsm: FSM.FSM;
 		
 		public function transport_shipAI(self: transport_ship, target: GameObject) 
 		{
 			// init ship
 			this.self = self;
-			this.self.direction = transport_ship.DIRECTION_LEFT;
+			this.self.direction = transport_ship.DIRECTION_NONE;
+			this.target = target;
 			
 			// Данные:
 			// 1) Ссылки на охрану
@@ -33,7 +35,7 @@ package AI
 		public function attach_guards(guard_one: ControllableObject, guard_two: ControllableObject)
 		{
 			var inactive2State: InactivityState = new InactivityState();
-			var moveAndAttackState: MoveAndAtackState = new MoveAndAtackState(this.self);
+			var moveAndAttackState: MoveAndAtackState = new MoveAndAtackState(this.self, this.target);
 			
 			var timeoutTransition: TimeoutTransition = new TimeoutTransition(500, 1000);
 			var guardKilledTransition: GuardsKilledTransition = new GuardsKilledTransition(guard_one, guard_two);
