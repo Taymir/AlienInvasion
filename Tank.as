@@ -3,6 +3,7 @@ package
 	import AI.Transition.MissleDangerTransition;
 	import common.TList.TList;
 	import common.TRegistry;
+	import Effects.EnergyUmbrellaEffect;
 	import Effects.FireAcceleratorEffect;
 	import Effects.SpeedAcceleratorEffect;
 	import flash.display.MovieClip;
@@ -125,6 +126,11 @@ package
 		public function activateSpeedAccelerator() : void
 		{
 			this.applyEffect(new SpeedAcceleratorEffect());
+		}
+		
+		public function activateEneryUmbrella() : void
+		{
+			this.applyEffect(new EnergyUmbrellaEffect());
 		}
 	}
 }

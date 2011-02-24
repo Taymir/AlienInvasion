@@ -159,7 +159,7 @@ package
 			UI.addWeaponIcon(new reflector_icon(), 4, player.activateReflector);
 			
 			UI.addProtectionIcon(new metal_shield_icon(), 0, null);
-			UI.addProtectionIcon(new energy_shield_icon(), 1, null);
+			UI.addProtectionIcon(new energy_umbrella_icon(), 1, player.activateEneryUmbrella);
 			UI.addProtectionIcon(new fire_accelerator_icon(), 2, player.activateFireAccelerator);
 			UI.addProtectionIcon(new speed_accelerator_icon(), 3, player.activateSpeedAccelerator);
 			UI.addProtectionIcon(new invisability_icon(), 4, null);

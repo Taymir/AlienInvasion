@@ -18,5 +18,4 @@ package TmpObstacles
 			missle.switchDirection();
 		}
 	}
-
 }

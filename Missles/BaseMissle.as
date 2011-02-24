@@ -16,7 +16,7 @@ package Missles
 		public static const DOWN:int = -1;
 		
 		protected var speed:Number = 17;
-		protected var damage: Number = 10;
+		public var damage: Number = 10;
 		protected var direction:int = 0;
 		
 		public function BaseMissle(x:Number, y:Number, direction:int) 
@@ -38,20 +38,16 @@ package Missles
 		{
 			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition") + this.height / 2)
 			{
-				//@TODO: Для работы с отражателем:
-				// Если натыкаемся на отражатель, то
-				// изменить direction
-				// ВОПРОС: куда поместить информацию о присутствии отражателя????
-				if (TRegistry.instance.getValue("tmp_obstacles").Walk(tmp_obstacles_collision_detection_callback) == null)
-					TRegistry.instance.getValue("player").Walk(collision_detection_callback);
+				y += speed;//@BUGFIX: чтобы ракеты не отображались поверх защитных щитов, сначала изменяем координаты, потом делаем collision detection
 				
-				y += speed;
+				if (TRegistry.instance.getValue("tmp_obstacles").Walk(tmp_obstacles_collision_detection_callback) == null)
+				TRegistry.instance.getValue("player").Walk(collision_detection_callback);
 			} 
 			else if (direction == UP && y > -70)
 			{
-				TRegistry.instance.getValue("enemies").Walk(collision_detection_callback);
-				
 				y -= speed;
+				
+				TRegistry.instance.getValue("enemies").Walk(collision_detection_callback);
 			}
 			else 
 			{
@@ -75,10 +71,9 @@ package Missles
 		{
 			var targetObj : BaseTmpObstacle = obj as BaseTmpObstacle;
 			
-			if (this.hitTestObject(targetObj))//@BUG: хотелось бы, чтобы не было видно ракет поверх щита
+			if (this.hitTestObject(targetObj))
 			{
 				targetObj.handleMissle(this);
-				
 				return TList.STOP_WALKING;
 			}
 			

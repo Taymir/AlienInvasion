@@ -16,6 +16,7 @@ package Missles
 		public function freezer(x:Number, y:Number, direction:int) 
 		{
 			this.speed = 12;
+			this.damage = 0;
 			super(x, y, direction);
 			
 		}
