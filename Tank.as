@@ -91,18 +91,6 @@ package
 			
 		}
 		
-		public override function destroy() : void
-		{
-			//Удаляем ссылку на танк
-			(TRegistry.instance.getValue("player") as TList).Remove(this);
-			
-			//Уничтожение продолжается в родительском методе
-			super.destroy();
-			
-			// Проверка конца игры
-			TRegistry.instance.getValue("gameStateManager").checkEndGame();
-		}
-		
 		override protected function doDamage(hits: int) : void
 		{
 			if(!TRegistry.instance.getValue("debug_god_mode"))

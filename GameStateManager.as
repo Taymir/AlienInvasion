@@ -1,5 +1,6 @@
 package  
 {
+	import common.Debug;
 	import common.TList.TList;
 	import Enemies.guard_ship;
 	import Enemies.large_ship;
@@ -18,8 +19,7 @@ package
 	 */
 	public class GameStateManager
 	{
-		private var isPause:Boolean = false;//@TMP: в этом отпадет необходимость, когда у игровых объектов появится метод destuctor()
-		private var isGameEnded = false;
+		private var isPause:Boolean = false;
 		private var documentObj: MovieClip;
 		private var BackBMP: BitmapData;// Изображение фона //@REFACTOR впоследствии уйдет на нижний уровень абстракции, что-то типа LevelLoader
 		
@@ -38,6 +38,7 @@ package
 		
 		public function startGame() 
 		{
+			this.initAllLists();
 			this.initLevel();
 			var player = this.initPlayer();
 			this.initEnemies();
@@ -45,6 +46,21 @@ package
 			(TRegistry.instance.getValue("music_manager") as MusicManager).play("track1");
 			
 			this.startGameLoop();
+		}
+		
+		private function initAllLists()
+		{
+			initList("player");
+			initList("enemies");
+			initList("obstacles");
+			initList("tmp_obstacles");
+		}
+		
+		private function initList(listname: String)
+		{
+			// Создать список
+			var list: TList = new TList();
+			TRegistry.instance.setValue(listname, list);
 		}
 		
 		private function initLevel()
@@ -74,37 +90,23 @@ package
 			documentObj.addChild(scene);
 			documentObj.swapChildren(scene, documentObj.uiPanel);
 			
+			TRegistry.instance.setValue("scene", scene);
+			
 			/* инициализация препятствий */
-			var left_rocks = new rocks();
-			var right_rocks = new rocks();
+			var left_rocks = new CommonGameObject(new rocks(), "obstacles");
+			var right_rocks = new CommonGameObject(new rocks(), "obstacles");
 			
 			left_rocks.y = TRegistry.instance.getValue("groundPosition") + 3;
 			left_rocks.x = scene.bounds.x + left_rocks.width / 2;
 			
 			right_rocks.y = TRegistry.instance.getValue("groundPosition") + 3;
 			right_rocks.x = scene.bounds.width + scene.bounds.x - right_rocks.width / 2;
-			
-			scene.addChild(left_rocks);
-			scene.addChild(right_rocks);
-			
-			var obstacles:TList = new TList();
-			obstacles.Add(left_rocks);
-			obstacles.Add(right_rocks);
-			TRegistry.instance.setValue("obstacles", obstacles);
-			
-			var tmp_obstacles: TList = new TList();
-			TRegistry.instance.setValue("tmp_obstacles", tmp_obstacles);
-			
-			TRegistry.instance.setValue("scene", scene);
 		}
 		
 		private function initPlayer() : Tank
 		{
 			// Создаём танк
-			var player:TList = new TList();
-			TRegistry.instance.setValue("player", player);
 			var tank: Tank = new Tank();
-			player.Add(tank);
 			tank.x = TRegistry.instance.getValue("stage").stageWidth / 2;
 			tank.y = TRegistry.instance.getValue("groundPosition") - tank.height;
 			
@@ -114,8 +116,6 @@ package
 		private function initEnemies()
 		{
 			// Создаём НЛОшки
-			var enemies:TList = new TList();
-			TRegistry.instance.setValue("enemies", enemies);
 			
 			if(!TRegistry.instance.getValue("debug_no_enemies")) {
 				var ufo;
@@ -125,28 +125,24 @@ package
 					ufo = new small_ship();
 					ufo.x = 0 + 100 * i;
 					ufo.y = 170;
-					enemies.Add(ufo);
 				}
 				/*
 				ufo = new large_ship();//@TMP
 				ufo.x = 800;
 				ufo.y = 50;
-				enemies.Add(ufo);*/
+				*/
 				
 				var transp: transport_ship = new transport_ship();
 				transp.x = 800;
 				transp.y = 50;
-				enemies.Add(transp);
 				
 				var guard1 = new guard_ship(transp, guard_ship.RIGHT_POSITION);
 				guard1.x = 850;
 				guard1.y = 100;
-				enemies.Add(guard1);
 				
 				var guard2 = new guard_ship(transp, guard_ship.LEFT_POSITION);
 				guard2.x = 750;
 				guard2.y = 100;
-				enemies.Add(guard2);
 				
 				transp.attach_guards(guard1, guard2);
 			}
@@ -172,7 +168,6 @@ package
 		private function startGameLoop()
 		{
 			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
-			isGameEnded = false;
 		}
 		
 		
@@ -190,22 +185,31 @@ package
 			}
 		}
 		
+		private function clearList(listname:String)
+		{
+			var list: TList = (TRegistry.instance.getValue(listname) as TList);
+			list.Walk(destroyer_callback);
+			
+			Debug.assert(list.Count() == 0, "Список не очищен полностью");
+		}
+		
+		private function destroyer_callback(obj: Object)
+		{
+			Debug.assert(obj is GameObject, "В один из списков попал Movieclip - не GameObject");
+			
+			(obj as GameObject).dispose();
+		}
+		
 		private function endGame()
 		{
-			isGameEnded = true;
-			
 			BackBMP.dispose();
 			BackBMP = null;
 			// Удаление всех инициализированных объектов
 			/* Очистка массивов */
-			(TRegistry.instance.getValue("obstacles") as TList).Walk(destroyer_callback);
-			(TRegistry.instance.getValue("obstacles") as TList).Clear();
-			(TRegistry.instance.getValue("tmp_obstacles") as TList).Walk(destroyer_callback);
-			(TRegistry.instance.getValue("tmp_obstacles") as TList).Clear();
-			(TRegistry.instance.getValue("player") as TList).Walk(destroyer_callback);
-			(TRegistry.instance.getValue("player") as TList).Clear();// Не требуется
-			(TRegistry.instance.getValue("enemies") as TList).Walk(destroyer_callback);
-			(TRegistry.instance.getValue("enemies") as TList).Clear();// Не трубуется
+			clearList("player");
+			clearList("enemies");
+			clearList("obstacles");
+			clearList("tmp_obstacles");
 			
 			/* Очищаем интерфейс */
 			(TRegistry.instance.getValue("UI") as UserInterfaceManager).clearIcons();
@@ -217,17 +221,9 @@ package
 			/* Удаление сцены */
 			var scene = documentObj.getChildByName("scene");
 			documentObj.removeChild(scene);
-			
-			//@TODO Возможны утечки памяти! (Мог забыть что-то отвязать)
 		}
 		
-		private function destroyer_callback(obj: Object)
-		{
-			//@TODO: в будущем /предположительно/ все игровые объекты будут экземплярами GameObject,
-			// но сейчас присутствуют и простые MovieClip
-			if(obj is GameObject)
-				(obj as GameObject).destroy();
-		}
+
 		
 		public function restartGame()
 		{
@@ -237,24 +233,19 @@ package
 		
 		public function checkEndGame()
 		{
-			if (!isGameEnded)
+			if (TRegistry.instance.getValue("player").Count() == 0)
 			{
-				if (TRegistry.instance.getValue("player").Count() == 0)
-				{
-					// Игрок погиб, конец игры
-					// Показываем месадж бокс и ставим на паузу
-					showEndGameDialog("Конец игры, смерть всем человекам!");
-					
-					this.pauseGame();
-					isGameEnded = true;
-				} else if (TRegistry.instance.getValue("enemies").Count() == 0) {
-					// Враги Повержены, конец игры
-					// Показываем месадж бокс и ставим на паузу
-					showEndGameDialog("Инопланетные захватчики повержены! УРА! УРА! УРА!");
-					
-					this.pauseGame();
-					isGameEnded = true;
-				}
+				// Игрок погиб, конец игры
+				// Показываем месадж бокс и ставим на паузу
+				showEndGameDialog("Конец игры, смерть всем человекам!");
+				
+				this.pauseGame();
+			} else if (TRegistry.instance.getValue("enemies").Count() == 0) {
+				// Враги Повержены, конец игры
+				// Показываем месадж бокс и ставим на паузу
+				showEndGameDialog("Инопланетные захватчики повержены! УРА! УРА! УРА!");
+				
+				this.pauseGame();
 			}
 		}
 		

@@ -36,7 +36,7 @@ package Weapons
 		{
 			if (shield != null)
 			{				
-				shield.destroy();
+				shield.dispose();
 				
 				shield = null;
 			}

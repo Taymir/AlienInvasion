@@ -15,20 +15,10 @@ package TmpObstacles
 		{
 			this.shooterObj = shooterObj;
 			
-			addToTmpObstaclesList();
+			addToList("tmp_obstacles");
 			addToGlobalEnterFrame(update);
 			super();
 			update();
-		}
-		
-		protected function addToTmpObstaclesList()
-		{
-			(TRegistry.instance.getValue("tmp_obstacles") as TList).Add(this);
-		}
-		
-		protected function removeFromTmpObstaclesList()
-		{
-			(TRegistry.instance.getValue("tmp_obstacles") as TList).Remove(this);
 		}
 		
 		protected function update()
@@ -37,11 +27,11 @@ package TmpObstacles
 			this.y = shooterObj.y;
 		}
 		
-		public override function destroy() : void
+		public override function dispose() : void
 		{
-			removeFromTmpObstaclesList();
+			removeFromList("tmp_obstacles");
 			removeFromGlobalEnterFrame(update);
-			super.destroy();
+			super.dispose();
 		}
 		
 		public function handleMissle(missle: BaseMissle)

@@ -56,7 +56,7 @@ package Missles
 			else 
 			{
 				this.hitGround();
-				this.Destroy();
+				this.dispose();
 			}
 		}
 		
@@ -92,7 +92,7 @@ package Missles
 			if (this.hitTestObject(targetObj))
 			{
 				hitTarget(targetObj);
-				this.Destroy();
+				this.dispose();
 				
 				return TList.STOP_WALKING;
 			}
@@ -100,13 +100,12 @@ package Missles
 			return TList.CONTINUE_WALKING;
 		}
 		
-		protected function Destroy() : void
+		public override function dispose() : void
 		{
 			// Завершаем анимацию движения ракеты
 			TRegistry.instance.getValue("globalEnterFrame").Remove(loop);
 			
-			// Прячем саму ракету
-			this.hide();
+			super.dispose();
 		}
 		
 		protected function Explode() : void

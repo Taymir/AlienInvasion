@@ -19,6 +19,9 @@ package Enemies
 		
 		public function BaseEnemy() : void
 		{
+			// Добавляемся в список
+			addToList("enemies");
+			
 			// Привязываемся к глобальному обновлятору
 			addToGlobalEnterFrame(update);
 			
@@ -54,16 +57,23 @@ package Enemies
 			rotation = velocity.x;
 		}
 		
-		public override function destroy() : void
+		public override function dispose() : void
 		{
 			//Удаляем НЛО из реестра игровых объектов
-			(TRegistry.instance.getValue("enemies") as TList).Remove(this);
+			removeFromList("enemies");
 			
 			//Отвязываем все события
 			removeFromGlobalEnterFrame(update);
 			
 			//Уничтожение продолжается в родительском методе
-			super.destroy();
+			super.dispose();
+		}
+		
+		public override function kill() : void
+		{
+			//@TODO анимация смерти
+			
+			super.kill();
 			
 			// Проверка конца игры
 			TRegistry.instance.getValue("gameStateManager").checkEndGame();

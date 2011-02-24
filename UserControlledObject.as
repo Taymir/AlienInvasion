@@ -17,13 +17,17 @@ package
 		
 		public function UserControlledObject() 
 		{
+			// Добавляемся в список
+			this.addToList("player");
+			
+			// Обновим UI
 			this.updateUi();
 			
 			Debug.assert( TRegistry.instance.getValue("stage") != null, "В реестре TRegistry не установлено значение объекта сцены stage" );
 			this.stageRef = TRegistry.instance.getValue("stage");
-							
 			key = new KeyObject(stageRef);
 			
+			// Привязываемся в глобальному обновлятору
 			addToGlobalEnterFrame(keyHandler);
 		}
 		
@@ -32,17 +36,31 @@ package
 			//@EMPTY: переопределяется в наследниках
 		}
 		
-		public override function destroy() : void
+		public override function dispose() : void
 		{
+			//Удаляем ссылку на игрока
+			this.removeFromList("player");
+			
 			//Отвязываем все события
 			removeFromGlobalEnterFrame(keyHandler);
 			key.deconstruct();
 			
 			//Уничтожение продолжается в родительском методе
-			super.destroy();
+			super.dispose();
 			
 			// Обнулям дополнительные переменные
 			stageRef = null;
+		}
+		
+		
+		public override function kill() : void
+		{
+			//@TODO анимация смерти
+			
+			super.kill();
+			
+			// Проверка конца игры
+			TRegistry.instance.getValue("gameStateManager").checkEndGame();
 		}
 		
 		private function updateUi() : void
