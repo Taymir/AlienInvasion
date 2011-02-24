@@ -9,10 +9,8 @@ package AI
 	 * ...
 	 * @author Taymir
 	 */
-	public final class small_shipAI
+	public final class small_shipAI extends BaseAI
 	{
-		
-		private var fsm : FSM.FSM;
 		private var self: small_ship;
 		
 		public function small_shipAI(self : small_ship, target : GameObject) 
@@ -43,9 +41,9 @@ package AI
 			fsm = new FSM.FSM(climbState);
 		}
 		
-		public function update() : void
+		public override function update()
 		{
-			fsm.update();
+			super.update();
 			self.followDirection();
 		}
 		

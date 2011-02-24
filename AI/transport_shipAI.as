@@ -10,11 +10,10 @@ package AI
 	 * ...
 	 * @author Taymir
 	 */
-	public class transport_shipAI 
+	public class transport_shipAI extends BaseAI
 	{
 		private var self: transport_ship;
 		private var target: GameObject;
-		private var fsm: FSM.FSM;
 		
 		public function transport_shipAI(self: transport_ship, target: GameObject) 
 		{
@@ -44,11 +43,6 @@ package AI
 			guardKilledTransition.nextTrueState = inactive2State;
 			inactive2State.transitions = new Array(timeoutTransition);
 			timeoutTransition.nextTrueState = moveAndAttackState;
-		}
-		
-		public function update() : void
-		{
-			fsm.update();
 		}
 		
 	}

@@ -13,7 +13,6 @@ package Enemies
 	 */
 	public final class large_ship extends BaseEnemy
 	{
-		private var ai:large_shipAI;
 		private var secondaryWeapon: BaseWeapon;
 		
 		public function large_ship() 
@@ -37,12 +36,6 @@ package Enemies
 			Debug.assert(secondaryWeapon != null, "Орудие не определенно");
 			
 			secondaryWeapon.fire();
-		}
-		
-		protected override function update() : void
-		{
-			ai.update();
-			super.update();
 		}
 		
 		public function isSecondaryReady() : Boolean

@@ -1,5 +1,6 @@
 package Enemies 
 {
+	import AI.BaseAI;
 	import AI.SimpleAI;
 	import common.TList.TList;
 	import common.TRegistry;
@@ -15,7 +16,7 @@ package Enemies
 	 */
 	public class BaseEnemy extends ControllableObject
 	{
-		//private var ai : SimpleAI;//@REFACTOR: вынести в UFO
+		protected var ai : BaseAI;
 		
 		public function BaseEnemy() : void
 		{
@@ -24,16 +25,11 @@ package Enemies
 			
 			// Привязываемся к глобальному обновлятору
 			addToGlobalEnterFrame(update);
-			
-			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"
-			//@REFACTOR: Как-то упростить эти длинные конструкции
-			/*var tank:Tank = (TRegistry.instance.getValue("player") as TList).Get(0) as Tank;
-			ai = new SimpleAI(this, tank);*///@REFACTOR: вынести в UFO
 		}
 		
 		protected function update() : void
 		{	
-			//ai.update();//@REFACTOR: вынести в UFO
+			ai.update();
 			slowdownXShift();
 			slowdownYShift();
 			

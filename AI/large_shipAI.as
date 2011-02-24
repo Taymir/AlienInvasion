@@ -18,9 +18,8 @@ package AI
 	 * ...
 	 * @author Taymir
 	 */
-	public final class large_shipAI
+	public final class large_shipAI extends BaseAI
 	{
-		private var fsm : FSM.FSM;
 		public var tactical_position: Point;
 		
 		public function large_shipAI(self : large_ship, target : GameObject) 
@@ -58,11 +57,6 @@ package AI
 			maneuverCompleteTransition.nextTrueState = atackState;
 			
 			fsm = new FSM.FSM(newPositionState);
-		}
-		
-		public function update() : void
-		{
-			fsm.update();
 		}
 	}
 

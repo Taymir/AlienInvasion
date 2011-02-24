@@ -15,8 +15,6 @@ package Enemies
 		
 		public var direction:int = DIRECTION_NONE;
 		
-		private var ai: transport_shipAI;
-		
 		public function transport_ship() 
 		{
 			this.speed = 1;
@@ -33,13 +31,7 @@ package Enemies
 		
 		public function attach_guards(guard_one: ControllableObject, guard_two: ControllableObject)
 		{
-			ai.attach_guards(guard_one, guard_two);
-		}
-		
-		override protected function update() : void
-		{
-			ai.update();
-			super.update();
+			(ai as transport_shipAI).attach_guards(guard_one, guard_two);
 		}
 		
 		protected override function reflectXVelocity()

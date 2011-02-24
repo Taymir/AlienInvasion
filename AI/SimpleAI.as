@@ -7,10 +7,8 @@ package AI
 	 * ...
 	 * @author Akkarin
 	 */
-	public class SimpleAI
-	{
-		private var fsm : FSM.FSM;
-		
+	public class SimpleAI extends BaseAI
+	{		
 		public function SimpleAI(self : ControllableObject, target : GameObject) 
 		{
 			var avoidState : AvoidState = new AvoidState(self, target);
@@ -29,15 +27,8 @@ package AI
 			lostTransition.nextFalseState = pursueState; // false state
 			attackTimeoutTransition.nextTrueState = avoidState;
 			
-			FSM.FSM.debug_mode = false;
 			fsm = new FSM.FSM(avoidState);
 		}
-		
-		public function update() : void
-		{
-			fsm.update();
-		}
-		
 	}
 
 }

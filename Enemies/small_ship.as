@@ -19,8 +19,6 @@ package Enemies
 		
 		public var direction:int = DIRECTION_NONE;
 		
-		private var ai: small_shipAI;
-		
 		public function small_ship()
 		{
 			this.speed = 5.0;
@@ -34,12 +32,6 @@ package Enemies
 			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"
 			var tank:Tank = TRegistry.instance.getValue("player").Get(0);
 			ai = new small_shipAI(this, tank);
-		}
-		
-		protected override function update() : void
-		{
-			ai.update();
-			super.update();
 		}
 		
 		protected override function reflectXVelocity()

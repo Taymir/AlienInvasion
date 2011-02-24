@@ -13,8 +13,6 @@ package Enemies
 		public static const LEFT_POSITION: int = -1;
 		public static const RIGHT_POSITION: int = +1;
 		
-		private var ai: guard_shipAI;
-		
 		public function guard_ship(transport: transport_ship, left_or_right: int = LEFT_POSITION) 
 		{
 			this.speed = 4;
@@ -27,12 +25,6 @@ package Enemies
 			
 			var tank: Tank = TRegistry.instance.getValue("player").Get(0);
 			ai = new guard_shipAI(this, tank, transport, left_or_right);
-		}
-		
-		override protected function update() : void
-		{
-			ai.update();
-			super.update();
 		}
 	}
 

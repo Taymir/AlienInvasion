@@ -15,9 +15,8 @@ package AI
 	 * ...
 	 * @author Taymir
 	 */
-	public class guard_shipAI 
+	public class guard_shipAI extends BaseAI
 	{
-		private var fsm: FSM;
 		public var tactical_position: Point;
 		
 		public function guard_shipAI(self: guard_ship, target: GameObject, transport: ControllableObject, left_or_right: int) : void
@@ -58,11 +57,6 @@ package AI
 			canNotShootTransition.nextFalseState = approachPositionState;
 			
 			fsm = new FSM.FSM(findPositionState);
-		}
-		
-		public function update() : void
-		{
-			fsm.update();
 		}
 	}
 }
