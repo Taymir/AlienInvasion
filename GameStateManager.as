@@ -129,7 +129,7 @@ package
 				
 				ufo = new large_ship();//@TMP
 				ufo.x = 800;
-				ufo.y = 50;
+				ufo.y = 150;
 				
 				
 				var transp: transport_ship = new transport_ship();

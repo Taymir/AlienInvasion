@@ -18,11 +18,14 @@ package Effects
 			this.duration = duration;
 			
 			effectTimer = new Timer(duration, 1);
-			effectTimer.addEventListener(TimerEvent.TIMER_COMPLETE, effectComplete, false, 0, true);
 		}
 		
 		public function beginEffect(targetObject: ControllableObject) : void
 		{
+			//@BUGFIX: т.к. не можем использовать weakReference (сборщик мусора удаляет эффекты из памяти), то
+			// приходится отвязывать событие после окончания эффекта. Впрочем, сам эффект в любом случае 
+			// используется лишь один раз
+			effectTimer.addEventListener(TimerEvent.TIMER_COMPLETE, effectComplete);
 			this.targetObject = targetObject;
 			
 			effectTimer.start();
@@ -30,6 +33,7 @@ package Effects
 		
 		private function effectComplete(e: TimerEvent) : void
 		{
+			effectTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, effectComplete);
 			this.endEffect();
 			this.targetObject = null;
 		}

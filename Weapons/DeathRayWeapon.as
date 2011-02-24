@@ -13,7 +13,7 @@ package Weapons
 	public class DeathRayWeapon extends BaseWeapon
 	{
 		//@TODO надо как-то изменить нижнюю часть луча: очень "плоско" выглядит, возможно сделать каую-то дополнительную вспышку?
-		protected var ray: MovieClip;
+		protected var ray: CommonGameObject;
 		protected var firingTimer: Timer;
 		
 		protected var damage: Number = 2;
@@ -30,25 +30,16 @@ package Weapons
 		{
 			if (ray == null)
 			{
-				//@TODO: Работаем напрямую с мувиклипом. Возможно вынести работу с графикой на отдельный уровень 
-				// абстракции: класс RAY
-				ray = new death_ray();
+				ray = new CommonGameObject(new death_ray());
 				firingTimer.start();
 				
 				this.updateRayPosition();
-				
-				getScene().addChild(ray);
 				
 				getGlobalEnterFrame().Add(update);
 				
 				
 				super.launch(x, y);
 			}
-		}
-		
-		private function getScene() : MovieClip
-		{
-			return  TRegistry.instance.getValue("scene")
 		}
 		
 		private function getGlobalEnterFrame() : GlobalEnterFrame
@@ -69,9 +60,8 @@ package Weapons
 			// Луч следует за кораблем
 			this.updateRayPosition();
 			
-			//@TODO проверка на пересечение с игроком / препятствиями
 			// Если пересечение существует:
-			// * Для луча: уменьшить высоту до высоты препятсивя / игрока+
+			// * Для луча: уменьшить высоту до высоты препятсивя / игрока
 			// * Для игрока: получить повреждения
 			
 			// Проверка на попадание
