@@ -65,8 +65,21 @@ package Enemies
 		
 		protected function Explode() : void
 		{
-			trace("explode");
 			new Explosion(x, y);
+		}
+		
+		protected override function update() : void
+		{		
+			if (this.y >= TRegistry.instance.getValue("groundPosition"))
+			{
+				
+				this.Explode();
+				this.kill();
+			}
+			
+			TRegistry.instance.getValue("player").Walk(collision_detection_callback);
+			
+			super.update();
 		}
 	}
 

@@ -28,7 +28,6 @@
 			if (MathExtra.RandomInt(0, 15) == 10)
 			{
 				random_point = new Point(MathExtra.RandomInt(0, 600), MathExtra.RandomInt(0, 300));
-				trace("X: " + random_point.x + "; Y: " + random_point.y);
 			}
 			
 			if(self.x > random_point.x)
