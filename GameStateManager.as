@@ -1,10 +1,13 @@
 package  
 {
+	import AI.suicide_shipAI;
 	import common.Debug;
 	import common.TList.TList;
 	import Enemies.guard_ship;
 	import Enemies.large_ship;
+	import Enemies.scout_ship;
 	import Enemies.small_ship;
+	import Enemies.suicide_ship;
 	import Enemies.transport_ship;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -122,29 +125,36 @@ package
 				const maxEnemies: int = 0;//@TMP
 				for(var i:int = 0; i < maxEnemies; i++)
 				{
-					ufo = new small_ship();
-					ufo.x = 0 + 100 * i;
-					ufo.y = 170;
+				//	ufo = new small_ship();
+				//	ufo.x = 0 + 100 * i;
+				//	ufo.y = 170;
 				}
 				
-				ufo = new large_ship();//@TMP
-				ufo.x = 800;
-				ufo.y = 150;
+				//ufo = new large_ship();//@TMP
+				//ufo.x = 800;
+				//ufo.y = 150;
 				
+				//var scout: scout_ship = new scout_ship();
+				//scout.x = 600;
+				//scout.y = 250;				
 				
-				var transp: transport_ship = new transport_ship();
-				transp.x = 800;
-				transp.y = 50;
+				var suicide: suicide_ship = new suicide_ship();
+				suicide.x = -600;
+				suicide.y = -250;
 				
-				var guard1 = new guard_ship(transp, guard_ship.RIGHT_POSITION);
-				guard1.x = 850;
-				guard1.y = 100;
+				//var transp: transport_ship = new transport_ship();
+				//transp.x = 800;
+				//transp.y = 50;
 				
-				var guard2 = new guard_ship(transp, guard_ship.LEFT_POSITION);
-				guard2.x = 750;
-				guard2.y = 100;
+				//var guard1 = new guard_ship(transp, guard_ship.RIGHT_POSITION);
+				//guard1.x = 850;
+				//guard1.y = 100;
 				
-				transp.attach_guards(guard1, guard2);
+				//var guard2 = new guard_ship(transp, guard_ship.LEFT_POSITION);
+				//guard2.x = 750;
+				//guard2.y = 100;
+				
+				//transp.attach_guards(guard1, guard2);
 			}
 		}
 		
