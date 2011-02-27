@@ -155,7 +155,7 @@ package
 			UI.addWeaponIcon(new base_weapon_icon(), 0, player.activateBaseWeapon);
 			UI.addWeaponIcon(new laser_icon(), 1, player.activateLaser);
 			UI.addWeaponIcon(new self_guided_missles_icon(), 2, null);
-			UI.addWeaponIcon(new bombs_icon(), 3, null);
+			UI.addWeaponIcon(new bombs_icon(), 3, player.activateParalyzeBombs);
 			UI.addWeaponIcon(new reflector_icon(), 4, player.activateReflector);
 			
 			UI.addProtectionIcon(new metal_shield_icon(), 0, null);

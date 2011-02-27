@@ -13,6 +13,7 @@ package
 	import flash.ui.Keyboard;
 	import Weapons.TankCannonWeapon;
 	import Weapons.TankLaserWeapon;
+	import Weapons.TankParalyzeWeapon;
 	import Weapons.TankReflectorWeapon;
 	
 	public final class Tank extends UserControlledObject
@@ -116,6 +117,11 @@ package
 		public function activateReflector() : void
 		{
 			this.primaryWeapon = new TankReflectorWeapon(this);
+		}
+		
+		public function activateParalyzeBombs() : void
+		{
+			this.primaryWeapon = new TankParalyzeWeapon(this);
 		}
 		
 		public function activateFireAccelerator() : void
