@@ -4,6 +4,7 @@ package
 	import common.TList.TList;
 	import Enemies.guard_ship;
 	import Enemies.large_ship;
+	import Enemies.scout_ship;
 	import Enemies.small_ship;
 	import Enemies.transport_ship;
 	import flash.display.Bitmap;
@@ -131,6 +132,9 @@ package
 				ufo.x = 800;
 				ufo.y = 150;
 				
+				var scout: scout_ship = new scout_ship();
+				scout.x = 600;
+				scout.y = 250;				
 				
 				var transp: transport_ship = new transport_ship();
 				transp.x = 800;
