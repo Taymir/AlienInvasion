@@ -34,7 +34,7 @@ package Missles
 			this.direction *= -1;
 		}
 		
-		private function loop() : void
+		protected function loop() : void
 		{
 			if (direction == DOWN && y < TRegistry.instance.getValue("groundPosition") + this.height / 2)
 			{

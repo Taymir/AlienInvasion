@@ -15,6 +15,7 @@ package
 	import Weapons.TankLaserWeapon;
 	import Weapons.TankParalyzeWeapon;
 	import Weapons.TankReflectorWeapon;
+	import Weapons.TankRocketWeapon;
 	
 	public final class Tank extends UserControlledObject
 	{
@@ -122,6 +123,11 @@ package
 		public function activateParalyzeBombs() : void
 		{
 			this.primaryWeapon = new TankParalyzeWeapon(this);
+		}
+		
+		public function activateRocketWeapon() : void
+		{
+			this.primaryWeapon = new TankRocketWeapon(this);
 		}
 		
 		public function activateFireAccelerator() : void

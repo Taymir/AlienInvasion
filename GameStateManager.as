@@ -119,7 +119,7 @@ package
 			
 			if(!TRegistry.instance.getValue("debug_no_enemies")) {
 				var ufo;
-				const maxEnemies: int = 5;//@TMP
+				const maxEnemies: int = 0;//@TMP
 				for(var i:int = 0; i < maxEnemies; i++)
 				{
 					ufo = new small_ship();
@@ -154,7 +154,7 @@ package
 			var UI:UserInterfaceManager = TRegistry.instance.getValue("UI");
 			UI.addWeaponIcon(new base_weapon_icon(), 0, player.activateBaseWeapon);
 			UI.addWeaponIcon(new laser_icon(), 1, player.activateLaser);
-			UI.addWeaponIcon(new self_guided_missles_icon(), 2, null);
+			UI.addWeaponIcon(new self_guided_missles_icon(), 2, player.activateRocketWeapon);
 			UI.addWeaponIcon(new bombs_icon(), 3, player.activateParalyzeBombs);
 			UI.addWeaponIcon(new reflector_icon(), 4, player.activateReflector);
 			
