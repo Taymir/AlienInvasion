@@ -122,39 +122,39 @@ package
 			
 			if(!TRegistry.instance.getValue("debug_no_enemies")) {
 				var ufo;
-				const maxEnemies: int = 0;//@TMP
+				const maxEnemies: int = 5;//@TMP
 				for(var i:int = 0; i < maxEnemies; i++)
 				{
-				//	ufo = new small_ship();
-				//	ufo.x = 0 + 100 * i;
-				//	ufo.y = 170;
+					ufo = new small_ship();
+					ufo.x = 0 + 100 * i;
+					ufo.y = 170;
 				}
 				
-				//ufo = new large_ship();//@TMP
-				//ufo.x = 800;
-				//ufo.y = 150;
+				ufo = new large_ship();//@TMP
+				ufo.x = 800;
+				ufo.y = 150;
 				
-				//var scout: scout_ship = new scout_ship();
-				//scout.x = 600;
-				//scout.y = 250;				
+				var scout: scout_ship = new scout_ship();
+				scout.x = 600;
+				scout.y = 250;				
 				
 				var suicide: suicide_ship = new suicide_ship();
 				suicide.x = -600;
 				suicide.y = -250;
 				
-				//var transp: transport_ship = new transport_ship();
-				//transp.x = 800;
-				//transp.y = 50;
+				var transp: transport_ship = new transport_ship();
+				transp.x = 800;
+				transp.y = 50;
 				
-				//var guard1 = new guard_ship(transp, guard_ship.RIGHT_POSITION);
-				//guard1.x = 850;
-				//guard1.y = 100;
+				var guard1 = new guard_ship(transp, guard_ship.RIGHT_POSITION);
+				guard1.x = 850;
+				guard1.y = 100;
 				
-				//var guard2 = new guard_ship(transp, guard_ship.LEFT_POSITION);
-				//guard2.x = 750;
-				//guard2.y = 100;
+				var guard2 = new guard_ship(transp, guard_ship.LEFT_POSITION);
+				guard2.x = 750;
+				guard2.y = 100;
 				
-				//transp.attach_guards(guard1, guard2);
+				transp.attach_guards(guard1, guard2);
 			}
 		}
 		
@@ -168,8 +168,8 @@ package
 			UI.addWeaponIcon(new bombs_icon(), 3, player.activateParalyzeBombs);
 			UI.addWeaponIcon(new reflector_icon(), 4, player.activateReflector);
 			
-			UI.addProtectionIcon(new metal_shield_icon(), 0, null);
-			UI.addProtectionIcon(new energy_umbrella_icon(), 1, player.activateEneryUmbrella);
+			UI.addProtectionIcon(new metal_shield_icon(), 0, player.activateMetalShield);
+			UI.addProtectionIcon(new energy_umbrella_icon(), 1, player.activateEnergyUmbrella);
 			UI.addProtectionIcon(new fire_accelerator_icon(), 2, player.activateFireAccelerator);
 			UI.addProtectionIcon(new speed_accelerator_icon(), 3, player.activateSpeedAccelerator);
 			UI.addProtectionIcon(new invisability_icon(), 4, null);

@@ -18,10 +18,15 @@ package TmpObstacles
 			addToList("tmp_obstacles");
 			addToGlobalEnterFrame(update);
 			super();
-			update();
+			autoFollow();
 		}
 		
 		protected function update()
+		{
+			autoFollow();
+		}
+		
+		protected function autoFollow(): void
 		{
 			this.x = shooterObj.x;
 			this.y = shooterObj.y;

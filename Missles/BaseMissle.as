@@ -103,7 +103,7 @@ package Missles
 			super.dispose();
 		}
 		
-		protected function Explode() : void
+		public function Explode() : void
 		{
 			new Explosion(x, y);
 		}

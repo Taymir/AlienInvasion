@@ -5,6 +5,7 @@ package
 	import common.TRegistry;
 	import Effects.EnergyUmbrellaEffect;
 	import Effects.FireAcceleratorEffect;
+	import Effects.MetalShieldEffect;
 	import Effects.SpeedAcceleratorEffect;
 	import flash.display.MovieClip;
 	import flash.events.Event;
@@ -140,9 +141,14 @@ package
 			this.applyEffect(new SpeedAcceleratorEffect());
 		}
 		
-		public function activateEneryUmbrella() : void
+		public function activateEnergyUmbrella() : void
 		{
 			this.applyEffect(new EnergyUmbrellaEffect());
+		}
+		
+		public function activateMetalShield() : void
+		{
+			this.applyEffect(new MetalShieldEffect());
 		}
 	}
 }
