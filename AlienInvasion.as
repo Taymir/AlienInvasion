@@ -74,6 +74,10 @@
 				TRegistry.instance.getValue("gameStateManager").pauseGame();
 			else if (e.keyCode == 82) // R
 				TRegistry.instance.getValue("gameStateManager").restartGame();
+			else if (e.keyCode == 77) // M
+				TRegistry.instance.getValue("music_manager").mute();
+			else if (e.keyCode == 83) // S
+				TRegistry.instance.getValue("sound_manager").mute();
 		}
 	}
 }

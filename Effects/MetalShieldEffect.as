@@ -9,7 +9,7 @@ package Effects
 	{
 		private var shield: metal_shield;
 		
-		public function MetalShieldEffect(duration = 1000000) 
+		public function MetalShieldEffect(duration = 15000) 
 		{
 			super(duration);
 			
