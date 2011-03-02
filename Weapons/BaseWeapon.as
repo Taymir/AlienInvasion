@@ -71,6 +71,11 @@ package Weapons
 			(TRegistry.instance.getValue("sound_manager") as SoundManager).play(soundName);
 		}
 		
+		public function dispose() : void
+		{
+			//@EMPTY
+		}
+		
 	}
 
 }

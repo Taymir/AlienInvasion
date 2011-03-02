@@ -134,6 +134,14 @@ package Weapons
 				ray = null;
 			}
 		}
+		
+		public override function dispose() : void
+		{
+			// Прекращаем огонь перед удалением оружия
+			this.stopFire();
+			
+			super.dispose();
+		}
 	}
 
 }

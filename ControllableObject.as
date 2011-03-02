@@ -171,6 +171,12 @@ package
 			this.dispose();
 		}
 		
+		override public function dispose():void 
+		{
+			this.primaryWeapon.dispose();
+			super.dispose();
+		}
+		
 		// Воспроизведение звуков
 		protected function playSound(soundName : String) : void
 		{
