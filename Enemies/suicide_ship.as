@@ -72,12 +72,11 @@ package Enemies
 		{		
 			if (this.y >= TRegistry.instance.getValue("groundPosition"))
 			{
-				
 				this.Explode();
 				this.kill();
+			} else {
+				TRegistry.instance.getValue("player").Walk(collision_detection_callback);
 			}
-			
-			TRegistry.instance.getValue("player").Walk(collision_detection_callback);
 			
 			super.update();
 		}

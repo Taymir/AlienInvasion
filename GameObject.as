@@ -33,7 +33,10 @@ package
 		
 		protected function hide() : void
 		{
-			scene.removeChild(this);
+			Debug.assert(scene.contains(this), "Попытка повторного удаление объекта со сцены");
+			
+			if (scene.contains(this))
+				scene.removeChild(this);
 		}
 		
 		public function dispose() : void

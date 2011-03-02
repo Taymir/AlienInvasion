@@ -112,6 +112,7 @@ package
 			var tank: Tank = new Tank();
 			tank.x = TRegistry.instance.getValue("stage").stageWidth / 2;
 			tank.y = TRegistry.instance.getValue("groundPosition") - tank.height;
+			tank.activateRocketWeapon();
 			
 			return tank;
 		}
@@ -122,7 +123,7 @@ package
 			
 			if(!TRegistry.instance.getValue("debug_no_enemies")) {
 				var ufo;
-				const maxEnemies: int = 5;//@TMP
+				const maxEnemies: int = 0;//@TMP
 				for(var i:int = 0; i < maxEnemies; i++)
 				{
 					ufo = new small_ship();
@@ -130,19 +131,19 @@ package
 					ufo.y = 170;
 				}
 				
-				ufo = new large_ship();//@TMP
+				/*ufo = new large_ship();//@TMP
 				ufo.x = 800;
 				ufo.y = 150;
 				
 				var scout: scout_ship = new scout_ship();
 				scout.x = 600;
-				scout.y = 250;				
+				scout.y = 250;	*/			
 				
 				var suicide: suicide_ship = new suicide_ship();
 				suicide.x = -600;
 				suicide.y = -250;
 				
-				var transp: transport_ship = new transport_ship();
+				/*var transp: transport_ship = new transport_ship();
 				transp.x = 800;
 				transp.y = 50;
 				
@@ -154,7 +155,7 @@ package
 				guard2.x = 750;
 				guard2.y = 100;
 				
-				transp.attach_guards(guard1, guard2);
+				transp.attach_guards(guard1, guard2);*/
 			}
 		}
 		
