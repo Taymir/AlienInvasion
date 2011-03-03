@@ -49,6 +49,11 @@ package Weapons
 			}
 		}
 		
+		/*public function getDelayStatus() : Number
+		{
+			//@TODO
+		}*/
+		
 		public function stopFire() : void
 		{
 			//@EMPTY

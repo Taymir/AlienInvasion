@@ -21,6 +21,9 @@
 		{
 			var test: TestTList = new TestTList();
 			test.run();
+			
+			//var test: testListArrayVector = new testListArrayVector();
+			//test.run();
 		}
 		
 		public function initGame() : void

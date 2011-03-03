@@ -173,6 +173,8 @@ package
 			UI.addProtectionIcon(new fire_accelerator_icon(), 2, player.activateFireAccelerator);
 			UI.addProtectionIcon(new speed_accelerator_icon(), 3, player.activateSpeedAccelerator);
 			UI.addProtectionIcon(new invisability_icon(), 4, null);
+			
+			
 		}
 		
 		private function startGameLoop()
