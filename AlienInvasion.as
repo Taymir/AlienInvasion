@@ -19,11 +19,11 @@
 		
 		public function runTests() : void
 		{
-			var test: TestTList = new TestTList();
-			test.run();
-			
+			//var test: TestTList = new TestTList();
 			//var test: testListArrayVector = new testListArrayVector();
-			//test.run();
+			var test: testTTimer = new testTTimer(this);
+			
+			test.run();
 		}
 		
 		public function initGame() : void
