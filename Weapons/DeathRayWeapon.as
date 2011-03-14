@@ -3,9 +3,9 @@ package Weapons
 	import common.TList.TList;
 	import common.TRegistry;
 	import flash.display.MovieClip;
-	import flash.events.TimerEvent;
+	import common.TTimerEvent;
 	import flash.geom.Rectangle;
-	import flash.utils.Timer;
+	import common.TTimer;
 	/**
 	 * ...
 	 * @author Taymir
@@ -14,14 +14,14 @@ package Weapons
 	{
 		//@TODO надо как-то изменить нижнюю часть луча: очень "плоско" выглядит, возможно сделать каую-то дополнительную вспышку?
 		protected var ray: CommonGameObject;
-		protected var firingTimer: Timer;
+		protected var firingTimer: TTimer;
 		
 		protected var damage: Number = 2;
 		
 		public function DeathRayWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 60000, firingPeriod:int = 30000) 
 		{
-			firingTimer = new Timer(firingPeriod, 1);
-			firingTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onRayComplete, false, 0, true);
+			firingTimer = new TTimer(firingPeriod);
+			firingTimer.addEventListener(TTimerEvent.TIMER_COMPLETE, onRayComplete, false, 0, true);
 			
 			super(shooterObj, fireDelayPeriod);
 		}
@@ -117,8 +117,7 @@ package Weapons
 		{
 			new Explosion(x, y);
 		}
-		
-		protected function onRayComplete(e: TimerEvent) : void
+		protected function onRayComplete(e: TTimerEvent) : void		
 		{
 			this.stopFire();
 		}

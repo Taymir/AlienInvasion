@@ -1,7 +1,7 @@
 package Effects 
 {
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
+	import common.TTimerEvent;
+	import common.TTimer;
 	/**
 	 * ...
 	 * @author Taymir
@@ -11,13 +11,13 @@ package Effects
 		protected var duration:int; // milliseconds
 		protected var targetObject:ControllableObject;
 		
-		private var effectTimer:Timer;
+		private var effectTimer:TTimer;
 		
 		public function TemporaryEffect(duration) 
 		{
 			this.duration = duration;
 			
-			effectTimer = new Timer(duration, 1);
+			effectTimer = new TTimer(duration);
 		}
 		
 		public function beginEffect(targetObject: ControllableObject) : void
@@ -25,15 +25,15 @@ package Effects
 			//@BUGFIX: т.к. не можем использовать weakReference (сборщик мусора удаляет эффекты из памяти), то
 			// приходится отвязывать событие после окончания эффекта. Впрочем, сам эффект в любом случае 
 			// используется лишь один раз
-			effectTimer.addEventListener(TimerEvent.TIMER_COMPLETE, effectComplete);
+			effectTimer.addEventListener(TTimerEvent.TIMER_COMPLETE, effectComplete);
 			this.targetObject = targetObject;
 			
 			effectTimer.start();
 		}
 		
-		private function effectComplete(e: TimerEvent) : void
+		private function effectComplete(e: TTimerEvent) : void
 		{
-			effectTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, effectComplete);
+			effectTimer.removeEventListener(TTimerEvent.TIMER_COMPLETE, effectComplete);
 			this.endEffect();
 			this.targetObject = null;
 		}

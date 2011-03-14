@@ -1,8 +1,8 @@
 package Weapons 
 {
 	import common.TRegistry;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
+	import common.TTimerEvent;
+	import common.TTimer;
 	/**
 	 * ...
 	 * @author Taymir
@@ -12,14 +12,14 @@ package Weapons
 		protected var fireDelayPeriod: int;
 		protected var canFire: Boolean = true;
 		protected var shooterObj: ControllableObject;
-		private var fireTimer: Timer;
+		private var fireTimer: TTimer;
 		
 		public function BaseWeapon(shooterObj:ControllableObject, fireDelayPeriod: int = 300) 
 		{
 			this.fireDelayPeriod = fireDelayPeriod;
 			
-			fireTimer = new Timer(fireDelayPeriod, 1);
-			fireTimer.addEventListener(TimerEvent.TIMER_COMPLETE, fireTimerHandler, false, 0, true);
+			fireTimer = new TTimer(fireDelayPeriod);
+			fireTimer.addEventListener(TTimerEvent.TIMER_COMPLETE, fireTimerHandler, false, 0, true);
 			
 			this.shooterObj = shooterObj;
 		}
@@ -29,7 +29,7 @@ package Weapons
 			fireTimer.delay *= fireDelayPeriodMultiplicator;
 		}
 		
-		private function fireTimerHandler(e:TimerEvent) : void
+		private function fireTimerHandler(e:TTimerEvent) : void
 		{
 			canFire = true;
 		}

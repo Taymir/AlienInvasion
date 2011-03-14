@@ -1,8 +1,8 @@
 package Weapons 
 {
 	import flash.display.MovieClip;
-	import flash.utils.Timer;
-	import flash.events.TimerEvent;
+	import common.TTimer;
+	import common.TTimerEvent;
 	import TmpObstacles.reflector;
 	/**
 	 * ...
@@ -11,13 +11,13 @@ package Weapons
 	public class TankReflectorWeapon extends BaseWeapon 
 	{
 		private var shield: reflector;
-		private var firingTimer: Timer;
+		private var firingTimer: TTimer;
 		
 		//@TODO: изменить поведение fireDelayPeriod так, чтобы отчет начался только после конца действия щита
 		public function TankReflectorWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 3000, firingPeriod:int = 2000)
 		{
-			firingTimer = new Timer(firingPeriod, 1);
-			firingTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onFireComplete, false, 0, true);
+			firingTimer = new TTimer(firingPeriod);
+			firingTimer.addEventListener(TTimerEvent.TIMER_COMPLETE, onFireComplete, false, 0, true);
 			
 			super(shooterObj, fireDelayPeriod);
 			
@@ -42,7 +42,7 @@ package Weapons
 			}
 		}
 		
-		protected function onFireComplete(e: TimerEvent) : void
+		protected function onFireComplete(e: TTimerEvent) : void
 		{
 			this.stopFire();
 		}
