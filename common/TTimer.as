@@ -67,13 +67,14 @@ package common
 		{
 			currentFrame++;
 			
-			if ((currentFrame % progressFrames) == 0)
-				this.dispatchEvent(new TTimerEvent(TTimerEvent.TIMER_PROGRESS, false, false, currentFrame / finalFrame) );
-			
 			if (currentFrame >= finalFrame)
 			{
+				this.dispatchEvent(new TTimerEvent(TTimerEvent.TIMER_PROGRESS, false, false, currentFrame / finalFrame) );
 				this.dispatchEvent(new TTimerEvent(TTimerEvent.TIMER_COMPLETE));
 				this.stop();
+			} else if ((currentFrame % progressFrames) == 0)
+			{
+				this.dispatchEvent(new TTimerEvent(TTimerEvent.TIMER_PROGRESS, false, false, currentFrame / finalFrame) );
 			}
 				
 		}

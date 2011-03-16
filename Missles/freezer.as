@@ -30,7 +30,7 @@ package Missles
 		{
 			//this.Explode();// Энергопотоки не взрываются
 			//tarjetObj.hit(damage);//Энергопотоки не повреждают танк, вместо этого они накладывают на него эффект заморозки
-			targetObj.applyEffect(new FreezeEffect(5000));
+			targetObj.applyEffect(new FreezeEffect(5000));//@BUG похоже, что скорость противников не меняется при применнии эффекта...
 		}
 	}
 

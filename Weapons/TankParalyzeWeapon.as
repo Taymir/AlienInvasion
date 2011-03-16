@@ -3,6 +3,9 @@ package Weapons
 	import AI.Transition.MissleDangerTransition;
 	import Missles.BaseMissle;
 	import Missles.paralyze_bomb;
+	import common.TTimerEvent;
+	import common.TRegistry;
+	import UI.UserInterfaceManager;
 	/**
 	 * ...
 	 * @author Taymir
@@ -13,6 +16,8 @@ package Weapons
 		public function TankParalyzeWeapon(shooterObj: ControllableObject, fireDelayPeriod:int = 6000) 
 		{
 			super(shooterObj, fireDelayPeriod);
+			
+			fireTimer.addEventListener(TTimerEvent.TIMER_PROGRESS, onDelayProgress, false, 0, true);
 		}
 		
 		override protected function launch(x: int, y: int): void
@@ -24,6 +29,12 @@ package Weapons
 			MissleDangerTransition.reportMissleLunch(x, y); 
 			
 			super.launch(x, y);
+		}
+		
+		protected function onDelayProgress(e: TTimerEvent) : void
+		{
+			// Inform UIManager about delay progress
+			(TRegistry.instance.getValue("UI") as UserInterfaceManager).updateProgress("bombs", e.progress);
 		}
 		
 	}

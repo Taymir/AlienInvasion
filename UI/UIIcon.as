@@ -122,9 +122,14 @@ package UI
 		{
 			this._progress_bar.width = percentage * _x_width;
 			
-			//@TODO: проверить, на сколько затратно в плане производительности замена цвета
 			var newColor: ColorTransform = this._progress_bar.transform.colorTransform;
-			newColor.color = 0x00DD00;//@TODO: заменить на изменяющийся цвет
+			
+			var r: uint = (1.0 - percentage) * 2 * 0xFF;  	r = (r > 0xFF ? 0xFF : r);
+			var g: uint = percentage * 2 * 0xFF; 			g = (g > 0xFF ? 0xFF : g);
+			var b:uint = 0x00;
+			
+			newColor.color = r << 16 | g << 8 | b;
+			
 			this._progress_bar.transform.colorTransform = newColor;
 		}
 	}

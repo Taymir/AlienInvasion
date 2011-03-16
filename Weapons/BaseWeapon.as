@@ -12,7 +12,7 @@ package Weapons
 		protected var fireDelayPeriod: int;
 		protected var canFire: Boolean = true;
 		protected var shooterObj: ControllableObject;
-		private var fireTimer: TTimer;
+		protected var fireTimer: TTimer;
 		
 		public function BaseWeapon(shooterObj:ControllableObject, fireDelayPeriod: int = 300) 
 		{

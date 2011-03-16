@@ -20,10 +20,10 @@ package Weapons
 		{
 			firingTimer = new TTimer(firingPeriod);
 			firingTimer.addEventListener(TTimerEvent.TIMER_COMPLETE, onFireComplete, false, 0, true);
-			firingTimer.addEventListener(TTimerEvent.TIMER_PROGRESS, onDelayProgress, false, 0, true);
 			
 			super(shooterObj, fireDelayPeriod);
 			
+			fireTimer.addEventListener(TTimerEvent.TIMER_PROGRESS, onDelayProgress, false, 0, true);
 		}
 		
 		override protected function launch(x: int, y: int): void

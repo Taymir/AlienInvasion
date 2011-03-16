@@ -13,9 +13,9 @@
 	public class AlienInvasion extends MovieClip {
 		
 		public function AlienInvasion() {		
-			//this.initGame();
+			this.initGame();
 			
-			this.runTests(); //@DEBUG
+			//this.runTests(); //@DEBUG
 		}
 		
 		public function runTests() : void
