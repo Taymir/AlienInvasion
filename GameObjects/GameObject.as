@@ -1,4 +1,4 @@
-package  
+package  GameObjects
 {
 	import common.TList.TList;
 	import flash.display.DisplayObject;

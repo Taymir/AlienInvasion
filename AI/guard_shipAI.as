@@ -10,6 +10,7 @@ package AI
 	import AI.Transition.TimeoutTransition;
 	import Enemies.guard_ship;
 	import flash.geom.Point;
+	import GameObjects.*;
 	import FSM.FSM;
 	/**
 	 * ...

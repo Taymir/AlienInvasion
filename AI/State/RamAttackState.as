@@ -2,6 +2,7 @@ package AI.State
 {
 	import Enemies.suicide_ship;
 	import flash.geom.Point;
+	import GameObjects.*;
 	import FSM.State;
 	import common.TRegistry;
 	

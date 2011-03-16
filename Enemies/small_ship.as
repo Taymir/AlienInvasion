@@ -1,5 +1,6 @@
 package Enemies 
 {
+	import GameObjects.*;
 	import AI.small_shipAI;
 	import Enemies.BaseEnemy;
 	import Missles.BaseMissle;

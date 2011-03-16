@@ -15,6 +15,7 @@ package
 	import common.TRegistry;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import GameObjects.*;
 	import UI.*;
 	
 	/**
@@ -134,14 +135,14 @@ package
 				ufo = new large_ship();//@TMP
 				ufo.x = 800;
 				ufo.y = 150;
-				/*
+				
 				var scout: scout_ship = new scout_ship();
 				scout.x = 600;
 				scout.y = 250;		
 				
 				var suicide: suicide_ship = new suicide_ship();
 				suicide.x = -600;
-				suicide.y = -250;*/
+				suicide.y = -250;
 				
 				var transp: transport_ship = new transport_ship();
 				transp.x = 800;

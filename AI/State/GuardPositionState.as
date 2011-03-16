@@ -1,5 +1,6 @@
 package AI.State 
 {
+	import GameObjects.ControllableObject;
 	import Enemies.guard_ship;
 	import flash.geom.Point;
 	import FSM.OneTickState;

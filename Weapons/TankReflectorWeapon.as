@@ -1,5 +1,6 @@
 package Weapons 
 {
+	import GameObjects.ControllableObject;
 	import flash.display.MovieClip;
 	import common.TTimer;
 	import common.TTimerEvent;

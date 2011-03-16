@@ -1,5 +1,6 @@
 package Missles 
 {
+	import GameObjects.ControllableObject;
 	import common.MathExtra;
 	import common.TList.TList;
 	import common.TRegistry;

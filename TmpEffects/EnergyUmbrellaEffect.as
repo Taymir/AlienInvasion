@@ -1,5 +1,6 @@
-package Effects 
+package TmpEffects 
 {
+	import GameObjects.*;
 	import TmpObstacles.energy_umbrella;
 	/**
 	 * ...

@@ -1,5 +1,6 @@
 package AI 
 {
+	import GameObjects.*;
 	import FSM.FSM;
 	import AI.State.*;
 	import AI.Transition.*;

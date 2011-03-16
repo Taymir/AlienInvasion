@@ -7,7 +7,7 @@ package Enemies
 	import flash.events.Event;
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
-	import ControllableObject;
+	import GameObjects.ControllableObject;
 	import Missles.BaseMissle;
 	
 	/**

@@ -1,6 +1,7 @@
 package Missles 
 {
-	import Effects.FreezeEffect;
+	import GameObjects.*;
+	import TmpEffects.FreezeEffect;
 	/**
 	 * ...
 	 * @author Taymir

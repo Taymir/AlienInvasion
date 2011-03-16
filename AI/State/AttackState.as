@@ -1,5 +1,6 @@
 package AI.State
 {
+	import GameObjects.ControllableObject;
 	import FSM.State;
 	
 	/**

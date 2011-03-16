@@ -1,5 +1,6 @@
 package Enemies 
 {
+	import GameObjects.*;
 	import AI.guard_shipAI;
 	import common.TRegistry;
 	import Weapons.BaseWeapon;

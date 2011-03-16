@@ -1,5 +1,6 @@
 package Weapons 
 {
+	import GameObjects.*;
 	import common.TList.TList;
 	import common.TRegistry;
 	import flash.display.MovieClip;

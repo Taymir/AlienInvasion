@@ -1,5 +1,6 @@
 package TmpObstacles 
 {
+	import GameObjects.*;
 	import common.TList.TList;
 	import common.TRegistry;
 	import Missles.BaseMissle;

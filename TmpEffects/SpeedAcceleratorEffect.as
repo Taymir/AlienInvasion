@@ -1,5 +1,6 @@
-package Effects 
+package TmpEffects 
 {
+	import GameObjects.*;
 	/**
 	 * ...
 	 * @author Taymir

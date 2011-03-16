@@ -1,4 +1,4 @@
-package  
+package GameObjects
 {
 	import flash.display.MovieClip;
 	

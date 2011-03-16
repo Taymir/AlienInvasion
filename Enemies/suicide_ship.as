@@ -1,5 +1,6 @@
 package Enemies 
 {
+	import GameObjects.*;
 	import AI.suicide_shipAI;
 	import Enemies.BaseEnemy;
 	import common.TRegistry;

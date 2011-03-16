@@ -1,4 +1,4 @@
-package  
+package  GameObjects
 {
 	import com.senocular.utils.KeyObject;
 	import flash.display.Stage;

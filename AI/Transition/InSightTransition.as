@@ -1,5 +1,6 @@
 package AI.Transition
 {
+	import GameObjects.*;
 	import Enemies.small_ship;
 	import FSM.Transition;
 	

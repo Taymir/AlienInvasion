@@ -1,5 +1,6 @@
 package AI.Transition 
 {
+	import GameObjects.*;
 	import flash.geom.Point;
 	import FSM.Transition;
 	

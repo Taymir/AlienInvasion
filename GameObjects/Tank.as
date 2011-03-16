@@ -1,12 +1,12 @@
-package 
+package GameObjects
 {
 	import AI.Transition.MissleDangerTransition;
 	import common.TList.TList;
 	import common.TRegistry;
-	import Effects.EnergyUmbrellaEffect;
-	import Effects.FireAcceleratorEffect;
-	import Effects.MetalShieldEffect;
-	import Effects.SpeedAcceleratorEffect;
+	import TmpEffects.EnergyUmbrellaEffect;
+	import TmpEffects.FireAcceleratorEffect;
+	import TmpEffects.MetalShieldEffect;
+	import TmpEffects.SpeedAcceleratorEffect;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.Rectangle;
@@ -110,13 +110,11 @@ package
 		
 		override public function dispose():void 
 		{
-			this.weapons = null;
-			
 			super.dispose();
+			this.weapons = null;
 		}
 		
 		//* USER CONTROLLED ACTION *//
-		//@BUG наверное, не надо создавать заново экземпляр класса при каждой смене орудия+++
 		private function initWeapons() : void
 		{
 			weapons = new Dictionary();

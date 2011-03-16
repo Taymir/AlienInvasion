@@ -1,5 +1,6 @@
 package  
 {
+	import GameObjects.GameObject
 	import common.TList.TList;
 	import flash.display.MovieClip;
 	import flash.display.Stage;
@@ -31,7 +32,7 @@ package
 			var player:TList = TRegistry.instance.getValue("player");
 			if (player.Count() > 0)
 			{
-				var tank = player.Get(0) as Tank;
+				var tank : GameObject = player.Get(0) as GameObject;
 				this.x = -1 * (tank.x - 400);
 			}
 		}

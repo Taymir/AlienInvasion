@@ -1,5 +1,6 @@
 package AI.Transition 
 {
+	import GameObjects.ControllableObject;
 	import FSM.Transition;
 	
 	/**

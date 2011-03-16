@@ -5,6 +5,7 @@ package AI
 	import AI.Transition.GuardsKilledTransition;
 	import AI.Transition.TimeoutTransition;
 	import Enemies.transport_ship;
+	import GameObjects.*;
 	import FSM.FSM;
 	/**
 	 * ...

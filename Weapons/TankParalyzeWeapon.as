@@ -1,5 +1,6 @@
 package Weapons 
 {
+	import GameObjects.ControllableObject;
 	import Missles.BaseMissle;
 	import Missles.paralyze_bomb;
 	/**

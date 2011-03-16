@@ -1,8 +1,8 @@
-package  
+package  GameObjects
 {
 	import common.Debug;
 	import common.Vector2D;
-	import Effects.TemporaryEffect;
+	import TmpEffects.TemporaryEffect;
 	import flash.media.Sound;
 	import common.TRegistry;
 	import Weapons.BaseWeapon;
@@ -173,7 +173,8 @@ package
 		
 		override public function dispose():void 
 		{
-			this.primaryWeapon.dispose();
+			if(this.primaryWeapon != null)
+				this.primaryWeapon.dispose();
 			super.dispose();
 		}
 		

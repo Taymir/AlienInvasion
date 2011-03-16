@@ -1,5 +1,6 @@
 package Weapons 
 {
+	import GameObjects.ControllableObject;
 	import AI.Transition.MissleDangerTransition;
 	import common.TTimerEvent;
 	import common.TRegistry;

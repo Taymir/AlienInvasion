@@ -4,6 +4,7 @@ package AI
 	import AI.Transition.*;
 	import Enemies.suicide_ship;
 	import flash.geom.Point;
+	import GameObjects.*;
 	import FSM.FSM;
 	/**
 	 * ...

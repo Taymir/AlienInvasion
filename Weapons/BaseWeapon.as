@@ -1,5 +1,6 @@
 package Weapons 
 {
+	import GameObjects.ControllableObject;
 	import common.TRegistry;
 	import common.TTimerEvent;
 	import common.TTimer;

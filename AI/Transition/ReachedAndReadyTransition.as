@@ -1,5 +1,6 @@
 package AI.Transition 
 {
+	import GameObjects.*;
 	import Enemies.large_ship;
 	/**
 	 * ...

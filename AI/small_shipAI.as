@@ -2,6 +2,7 @@ package AI
 {
 	import common.TRegistry;
 	import Enemies.small_ship;
+	import GameObjects.*;
 	import FSM.FSM;
 	import AI.State.*;
 	import AI.Transition.*;

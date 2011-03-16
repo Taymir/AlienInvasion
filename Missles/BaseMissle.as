@@ -1,5 +1,6 @@
 package Missles 
 {
+	import GameObjects.*;
 	import common.TList.TList;
 	import flash.display.MovieClip;
 	import flash.events.Event;

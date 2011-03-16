@@ -1,5 +1,6 @@
 package Enemies 
 {
+	import GameObjects.*;
 	import AI.transport_shipAI;
 	import common.TRegistry;
 	import Weapons.DeathRayWeapon;

@@ -1,5 +1,6 @@
 package AI.State 
 {
+	import GameObjects.*;
 	import common.MathExtra;
 	import flash.geom.Point;
 	/**
