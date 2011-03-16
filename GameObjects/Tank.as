@@ -3,6 +3,7 @@ package GameObjects
 	import AI.Transition.MissleDangerTransition;
 	import common.TList.TList;
 	import common.TRegistry;
+	import Protections.CommonProtection;
 	import TmpEffects.EnergyUmbrellaEffect;
 	import TmpEffects.FireAcceleratorEffect;
 	import TmpEffects.MetalShieldEffect;
@@ -23,10 +24,12 @@ package GameObjects
 	public final class Tank extends UserControlledObject
 	{
 		private var weapons: Dictionary;
+		private var protections: Dictionary;
 		
 		public function Tank(): void
 		{
 			initWeapons();
+			initProtections();
 		}
 		
 		protected override function keyHandler() : void
@@ -112,9 +115,9 @@ package GameObjects
 		{
 			super.dispose();
 			this.weapons = null;
+			this.protections = null;
 		}
 		
-		//* USER CONTROLLED ACTION *//
 		private function initWeapons() : void
 		{
 			weapons = new Dictionary();
@@ -126,6 +129,18 @@ package GameObjects
 			weapons["reflector"] = new TankReflectorWeapon(this);
 		}
 		
+		private function initProtections() : void
+		{
+			protections = new Dictionary();
+			
+			protections["metal_shield"] = new CommonProtection("metal_shield", new MetalShieldEffect());
+			protections["energy_umbrella"] = new CommonProtection("energy_umbrella", new EnergyUmbrellaEffect());
+			protections["fire_accelerator"] = new CommonProtection("fire_accelerator", new FireAcceleratorEffect());
+			protections["speed_accelerator"] = new CommonProtection("speed_accelerator", new SpeedAcceleratorEffect());
+			//protections["invisability"] = new CommonProtection("", new FireAcceleratorEffect());
+		}
+		
+		//* USER CONTROLLED ACTION *//
 		public function activateLaser() : void
 		{
 			activateWeapon(weapons["laser"]);
@@ -160,24 +175,29 @@ package GameObjects
 			weapon.activateWeapon();
 		}
 		
+		private function activateProtection(protection: CommonProtection) : void
+		{
+			protection.activateProtection(this);
+		}
+		
 		public function activateFireAccelerator() : void
 		{
-			this.applyEffect(new FireAcceleratorEffect());
+			activateProtection(protections["fire_accelerator"]);
 		}
 		
 		public function activateSpeedAccelerator() : void
 		{
-			this.applyEffect(new SpeedAcceleratorEffect());
+			activateProtection(protections["speed_accelerator"]);
 		}
 		
 		public function activateEnergyUmbrella() : void
 		{
-			this.applyEffect(new EnergyUmbrellaEffect());
+			activateProtection(protections["energy_umbrella"]);
 		}
 		
 		public function activateMetalShield() : void
 		{
-			this.applyEffect(new MetalShieldEffect());
+			activateProtection(protections["metal_shield"]);
 		}
 	}
 }
