@@ -10,32 +10,22 @@ package Weapons
 	 * ...
 	 * @author Taymir
 	 */
-	public class TankRocketWeapon extends BaseWeapon 
+	public class TankRocketWeapon extends BaseTankWeapon 
 	{
+		const icon_name = "self_guided_missles";
 		
 		public function TankRocketWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 1200) 
 		{
-			super(shooterObj, fireDelayPeriod);
-			
-			fireTimer.addEventListener(TTimerEvent.TIMER_PROGRESS, onDelayProgress, false, 0, true);
+			super(icon_name, shooterObj, fireDelayPeriod);
 		}
 		
 		override protected function launch(x: int, y: int) : void
 		{
 			new rocket_missle(x, y, BaseMissle.UP);
 			
-			// Это сделанно для возможности некоторыми нлошками "засечь" стрельбу игрока... 
-			//возможно, существует более элегантное решение для этого...
-			MissleDangerTransition.reportMissleLunch(x, y); 
-			
 			super.launch(x, y);
 		}
-		
-		protected function onDelayProgress(e: TTimerEvent) : void
-		{
-			// Inform UIManager about delay progress
-			(TRegistry.instance.getValue("UI") as UserInterfaceManager).updateProgress("self_guided_missles", e.progress);
-		}
+	
 		
 	}
 

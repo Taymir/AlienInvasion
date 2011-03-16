@@ -25,7 +25,7 @@ package UI
 		protected var _x_offset: int;
 		protected var _y_offset: int = 20;
 		
-		protected var _light_up_color: uint = 0xDDDDDD;
+		protected var _light_up_color: uint;
 		
 		protected var _action: Function;
 		
@@ -67,7 +67,7 @@ package UI
 		private function createProgressBar(uiPanel: MovieClip) : void
 		{
 			_progress_bar = new Shape();
-			_progress_bar.graphics.beginFill(0x00DD00);
+			_progress_bar.graphics.beginFill(0x00FF00);
 			_progress_bar.graphics.drawRect(0, 0, _x_width, 3);
 			_progress_bar.graphics.endFill();
 			
@@ -100,15 +100,13 @@ package UI
 			this._action.call();
 		}
 		
-		public function activate() : Boolean
+		public function activate() : void
 		{
 			// Добавляем свечение
 			var filter = new GlowFilter(this._light_up_color);
 			var filters : Array = this.filters;
 			filters.push(filter);
 			this.filters = filters;
-			
-			return true;//@TMP
 		}
 		
 		public function deactivate() : void

@@ -28,7 +28,7 @@ package UI
 			//3) цвета подсветки//@TODO!!!!!!!!!!!!!!!
 			
 			this.uiPanel = uiPanel;
-			icons = new Dictionary();
+			this.clearIcons();
 			
 			if (TRegistry.instance.getValue("debug_show_fps") == true)
 				showFps(true);
@@ -56,7 +56,7 @@ package UI
 		
 		public function clearIcons()
 		{
-			//@TODO
+			icons = new Dictionary();
 		}
 		
 		public function addIcon(icon: UIIcon) : void
@@ -67,7 +67,17 @@ package UI
 		
 		public function updateProgress(iconName: String, progress: Number) : void
 		{
-			icons[iconName].updateProgress(progress);
+			(icons[iconName] as UIIcon).updateProgress(progress);
+		}
+		
+		public function activateIcon(iconName: String) : void
+		{
+			(icons[iconName] as UIIcon).activate();
+		}
+		
+		public function deactivateIcon(iconName: String) : void
+		{
+			(icons[iconName] as UIIcon).deactivate();
 		}
 	}
 

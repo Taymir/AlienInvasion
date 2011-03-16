@@ -49,7 +49,7 @@ package
 			this.initUI(player);
 			(TRegistry.instance.getValue("music_manager") as MusicManager).play("track1");
 			
-			this.startGameLoop();
+			this.startGameLoop(player);
 		}
 		
 		private function initAllLists()
@@ -178,9 +178,10 @@ package
 			
 		}
 		
-		private function startGameLoop()
+		private function startGameLoop(tank: Tank)
 		{
 			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
+			tank.activateBaseWeapon();
 		}
 		
 		

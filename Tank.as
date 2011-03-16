@@ -12,6 +12,8 @@ package
 	import flash.geom.Rectangle;
 	import flash.text.StyleSheet;
 	import flash.ui.Keyboard;
+	import flash.utils.Dictionary;
+	import Weapons.BaseTankWeapon;
 	import Weapons.TankCannonWeapon;
 	import Weapons.TankLaserWeapon;
 	import Weapons.TankParalyzeWeapon;
@@ -20,9 +22,11 @@ package
 	
 	public final class Tank extends UserControlledObject
 	{
+		private var weapons: Dictionary;
+		
 		public function Tank(): void
 		{
-			this.activateBaseWeapon();
+			initWeapons();
 		}
 		
 		protected override function keyHandler() : void
@@ -104,31 +108,58 @@ package
 			slowdownXShift(2);
 		}
 		
+		override public function dispose():void 
+		{
+			this.weapons = null;
+			
+			super.dispose();
+		}
+		
 		//* USER CONTROLLED ACTION *//
-		//@BUG наверное, не надо создавать заново экземпляр класса при каждой смене орудия
+		//@BUG наверное, не надо создавать заново экземпляр класса при каждой смене орудия+++
+		private function initWeapons() : void
+		{
+			weapons = new Dictionary();
+			
+			weapons["base_weapon"] = new TankCannonWeapon(this);
+			weapons["laser"] = new TankLaserWeapon(this);
+			weapons["self_guided_missles"] = new TankRocketWeapon(this);
+			weapons["bombs"] = new TankParalyzeWeapon(this);
+			weapons["reflector"] = new TankReflectorWeapon(this);
+		}
+		
 		public function activateLaser() : void
 		{
-			this.primaryWeapon = new TankLaserWeapon(this);
+			activateWeapon(weapons["laser"]);
 		}
 		
 		public function activateBaseWeapon() : void
 		{
-			this.primaryWeapon = new TankCannonWeapon(this);
+			activateWeapon(weapons["base_weapon"]);
 		}
 		
 		public function activateReflector() : void
 		{
-			this.primaryWeapon = new TankReflectorWeapon(this);
+			activateWeapon(weapons["reflector"])
 		}
 		
 		public function activateParalyzeBombs() : void
 		{
-			this.primaryWeapon = new TankParalyzeWeapon(this);
+			activateWeapon(weapons["bombs"]);
 		}
 		
 		public function activateRocketWeapon() : void
 		{
-			this.primaryWeapon = new TankRocketWeapon(this);
+			activateWeapon(weapons["self_guided_missles"]);
+		}
+		
+		private function activateWeapon(weapon : BaseTankWeapon) : void
+		{
+			if (this.primaryWeapon != null)
+				(this.primaryWeapon as BaseTankWeapon).deactivateWeapon();
+			
+			this.primaryWeapon = weapon;
+			weapon.activateWeapon();
 		}
 		
 		public function activateFireAccelerator() : void
