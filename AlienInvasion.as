@@ -13,16 +13,17 @@
 	public class AlienInvasion extends MovieClip {
 		
 		public function AlienInvasion() {		
-			this.initGame();
+			//this.initGame();
 			
-			//this.runTests(); //@DEBUG
+			this.runTests(); //@DEBUG
 		}
 		
 		public function runTests() : void
 		{
 			//var test: TestTList = new TestTList();
 			//var test: testListArrayVector = new testListArrayVector();
-			var test: testTTimer = new testTTimer(this);
+			//var test: testTTimer = new testTTimer(this);
+			var test: testColorTransform = new testColorTransform(this);
 			
 			test.run();
 		}
