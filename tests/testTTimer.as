@@ -7,6 +7,7 @@ package tests
 	import flash.display.Stage;
 	import flash.events.Event;
 	import common.TTimerEvent;
+	import UI.UserInterfaceManager;
 	/**
 	 * ...
 	 * @author Taymir

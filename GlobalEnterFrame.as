@@ -4,6 +4,7 @@ package
 	import common.TList.TList;
 	import flash.events.Event;
 	import flash.utils.getTimer;
+	import UI.UserInterfaceManager;
 	
 	/**
 	 * ...

@@ -24,7 +24,7 @@ package common
 		private var progressFrames: uint;
 		
 		
-		public function TTimer(delay: Number, progress_delay: uint = 300)
+		public function TTimer(delay: Number, progress_delay: uint = 100)
 		{
 			this.delay = delay;
 			this.progressFrames = ms2frames(progress_delay);

@@ -8,6 +8,7 @@
 	import flash.ui.*;
 	import common.TRegistry;
 	import tests.*
+	import UI.UserInterfaceManager;
 
 	public class AlienInvasion extends MovieClip {
 		

@@ -6,6 +6,7 @@ package
 	import common.TRegistry;
 	import common.Debug;
 	import flash.text.TextField;
+	import UI.UserInterfaceManager;
 	/**
 	 * ...
 	 * @author Taymir

@@ -15,6 +15,7 @@ package
 	import common.TRegistry;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import UI.*;
 	
 	/**
 	 * ...
@@ -161,19 +162,19 @@ package
 		private function initUI(player: Tank)
 		{
 			// Добавление UI-ярлыков
-			var UI:UserInterfaceManager = TRegistry.instance.getValue("UI");
-			UI.addWeaponIcon(new base_weapon_icon(), 0, player.activateBaseWeapon);
-			UI.addWeaponIcon(new laser_icon(), 1, player.activateLaser);
-			UI.addWeaponIcon(new self_guided_missles_icon(), 2, player.activateRocketWeapon);
-			UI.addWeaponIcon(new bombs_icon(), 3, player.activateParalyzeBombs);
-			UI.addWeaponIcon(new reflector_icon(), 4, player.activateReflector);
+			var ui:UserInterfaceManager = TRegistry.instance.getValue("UI");
 			
-			UI.addProtectionIcon(new metal_shield_icon(), 0, player.activateMetalShield);
-			UI.addProtectionIcon(new energy_umbrella_icon(), 1, player.activateEnergyUmbrella);
-			UI.addProtectionIcon(new fire_accelerator_icon(), 2, player.activateFireAccelerator);
-			UI.addProtectionIcon(new speed_accelerator_icon(), 3, player.activateSpeedAccelerator);
-			UI.addProtectionIcon(new invisability_icon(), 4, null);
+			ui.addIcon(new WeaponIcon("base_weapon", 0, player.activateBaseWeapon));
+			ui.addIcon(new WeaponIcon("laser", 1, player.activateLaser));
+			ui.addIcon(new WeaponIcon("self_guided_missles", 2, player.activateRocketWeapon));
+			ui.addIcon(new WeaponIcon("bombs", 3, player.activateParalyzeBombs));
+			ui.addIcon(new WeaponIcon("reflector", 4, player.activateReflector));
 			
+			ui.addIcon(new ProtectionIcon("metal_shield", 0, player.activateMetalShield));
+			ui.addIcon(new ProtectionIcon("energy_umbrella", 1, player.activateEnergyUmbrella));
+			ui.addIcon(new ProtectionIcon("fire_accelerator", 2, player.activateFireAccelerator));
+			ui.addIcon(new ProtectionIcon("speed_accelerator", 3, player.activateSpeedAccelerator));
+			ui.addIcon(new ProtectionIcon("invisability", 4, null));
 			
 		}
 		
