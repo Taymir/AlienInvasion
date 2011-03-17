@@ -62,22 +62,44 @@ package UI
 		public function addIcon(icon: UIIcon) : void
 		{
 			icons[icon.name] = icon;
+			icons[icon.identificator] = icon;
+			
 			icon.addToUI(this.uiPanel);
 		}
 		
-		public function updateProgress(iconName: String, progress: Number) : void
+		public function updateProgress(iconName, progress: Number) : void
 		{
-			(icons[iconName] as UIIcon).updateProgress(progress);
+			if(icons[iconName] != null)
+				(icons[iconName] as UIIcon).updateProgress(progress);
 		}
 		
-		public function activateIcon(iconName: String) : void
+		public function activateIcon(iconName) : void
 		{
-			(icons[iconName] as UIIcon).activate();
+			if(icons[iconName] != null)
+				(icons[iconName] as UIIcon).activate();
 		}
 		
-		public function deactivateIcon(iconName: String) : void
+		public function deactivateIcon(iconName) : void
 		{
-			(icons[iconName] as UIIcon).deactivate();
+			if(icons[iconName] != null)
+				(icons[iconName] as UIIcon).deactivate();
+		}
+		
+		public function pressIcon(iconName) : void
+		{
+			if(icons[iconName] != null)
+				(icons[iconName] as UIIcon).press();
+		}
+		
+		public function keyHandler(keyCode: int, shift: Boolean) : void
+		{
+			const firstDigitCode: int = 49;
+			var num: int = keyCode - firstDigitCode;
+
+			if (shift)
+				this.pressIcon("protection" + num.toString());
+			else
+				this.pressIcon("weapon" + num.toString());
 		}
 	}
 

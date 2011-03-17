@@ -16,6 +16,8 @@ package UI
 	 */
 	public class UIIcon extends MovieClip 
 	{
+		public var type: String;
+		
 		private const _x_padding: int = 5;
 		private const _x_width: int = 20;
 		
@@ -90,6 +92,11 @@ package UI
 			return this._position;
 		}
 		
+		public function get identificator() : String
+		{
+			return this.type + this.position.toString();
+		}
+		
 		private function onMouseClick(e: MouseEvent) : void
 		{
 			this.press();
@@ -97,7 +104,8 @@ package UI
 		
 		public function press() : void
 		{
-			this._action.call();
+			if(_action != null)
+				this._action.call();
 		}
 		
 		public function activate() : void

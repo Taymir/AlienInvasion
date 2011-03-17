@@ -75,14 +75,38 @@
 		
 		private function keyHandler(e:KeyboardEvent)
 		{
-			if (e.keyCode == 80) // P
-				TRegistry.instance.getValue("gameStateManager").pauseGame();
-			else if (e.keyCode == 82) // R
-				TRegistry.instance.getValue("gameStateManager").restartGame();
-			else if (e.keyCode == 77) // M
-				TRegistry.instance.getValue("music_manager").mute();
-			else if (e.keyCode == 83) // S
-				TRegistry.instance.getValue("sound_manager").mute();
+			switch(e.keyCode)
+			{
+				/// GAME STATE MANAGER
+				case 80: //P
+					TRegistry.instance.getValue("gameStateManager").pauseGame();
+					break;
+				case 82: //R
+					TRegistry.instance.getValue("gameStateManager").pauseGame();
+					break;
+				
+				/// SOUND & MUSIC MANAGERS
+				case 77: //M
+					TRegistry.instance.getValue("music_manager").mute();
+					break;
+				case 83: //S
+					TRegistry.instance.getValue("sound_manager").mute();
+					break;
+				
+				/// USER INTERFACE MANAGER
+				//case 48: //0
+				case 49://1
+				case 50://2
+				case 51://3
+				case 52://4
+				case 53://5
+				case 54://6
+				case 55://7
+				case 56://8
+				case 57://9
+					TRegistry.instance.getValue("UI").keyHandler(e.keyCode, e.shiftKey);
+					break;
+			}
 		}
 	}
 }

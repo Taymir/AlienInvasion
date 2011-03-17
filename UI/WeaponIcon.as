@@ -12,6 +12,7 @@ package UI
 		
 		public function WeaponIcon(name:String, position:int, action: Function) 
 		{
+			this.type = "weapon";
 			this._x_offset = weapons_offset;
 			this._light_up_color = weapon_glow;
 			super(name, position, action);
