@@ -66,11 +66,29 @@ package Weapons
 			// * Для игрока: получить повреждения
 			
 			// Проверка на попадание
-			TRegistry.instance.getValue("player").Walk(collision_detection_callback);
+			
+			if (TRegistry.instance.getValue("tmp_obstacles").Walk(tmp_obstacles_collision_detection_callback) == null)
+			if (TRegistry.instance.getValue("player").Walk(collision_detection_callback) == null)
 			TRegistry.instance.getValue("obstacles").Walk(collision_detection_callback);
 			
 			// Луч создает искры
 			var sparkles: ParticleSparkles = new ParticleSparkles(ray.x, ray.y + ray.height); //@BUG при большой скорости движения корабля, искры запаздывают
+		}
+		
+		protected function tmp_obstacles_collision_detection_callback(obj: Object) : int
+		{
+			var targetObj: MovieClip = obj as MovieClip;
+			
+			if (this.ray.hitTestObject(targetObj) && targetObj.CAN_STAND_AGAINST_DEATH_RAY)
+			{
+				var y: Number = this.find_top_collision_point(targetObj, ray);
+				
+				this.ray.height = y - shooterObj.y;
+				
+				return TList.STOP_WALKING;
+			}
+			
+			return TList.CONTINUE_WALKING;
 		}
 		
 		protected function collision_detection_callback(obj: Object): int

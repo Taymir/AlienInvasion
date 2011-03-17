@@ -48,6 +48,7 @@ package Missles
 			{
 				y -= speed;
 				
+				if (TRegistry.instance.getValue("tmp_obstacles").Walk(tmp_obstacles_collision_detection_callback) == null)
 				TRegistry.instance.getValue("enemies").Walk(collision_detection_callback);
 			}
 			else 

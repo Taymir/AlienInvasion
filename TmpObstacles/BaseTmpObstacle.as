@@ -22,6 +22,11 @@ package TmpObstacles
 			autoFollow();
 		}
 		
+		public function get CAN_STAND_AGAINST_DEATH_RAY():Boolean
+		{
+			return false;
+		}
+		
 		protected function update()
 		{
 			autoFollow();

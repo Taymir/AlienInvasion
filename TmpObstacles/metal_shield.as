@@ -7,11 +7,15 @@ package TmpObstacles
 	 * @author Taymir
 	 */
 	public class metal_shield extends BaseTmpObstacle 
-	{
-		
+	{		
 		public function metal_shield(shooterObj:ControllableObject) 
 		{
 			super(shooterObj);
+		}
+		
+		public override function get CAN_STAND_AGAINST_DEATH_RAY():Boolean
+		{
+			return true;
 		}
 		
 		public override function handleMissle(missle: BaseMissle)

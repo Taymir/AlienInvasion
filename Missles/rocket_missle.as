@@ -40,6 +40,7 @@ package Missles
 				x += Math.cos(fi) * 1 - Math.sin(fi) * (-speed);
 				y += Math.sin(fi) * 1 + Math.cos(fi) * (-speed);
 				
+				if (TRegistry.instance.getValue("tmp_obstacles").Walk(tmp_obstacles_collision_detection_callback) == null)
 				TRegistry.instance.getValue("enemies").Walk(collision_detection_callback);
 			}
 			else 
