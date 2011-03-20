@@ -23,6 +23,8 @@ package Protections
 			this.effect = effect;
 			this.effect.progressAction = onProgress;
 			this.effect.completeAction = onComplete;
+			this.effect.progressRestoreAction = onProgressRestore;
+			this.effect.restoreCompleteAction = onRestored;
 			
 			this.protection_active = false;
 		}
@@ -30,12 +32,24 @@ package Protections
 		private function onProgress(e: TTimerEvent) : void
 		{
 			// Inform UIManager about delay progress
+			(TRegistry.instance.getValue("UI") as UserInterfaceManager).updateProgress(this.UIIconName, 1.0 - e.progress);
+		}
+		
+		private function onProgressRestore(e: TTimerEvent) : void
+		{
+			// Inform UIManager about delay progress
 			(TRegistry.instance.getValue("UI") as UserInterfaceManager).updateProgress(this.UIIconName, e.progress);
 		}
 		
 		private function onComplete(e: TTimerEvent)
 		{
+			(TRegistry.instance.getValue("UI") as UserInterfaceManager).updateProgress(this.UIIconName, 1.0 - e.progress);
 			(TRegistry.instance.getValue("UI") as UserInterfaceManager).deactivateIcon(this.UIIconName);
+		}
+		
+		private function onRestored(e: TTimerEvent)
+		{
+			(TRegistry.instance.getValue("UI") as UserInterfaceManager).updateProgress(this.UIIconName, e.progress);
 			this.protection_active = false;
 		}
 		

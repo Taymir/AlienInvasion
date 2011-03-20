@@ -42,6 +42,8 @@ package Weapons
 				shield.dispose();
 				
 				shield = null;
+				
+				super.stopFire();
 			}
 		}
 		

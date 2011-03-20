@@ -1,5 +1,6 @@
 package TmpEffects 
 {
+	import flash.events.Event;
 	import GameObjects.*;
 	import common.TTimerEvent;
 	import common.TTimer;
@@ -10,17 +11,25 @@ package TmpEffects
 	public class TemporaryEffect
 	{
 		protected var duration:int; // milliseconds
+		protected var restoration:int; //milliseconds
 		protected var targetObject:ControllableObject;
 		
 		private var effectTimer:TTimer;
+		private var restoreTimer:TTimer;
 		private var _progressAction: Function;
 		private var _completeAction: Function;
+		private var _progressRestoreAction: Function;
+		private var _restoreCompleteAction: Function;
 		
-		public function TemporaryEffect(duration) 
+		public function TemporaryEffect(duration: int, restoration: int = 0 ) 
 		{
+			if (restoration == 0)
+				restoration = duration;
 			this.duration = duration;
+			this.restoration = restoration;
 			
 			effectTimer = new TTimer(duration);
+			restoreTimer = new TTimer(restoration);
 		}
 		
 		public function set progressAction(value: Function)
@@ -31,6 +40,16 @@ package TmpEffects
 		public function set completeAction(value: Function)
 		{
 			this._completeAction = value;
+		}
+		
+		public function set progressRestoreAction(value: Function)
+		{
+			this._progressRestoreAction = value;
+		}
+		
+		public function set restoreCompleteAction(value: Function)
+		{
+			this._restoreCompleteAction = value;
 		}
 		
 		public function beginEffect(targetObject: ControllableObject) : void
@@ -54,6 +73,22 @@ package TmpEffects
 			if (_completeAction != null)
 				_completeAction.call(null, e);
 			this.endEffect();
+			
+			restoreTimer.addEventListener(TTimerEvent.TIMER_COMPLETE, restoreComplete);
+			if (_progressRestoreAction != null)
+				restoreTimer.addEventListener(TTimerEvent.TIMER_PROGRESS, _progressRestoreAction);
+			restoreTimer.start();
+		}
+		
+		private function restoreComplete(e: TTimerEvent) : void
+		{
+			restoreTimer.removeEventListener(TTimerEvent.TIMER_COMPLETE, restoreComplete);
+			
+			if (_progressRestoreAction != null)
+				restoreTimer.removeEventListener(TTimerEvent.TIMER_PROGRESS, _progressRestoreAction);
+			if (_restoreCompleteAction != null)
+				_restoreCompleteAction.call(null, e);
+				
 			this.targetObject = null;
 		}
 		

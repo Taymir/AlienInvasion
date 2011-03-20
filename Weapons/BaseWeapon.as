@@ -46,7 +46,7 @@ package Weapons
 			if (canFire)
 			{
 				this.launch(shooterObj.x, shooterObj.y);
-				fireDelay();
+				fireDelay();//@TODO: начать отчет только после того, как оружие перестало стрелять
 			}
 		}
 		
