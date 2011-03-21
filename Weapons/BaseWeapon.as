@@ -15,6 +15,8 @@ package Weapons
 		protected var shooterObj: ControllableObject;
 		protected var fireTimer: TTimer;
 		
+		protected var DELAY_ON_STOP_FIRE: Boolean;
+		
 		public function BaseWeapon(shooterObj:ControllableObject, fireDelayPeriod: int = 300) 
 		{
 			this.fireDelayPeriod = fireDelayPeriod;
@@ -23,6 +25,8 @@ package Weapons
 			fireTimer.addEventListener(TTimerEvent.TIMER_COMPLETE, fireTimerHandler, false, 0, true);
 			
 			this.shooterObj = shooterObj;
+			
+			DELAY_ON_STOP_FIRE = false;
 		}
 		
 		public function changeFireDelayPeriod(fireDelayPeriodMultiplicator: Number = 1.0)
@@ -46,7 +50,9 @@ package Weapons
 			if (canFire)
 			{
 				this.launch(shooterObj.x, shooterObj.y);
-				fireDelay();//@TODO: начать отчет только после того, как оружие перестало стрелять
+				
+				if(!DELAY_ON_STOP_FIRE)
+					fireDelay();
 			}
 		}
 		
@@ -57,7 +63,8 @@ package Weapons
 		
 		public function stopFire() : void
 		{
-			//@EMPTY
+			if (DELAY_ON_STOP_FIRE)
+				fireDelay();
 		}
 		
 		public function isReady() : Boolean

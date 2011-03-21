@@ -27,6 +27,7 @@ package Weapons
 			//возможно, существует более элегантное решение для этого...
 			MissleDangerTransition.reportMissleLunch(x, y); 
 			
+			(TRegistry.instance.getValue("UI") as UserInterfaceManager).updateProgress(this.UIIconName, 0.0);
 			super.launch(x, y);
 		}
 		
