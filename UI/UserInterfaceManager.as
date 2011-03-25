@@ -19,14 +19,8 @@ package UI
 		
 		private var icons: Dictionary;
 		
-		//@TODO: добавить управление с клавиатуры
 		public function UserInterfaceManager(uiPanel: MovieClip) 
 		{
-			//массив иконок должен содержать:
-			//1) список иконок данного типа
-			//2) графические отступы
-			//3) цвета подсветки//@TODO!!!!!!!!!!!!!!!
-			
 			this.uiPanel = uiPanel;
 			this.clearIcons();
 			

@@ -23,8 +23,6 @@ package AI
 		public function guard_shipAI(self: guard_ship, target: GameObject, transport: ControllableObject, left_or_right: int) : void
 		{
 			// init AI
-			//@TMP Просто для проверки оружия, надо поправить
-			
 			// Данные :
 			// 1) Тактическая позиция - справа или слева от транспортника <= позиция транспортника
 			// Алгоритм ИИ:

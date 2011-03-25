@@ -17,7 +17,6 @@ package Weapons
 		private var shield: reflector;
 		private var firingTimer: TTimer;
 		
-		//@TODO: изменить поведение fireDelayPeriod так, чтобы отчет начался только после конца действия щита
 		public function TankReflectorWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 3000, firingPeriod:int = 2000)
 		{
 			firingTimer = new TTimer(firingPeriod);

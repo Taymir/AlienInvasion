@@ -19,10 +19,7 @@ package AI.State
 		public function ChangeHeightState(self: ControllableObject, direction: int, border: Number) 
 		{
 			name = "Изменение высоты";
-			//@BUG Следующие две строки не работают, т.к. эти проверки должны совершаться уже после инициализации объекта координатами...
-			/*if(direction == DIRECTION_UP )  Debug.assert(self.y > border, "Верхняя граница ниже текущей высоты в состоянии: " + name);
-			if(direction == DIRECTION_DOWN) Debug.assert(self.y < border, "Нижняя граница выше текущей высоты в состоянии: " + name);
-			*/ //@TOTHINK  А нужны ли они вообще?
+
 			this.self = self;
 			this.direction = direction;
 			this.border = border;

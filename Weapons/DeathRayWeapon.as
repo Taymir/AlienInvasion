@@ -13,7 +13,6 @@ package Weapons
 	 */
 	public class DeathRayWeapon extends BaseWeapon
 	{
-		//@TODO надо как-то изменить нижнюю часть луча: очень "плоско" выглядит, возможно сделать каую-то дополнительную вспышку?
 		protected var ray: CommonGameObject;
 		protected var firingTimer: TTimer;
 		

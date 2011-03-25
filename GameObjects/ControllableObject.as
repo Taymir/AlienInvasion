@@ -187,7 +187,6 @@ package  GameObjects
 		public function applyEffect(effect: TemporaryEffect)
 		{
 			effect.beginEffect(this);
-			//@TOTHINK: Надо ли вести список всех примененных к объекту эффектов?
 		}
 	}
 

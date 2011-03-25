@@ -14,7 +14,7 @@ package AI.Transition
 		
 		public static function reportMissleLunch(x: Number, y: Number)
 		{
-			lastMisslePositionX = x;//@TOTHINK: может заменить на подписку на событие стрельбы танка??
+			lastMisslePositionX = x;
 		}
 		
 		private var self:GameObject;

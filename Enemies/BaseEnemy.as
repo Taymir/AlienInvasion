@@ -48,7 +48,7 @@ package Enemies
 			checkAndPlaceWithinScreenBounds();
 		}
 		
-		private function inertiaDeviation() : void//@REFACTOR: вынести в UFO
+		private function inertiaDeviation() : void
 		{
 			rotation = velocity.x;
 		}

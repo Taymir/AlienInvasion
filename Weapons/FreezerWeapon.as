@@ -10,7 +10,7 @@ package Weapons
 	public class FreezerWeapon extends BaseWeapon
 	{
 		
-		public function FreezerWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 6000) 
+		public function FreezerWeapon(shooterObj:ControllableObject, fireDelayPeriod:int = 6000)//@TMP 
 		{
 			super(shooterObj, fireDelayPeriod);
 		}
