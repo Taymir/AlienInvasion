@@ -1,5 +1,6 @@
 package  
 {
+	import common.MathExtra;
 	import GameObjects.GameObject
 	import common.TList.TList;
 	import flash.display.MovieClip;
@@ -34,7 +35,15 @@ package
 			{
 				var tank : GameObject = player.Get(0) as GameObject;
 				this.x = -1 * (tank.x - 400);
+				this.y = 0; // Для стабилизации после тряски
 			}
+		}
+		
+		// Тряска экрана
+		public function shake(maxOffset = 4) 
+		{
+			this.x += MathExtra.RandomInt( -maxOffset, +maxOffset);
+			this.y += MathExtra.RandomInt( -maxOffset, +maxOffset);
 		}
 	}
 

@@ -128,6 +128,7 @@ package Weapons
 		{
 			if(Math.random() < 0.4)//@HARDFIX Слишком много взрывов...
 				this.Explode(x, y);
+			TRegistry.instance.getValue("scene").shake();
 			targetObj.hit(damage);
 		}
 		
