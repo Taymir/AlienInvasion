@@ -15,13 +15,19 @@ package UI
 	 */
 	public class UserInterfaceManager 
 	{
+		private const uiPanelPos: int = 502;
 		private var uiPanel: MovieClip;
 		
 		private var icons: Dictionary;
 		
-		public function UserInterfaceManager(uiPanel: MovieClip) 
+		public function UserInterfaceManager(documentObj: MovieClip) 
 		{
-			this.uiPanel = uiPanel;
+			this.uiPanel = new Interface();
+			this.uiPanel.name = "uiPanel";
+			this.uiPanel.x = 0;
+			this.uiPanel.y = uiPanelPos;
+			documentObj.addChild(this.uiPanel);
+			
 			this.clearIcons();
 			
 			if (TRegistry.instance.getValue("debug_show_fps") == true)

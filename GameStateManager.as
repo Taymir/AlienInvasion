@@ -17,6 +17,7 @@ package
 	import flash.events.Event;
 	import GameObjects.*;
 	import UI.*;
+	import UI.Menu.Menu;
 	
 	/**
 	 * ...
@@ -26,6 +27,7 @@ package
 	{
 		private var isPause:Boolean = false;
 		private var documentObj: MovieClip;
+		private var menu:Menu;
 		private var BackBMP: BitmapData;// Изображение фона //@REFACTOR впоследствии уйдет на нижний уровень абстракции, что-то типа LevelLoader
 		
 		public function GameStateManager(document: MovieClip)
@@ -43,6 +45,7 @@ package
 		
 		public function startGame() 
 		{
+			this.initCore();
 			this.initAllLists();
 			this.initLevel();
 			var player = this.initPlayer();
@@ -51,6 +54,55 @@ package
 			(TRegistry.instance.getValue("music_manager") as MusicManager).play("track1");
 			
 			this.startGameLoop(player);
+		}
+		
+		public function startMenu()
+		{
+			this.initMusic();
+			this.initSounds();
+			menu = new Menu(documentObj);
+			this.showMenu();
+		}
+		
+		//@TODO: Реализовать выход в меню из игры...
+		public function showMenu()
+		{
+			menu.show();
+		}
+		
+		private function initCore()
+		{
+			// Инициализация globalEnterFrame
+			var globalEnterFrame:GlobalEnterFrame = new GlobalEnterFrame();
+			TRegistry.instance.setValue("globalEnterFrame", globalEnterFrame);
+			
+			// Инициализаци UI
+			var userInterfaceManager: UserInterfaceManager = new UserInterfaceManager(documentObj);
+			TRegistry.instance.setValue("UI", userInterfaceManager);
+		}
+		
+		private function initMusic()
+		{
+			var music : MusicManager = new MusicManager();
+			//@REFACTOR use getDefinitionByName
+			TRegistry.instance.setValue("music_manager", music);
+			music.loadTrack("track1", "music/track1.mp3");
+			//music.loadTrack("track2", "music/track2.mp3");//@TMP
+			//music.loadTrack("track3", "music/track3.mp3");
+			//music.loadTrack("track4", "music/track4.mp3");
+			//music.loadTrack("track5", "music/track5.mp3");
+			music.loadTrack("track_lobby", "music/track_lobby.mp3");
+		}
+		
+		private function initSounds()
+		{
+			var sounds: SoundManager = new SoundManager();
+			//@REFACTOR use getDefinitionByName
+			TRegistry.instance.setValue("sound_manager", sounds);
+			sounds.addSound("shoot", new shootSnd);
+			sounds.addSound("hit", new hitSnd);
+			sounds.addSound("rolloverMenuSnd", new rolloverMenuSnd);
+			sounds.addSound("clickMenuSnd", new clickMenuSnd);
 		}
 		
 		private function initAllLists()
@@ -93,7 +145,7 @@ package
 			scene.addChild(right_back);
 			scene.addChild(center_back);
 			documentObj.addChild(scene);
-			documentObj.swapChildren(scene, documentObj.uiPanel);
+			documentObj.swapChildren(scene, documentObj.getChildByName("uiPanel"));
 			
 			TRegistry.instance.setValue("scene", scene);
 			
@@ -237,8 +289,6 @@ package
 			var scene = documentObj.getChildByName("scene");
 			documentObj.removeChild(scene);
 		}
-		
-
 		
 		public function restartGame()
 		{

@@ -38,39 +38,18 @@
 			TRegistry.instance.setValue("debug_show_fps", true);
 			TRegistry.instance.setValue("debug_profiler", true);
 			
-			// Инициализация globalEnterFrame
-			var globalEnterFrame:GlobalEnterFrame = new GlobalEnterFrame();
-			TRegistry.instance.setValue("globalEnterFrame", globalEnterFrame);	
+			// Инициализация сцены
 			TRegistry.instance.setValue("stage", stage);
-			
-			// Инициализаци UI
-			var userInterfaceManager: UserInterfaceManager = new UserInterfaceManager(uiPanel);
-			TRegistry.instance.setValue("UI", userInterfaceManager);
 			
 			if(TRegistry.instance.getValue("debug_profiler"))
 				SWFProfiler.init(TRegistry.instance.getValue("stage"), this);
-			
-			// Инициализация музыки
-			var music : MusicManager = new MusicManager();
-			TRegistry.instance.setValue("music_manager", music);
-			music.loadTrack("track1", "music/track1.mp3");
-			//music.loadTrack("track2", "music/track2.mp3");//@TMP
-			//music.loadTrack("track3", "music/track3.mp3");
-			//music.loadTrack("track4", "music/track4.mp3");
-			//music.loadTrack("track5", "music/track5.mp3");
-			//music.loadTrack("track_lobby", "music/track_lobby.mp3");
-			
-			// Инициализация звуков
-			var sounds: SoundManager = new SoundManager();
-			TRegistry.instance.setValue("sound_manager", sounds);
-			sounds.addSound("shoot", new shootSnd);
-			sounds.addSound("hit", new hitSnd);
 			
 			// Инициализация GameStateManager		
 			var gameStateManager:GameStateManager = new GameStateManager(this);
 			TRegistry.instance.setValue("gameStateManager", gameStateManager);
 			stage.addEventListener(KeyboardEvent.KEY_UP, keyHandler);
-			gameStateManager.startGame();
+			
+			gameStateManager.startMenu();
 		}
 		
 		private function keyHandler(e:KeyboardEvent)
@@ -78,6 +57,9 @@
 			switch(e.keyCode)
 			{
 				/// GAME STATE MANAGER
+				case 27:
+					TRegistry.instance.getValue("gameStateManager").showMenu();
+					break;
 				case 80: //P
 					TRegistry.instance.getValue("gameStateManager").pauseGame();
 					break;
