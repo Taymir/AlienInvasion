@@ -61,13 +61,29 @@ package
 			this.initMusic();
 			this.initSounds();
 			menu = new Menu(documentObj);
-			this.showMenu();
+			menu.show();
 		}
 		
-		//@TODO: Реализовать выход в меню из игры...
 		public function showMenu()
 		{
-			menu.show();
+			if (!TRegistry.instance.getValue("scene"))
+				return;//@HACK чтобы ескейп не работал в меню
+			if (isPause)
+				return hideMenu();//@HACK: повторный ескейп прячет меню, реализовано криво пока
+			TRegistry.instance.getValue("UI").visible = false;
+			TRegistry.instance.getValue("scene").visible = false;
+			
+			pauseGame();
+			menu.show("pause");
+		}
+		
+		public function hideMenu()
+		{
+			TRegistry.instance.getValue("UI").visible = true;
+			TRegistry.instance.getValue("scene").visible = true;
+			
+			pauseGame();
+			menu.hide();
 		}
 		
 		private function initCore()

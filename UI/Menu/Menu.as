@@ -27,6 +27,8 @@ package UI.Menu
 			menuScreens["controls"] = new ControlsMenuScreen(this);
 			menuScreens["settings"] = new SettingsMenuScreen(this);
 			menuScreens["credits"] = new CreditsMenuScreen(this);
+			menuScreens["pause"] = new PauseMenuScreen(this);
+			(TRegistry.instance.getValue("music_manager") as MusicManager).play("track_lobby"); //@BUGFIX: чтобы музыка менялась только в начальном меню, но не во время игры
 			
 			this.visible = false;
 		}
@@ -40,11 +42,10 @@ package UI.Menu
 			currentScreen = menuScreens[screenName];
 		}
 		
-		public function show()
+		public function show(screenName: String = "main")
 		{
 			this.visible = true;
-			(TRegistry.instance.getValue("music_manager") as MusicManager).play("track_lobby");
-			switchToScreen("main");
+			switchToScreen(screenName);
 		}
 		
 		public function hide()

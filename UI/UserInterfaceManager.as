@@ -101,6 +101,16 @@ package UI
 			else
 				this.pressIcon("weapon" + num.toString());
 		}
+		
+		public function set visible(value:Boolean)
+		{
+			this.uiPanel.visible = value;
+		}
+		
+		public function get visible(): Boolean
+		{
+			return this.uiPanel.visible;
+		}
 	}
 
 }
