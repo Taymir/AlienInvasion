@@ -175,7 +175,7 @@ package
 			ui.addIcon(new ProtectionIcon("energy_umbrella", 1, player.activateEnergyUmbrella));
 			ui.addIcon(new ProtectionIcon("fire_accelerator", 2, player.activateFireAccelerator));
 			ui.addIcon(new ProtectionIcon("speed_accelerator", 3, player.activateSpeedAccelerator));
-			ui.addIcon(new ProtectionIcon("invisability", 4, null));
+			//ui.addIcon(new ProtectionIcon("invisability", 4, null));
 			
 		}
 		
