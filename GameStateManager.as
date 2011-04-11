@@ -100,14 +100,13 @@ package
 		private function initMusic()
 		{
 			var music : MusicManager = new MusicManager();
-			//@REFACTOR use getDefinitionByName
 			TRegistry.instance.setValue("music_manager", music);
-			music.loadTrack("track1", "music/track1.mp3");
+			music.loadTrack("track1");
 			//music.loadTrack("track2", "music/track2.mp3");//@TMP
 			//music.loadTrack("track3", "music/track3.mp3");
 			//music.loadTrack("track4", "music/track4.mp3");
 			//music.loadTrack("track5", "music/track5.mp3");
-			music.loadTrack("track_lobby", "music/track_lobby.mp3");
+			music.loadTrack("track_lobby");
 		}
 		
 		private function initSounds()
@@ -117,8 +116,8 @@ package
 			TRegistry.instance.setValue("sound_manager", sounds);
 			sounds.addSound("shoot", new shootSnd);
 			sounds.addSound("hit", new hitSnd);
-			sounds.addSound("rolloverMenuSnd", new rolloverMenuSnd);
-			sounds.addSound("clickMenuSnd", new clickMenuSnd);
+			sounds.addSound("rolloverMenuSnd");
+			sounds.addSound("clickMenuSnd");
 		}
 		
 		private function initAllLists()

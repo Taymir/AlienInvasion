@@ -13,6 +13,9 @@ package
 	 */
 	public class MusicManager
 	{
+		private const defPath: String = "music/";
+		private const defExt: String = ".mp3";
+		
 		private var sndTransform: SoundTransform;
 		private var tracks: Dictionary = new Dictionary();
 		private var currentChannel: SoundChannel;
@@ -51,8 +54,13 @@ package
 			tracks[trackName] = track;
 		}
 		
-		public function loadTrack(trackName: String, trackUrl: String)
+		public function loadTrack(trackName: String, trackUrl: String = null)
 		{
+			if (trackUrl == null)
+			{
+				trackUrl = this.defPath + trackName + this.defExt;
+			}
+			
 			var track:Sound = new Sound();
 			track.load(new URLRequest(trackUrl));
 			track.addEventListener(Event.COMPLETE, 

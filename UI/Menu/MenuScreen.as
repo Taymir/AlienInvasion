@@ -35,12 +35,17 @@ package UI.Menu
 		protected function addMenuItem(itemText: String, itemPos: int, action: Function = null)
 		{
 			var label: MovieClip = new MovieClip();
-			label.addChild(this.createLabel(itemText, new Point(menuOffset.x, itemOffset * itemPos + menuOffset.y), TextFieldAutoSize.LEFT, 30, 3, 0.85));
+			var text: TextField = this.createLabel(itemText, new Point(menuOffset.x, itemOffset * itemPos + menuOffset.y), TextFieldAutoSize.LEFT, 30, 3, 0.85);
+			label.addChild(text);
 			label.action = action;
 			
 			label.addEventListener(MouseEvent.CLICK, onItemClick);
 			label.addEventListener(MouseEvent.MOUSE_OVER, onItemOver);
 			label.addEventListener(MouseEvent.MOUSE_OUT, onItemOut);
+			
+			label.buttonMode = true;
+			label.useHandCursor = true;
+			label.mouseChildren = false;
 			
 			this.addChild(label);
 			return label;

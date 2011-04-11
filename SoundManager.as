@@ -5,6 +5,7 @@ package
 	import flash.media.Sound;
 	import flash.media.SoundTransform;
 	import flash.utils.Dictionary;
+	import flash.utils.getDefinitionByName;
 	/**
 	 * ...
 	 * @author Taymir
@@ -38,8 +39,14 @@ package
 			this.sndTransform.volume = volume;
 		}
 		
-		public function addSound(soundName: String, sound: Sound)
+		public function addSound(soundName: String, sound: Sound = null)
 		{
+			if (sound == null)
+			{
+				var classRef: Class = getDefinitionByName(soundName) as Class;
+				sound = new classRef() as Sound;
+			}
+			
 			sounds[soundName] = sound;
 		}
 		
