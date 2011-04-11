@@ -28,9 +28,24 @@ package UI.Menu
 			menuScreens["settings"] = new SettingsMenuScreen(this);
 			menuScreens["credits"] = new CreditsMenuScreen(this);
 			menuScreens["pause"] = new PauseMenuScreen(this);
-			(TRegistry.instance.getValue("music_manager") as MusicManager).play("track_lobby"); //@BUGFIX: чтобы музыка менялась только в начальном меню, но не во время игры
+			this.loadSoundsAndMusic();
 			
 			this.visible = false;
+		}
+		
+		private function loadSoundsAndMusic()
+		{
+			var music:MusicManager = TRegistry.instance.getValue("music_manager");
+			music.loadTrack("track_lobby");
+			
+			var sounds: SoundManager = TRegistry.instance.getValue("sound_manager");
+			sounds.addSound("rolloverMenuSnd");
+			sounds.addSound("clickMenuSnd");
+		}
+		
+		public function playMenuMusic()
+		{
+			(TRegistry.instance.getValue("music_manager") as MusicManager).play("track_lobby");
 		}
 		
 		public function switchToScreen(screenName: String)

@@ -37,6 +37,7 @@
 			TRegistry.instance.setValue("debug_god_mode", true);
 			TRegistry.instance.setValue("debug_show_fps", true);
 			TRegistry.instance.setValue("debug_profiler", true);
+			TRegistry.instance.setValue("debug_no_menu", false); //@TODO
 			
 			// Инициализация сцены
 			TRegistry.instance.setValue("stage", stage);
@@ -64,7 +65,7 @@
 					TRegistry.instance.getValue("gameStateManager").pauseGame();
 					break;
 				case 82: //R
-					TRegistry.instance.getValue("gameStateManager").pauseGame();
+					TRegistry.instance.getValue("gameStateManager").restartGame();
 					break;
 				
 				/// SOUND & MUSIC MANAGERS

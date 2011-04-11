@@ -36,6 +36,12 @@ package UI
 				showFps(false);
 		}
 		
+		public function dispose()
+		{
+			this.clearIcons();
+			uiPanel.parent.removeChild(uiPanel);
+		}
+		
 		public function setHitPoints(hp: int)
 		{
 			if (TRegistry.instance.getValue("debug_god_mode") == true)

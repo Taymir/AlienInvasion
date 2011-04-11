@@ -50,6 +50,8 @@ package
 			sounds[soundName] = sound;
 		}
 		
+		
+		
 		public function play(soundName:String)
 		{
 			Debug.assert(sounds[soundName] != null, "Звук не найден");
