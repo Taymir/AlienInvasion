@@ -11,7 +11,7 @@ package FSM
 		public var nextTrueState: FSM.State = null;
 		public var nextFalseState: FSM.State = null;
 		
-		protected function isTriggered() : Boolean
+		protected function isTriggered(/*state: State*/) : Boolean//@TODO: Возможно понадобится в будущем
 		{
 			//@EMPTY
 			return false;

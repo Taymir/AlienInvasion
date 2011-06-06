@@ -37,7 +37,7 @@ package FSM
 		{
 			for each(var transition:Transition in transitions)
 			{
-				var newState:State = transition.check();
+				var newState:State = transition.check(/*this*/);//@TODO: может пригодиться в будущем
 				
 				if (newState != null)
 					return newState;

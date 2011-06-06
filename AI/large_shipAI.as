@@ -3,16 +3,17 @@ package AI
 	import AI.State.AttackState;
 	import AI.State.EvasiveManeuver;
 	import AI.State.FreezerState;
+	import AI.State.LaunchShipState;
 	import AI.State.MoveToPositionState;
 	import AI.State.NewPositionState;
 	import AI.State.ShortPursueState;
-	import AI.State.LaunchSmallShipsState;
 	import AI.Transition.completeTransition;
 	import AI.Transition.MissleDangerTransition;
 	import AI.Transition.ReachedAndReadyTransition;
 	import AI.Transition.ReachedTransition;
 	import AI.Transition.TimeoutTransition;
 	import Enemies.large_ship;
+	import Enemies.small_ship;
 	import flash.geom.Point;
 	import GameObjects.*;
 	import FSM.FSM;
@@ -59,13 +60,15 @@ package AI
 			
 			if (typeShipAI == LARGE_SHIP_PRODUCES_SMALL_SHIPS)
 			{
-				var launchSmallShipsState: LaunchSmallShipsState = new LaunchSmallShipsState(self);
+				var launchSmallShipsState:LaunchShipState = new LaunchShipState(self, launchingSmallShip);
 				
 				var canLaunchShipTransition: ReachedTransition = new ReachedTransition(self, target, 20);
+				var launchingDelayTransition: TimeoutTransition = new TimeoutTransition(300, 500);
 				
 				atackState.transitions = new Array(canNotShootTransition, missleDangerTransition, canLaunchShipTransition);
 				canLaunchShipTransition.nextTrueState = launchSmallShipsState;
-				launchSmallShipsState.nextState = atackState;
+				launchSmallShipsState.transitions = new Array(launchingDelayTransition);
+				launchingDelayTransition.nextTrueState = atackState;
 			} else if (typeShipAI == LARGE_SHIP_SHOOTING_FREEZE) {
 				var freezerState: FreezerState = new FreezerState(self);
 				
@@ -83,6 +86,11 @@ package AI
 			maneuverCompleteTransition.nextTrueState = atackState;
 			
 			fsm = new FSM.FSM(newPositionState);
+		}
+		
+		private function launchingSmallShip() : small_ship
+		{
+			return new small_ship();
 		}
 	}
 

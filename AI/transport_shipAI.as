@@ -1,10 +1,11 @@
 package AI 
 {
 	import AI.State.InactivityState;
+	import AI.State.LaunchShipState;
 	import AI.State.MoveAndAtackState;
-	import AI.State.LaunchLargeShipsState;
 	import AI.Transition.GuardsKilledTransition;
 	import AI.Transition.TimeoutTransition;
+	import Enemies.large_ship;
 	import Enemies.transport_ship;
 	import GameObjects.*;
 	import FSM.FSM;
@@ -28,7 +29,7 @@ package AI
 			// 1) Ссылки на охрану
 			
 			// init AI
-			var launchLargeShipsState: LaunchLargeShipsState = new LaunchLargeShipsState(self);
+			var launchLargeShipsState: LaunchShipState = new LaunchShipState(self, launchingLargeShip);
 			
 			fsm = new FSM.FSM(launchLargeShipsState);
 		}
@@ -45,6 +46,11 @@ package AI
 			guardKilledTransition.nextTrueState = inactive2State;
 			inactive2State.transitions = new Array(timeoutTransition);
 			timeoutTransition.nextTrueState = moveAndAttackState;
+		}
+		
+		private function launchingLargeShip() : large_ship
+		{
+			return new large_ship(1); //@TODO: разные типы кораблей
 		}
 		
 	}
