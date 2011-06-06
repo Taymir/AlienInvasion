@@ -16,7 +16,7 @@ package Enemies
 	{
 		private var secondaryWeapon: BaseWeapon;
 		
-		public function large_ship() 
+		public function large_ship(typeShipAI:int) 
 		{
 			this.speed = 3.5;
 			this.friction = 0.7;
@@ -29,7 +29,7 @@ package Enemies
 			
 			//@BUG: После того, как танк убит, НЛО все ещё "помнит о его существовании"
 			var tank:Tank = TRegistry.instance.getValue("player").Get(0);
-			ai = new large_shipAI(this, tank);
+			ai = new large_shipAI(this, tank, typeShipAI);
 		}
 		
 		public function fireSecondary()

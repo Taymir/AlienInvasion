@@ -125,7 +125,7 @@ package Levels
 			if(!TRegistry.instance.getValue("debug_no_enemies")) {
 				var ufo;
 				const maxEnemies: int = 5;
-				for(var i:int = 0; i < maxEnemies; i++)
+				/*for(var i:int = 0; i < maxEnemies; i++)
 				{
 					ufo = new small_ship();
 					ufo.x = 0 + 100 * i;
@@ -142,7 +142,7 @@ package Levels
 				
 				var suicide: suicide_ship = new suicide_ship();
 				suicide.x = -600;
-				suicide.y = -250;
+				suicide.y = -250;*/
 				
 				var transp: transport_ship = new transport_ship();
 				transp.x = 800;

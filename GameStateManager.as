@@ -38,6 +38,8 @@ package
 		
 		public function startGame() 
 		{
+			this.initMusic();//@BUG : Повторная инициализация
+			this.initSounds();//@BUG : Повторная инициализация
 			this.initCore();
 			this.initAllLists();
 			

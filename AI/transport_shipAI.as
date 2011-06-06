@@ -2,6 +2,7 @@ package AI
 {
 	import AI.State.InactivityState;
 	import AI.State.MoveAndAtackState;
+	import AI.State.LaunchLargeShipsState;
 	import AI.Transition.GuardsKilledTransition;
 	import AI.Transition.TimeoutTransition;
 	import Enemies.transport_ship;
@@ -27,9 +28,9 @@ package AI
 			// 1) Ссылки на охрану
 			
 			// init AI
-			var inactiveState: InactivityState = new InactivityState();
+			var launchLargeShipsState: LaunchLargeShipsState = new LaunchLargeShipsState(self);
 			
-			fsm = new FSM.FSM(inactiveState);
+			fsm = new FSM.FSM(launchLargeShipsState);
 		}
 		
 		public function attach_guards(guard_one: ControllableObject, guard_two: ControllableObject)

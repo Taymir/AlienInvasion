@@ -31,13 +31,13 @@
 		public function initGame() : void
 		{
 			// Настройки
-			TRegistry.instance.setValue("config_play_sounds", true);
-			TRegistry.instance.setValue("config_play_music", true);
+			TRegistry.instance.setValue("config_play_sounds", false);
+			TRegistry.instance.setValue("config_play_music", false);
 			TRegistry.instance.setValue("debug_no_enemies", false);
 			TRegistry.instance.setValue("debug_god_mode", true);
 			TRegistry.instance.setValue("debug_show_fps", true);
 			TRegistry.instance.setValue("debug_profiler", true);
-			TRegistry.instance.setValue("debug_no_menu", false); //@TODO
+			TRegistry.instance.setValue("debug_no_menu", true);
 			
 			// Инициализация сцены
 			TRegistry.instance.setValue("stage", stage);
@@ -50,7 +50,10 @@
 			TRegistry.instance.setValue("gameStateManager", gameStateManager);
 			stage.addEventListener(KeyboardEvent.KEY_UP, keyHandler);
 			
-			gameStateManager.startMenu();
+			if (TRegistry.instance.getValue("debug_no_menu"))
+				gameStateManager.startGame();
+			else
+				gameStateManager.startMenu();
 		}
 		
 		private function keyHandler(e:KeyboardEvent)
