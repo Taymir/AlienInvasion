@@ -5,6 +5,7 @@ package AI
 	import AI.State.MoveAndAtackState;
 	import AI.Transition.GuardsKilledTransition;
 	import AI.Transition.TimeoutTransition;
+	import common.MathExtra;
 	import Enemies.large_ship;
 	import Enemies.transport_ship;
 	import GameObjects.*;
@@ -50,7 +51,7 @@ package AI
 		
 		private function launchingLargeShip() : large_ship
 		{
-			return new large_ship(1); //@TODO: разные типы кораблей
+			return new large_ship(MathExtra.RandomInt(1, 3));
 		}
 		
 	}

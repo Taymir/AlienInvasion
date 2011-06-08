@@ -14,6 +14,7 @@ package AI
 	import AI.Transition.TimeoutTransition;
 	import Enemies.large_ship;
 	import Enemies.small_ship;
+	import Enemies.suicide_ship;
 	import flash.geom.Point;
 	import GameObjects.*;
 	import FSM.FSM;
@@ -60,14 +61,14 @@ package AI
 			
 			if (typeShipAI == LARGE_SHIP_PRODUCES_SMALL_SHIPS)
 			{
-				var launchSmallShipsState:LaunchShipState = new LaunchShipState(self, launchingSmallShip);
+				var launchShipsState:LaunchShipState = new LaunchShipState(self, launchingSmallShip);
 				
 				var canLaunchShipTransition: ReachedTransition = new ReachedTransition(self, target, 20);
 				var launchingDelayTransition: TimeoutTransition = new TimeoutTransition(300, 500);
 				
 				atackState.transitions = new Array(canNotShootTransition, missleDangerTransition, canLaunchShipTransition);
-				canLaunchShipTransition.nextTrueState = launchSmallShipsState;
-				launchSmallShipsState.transitions = new Array(launchingDelayTransition);
+				canLaunchShipTransition.nextTrueState = launchShipsState;
+				launchShipsState.transitions = new Array(launchingDelayTransition);
 				launchingDelayTransition.nextTrueState = atackState;
 			} else if (typeShipAI == LARGE_SHIP_SHOOTING_FREEZE) {
 				var freezerState: FreezerState = new FreezerState(self);
@@ -77,8 +78,19 @@ package AI
 				atackState.transitions = new Array(canNotShootTransition, missleDangerTransition, canFreezeTransition);
 				canFreezeTransition.nextTrueState = freezerState;
 				freezerState.nextState = atackState;
-			} else {
-				//@TODO: LARGE_SHIP_SHOOTING_FREEZE
+			} else if (typeShipAI == LARGE_SHIP_PRODUCES_SUICIDE_SHIPS) {
+				launchShipsState = new LaunchShipState(self, launchingSuicideShip);
+				launchShipsState.maxShips = 2;
+				
+				canLaunchShipTransition = new ReachedTransition(self, target, 20);
+				launchingDelayTransition = new TimeoutTransition(300, 500);
+				
+				atackState.transitions = new Array(canNotShootTransition, missleDangerTransition, canLaunchShipTransition);
+				canLaunchShipTransition.nextTrueState = launchShipsState;
+				launchShipsState.transitions = new Array(launchingDelayTransition);
+				launchingDelayTransition.nextTrueState = atackState;
+			} else
+			{
 				atackState.transitions = new Array(canNotShootTransition, missleDangerTransition);
 			}
 			
@@ -91,6 +103,11 @@ package AI
 		private function launchingSmallShip() : small_ship
 		{
 			return new small_ship();
+		}
+		
+		private function launchingSuicideShip() : suicide_ship
+		{
+			return new suicide_ship();
 		}
 	}
 
