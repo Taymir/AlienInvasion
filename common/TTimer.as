@@ -13,7 +13,7 @@ package common
 	// при достижении последнего кадра, вызвать onComplete
 	// 
 	// Если игра на паузе, кадры не инкрементятся
-	public class TTimer extends EventDispatcher
+	public dynamic class TTimer extends EventDispatcher
 	{		
 		private const framerate: Number = 0.024; // 0.024 frames per millisecond!
 		

@@ -18,6 +18,7 @@ package AI.State
 		
 		private var self: BaseEnemy;
 		private var timer: TTimer;
+		private var animTimer: TTimer;
 		private var launchedShips: int = 0;
 		private var canLaunch: Boolean = false;
 		private var launchShipFunc: Function;
@@ -60,15 +61,42 @@ package AI.State
 			{
 				if (launchedShips < maxShips)
 				{
-					var ship: BaseEnemy = this.launchShipFunc.call();
-					ship.x = self.x;
-					ship.y = self.y;
+					startLaunchingAnimation();
 					
 					canLaunch = false;
 					launchedShips++;
 					initDelayTimer();
 				}
 			}
+		}
+		
+		private function startLaunchingAnimation()
+		{
+			var ship:BaseEnemy = this.launchShipFunc.call();
+			self.parent.swapChildren(self, ship);
+			ship.x = self.x;
+			ship.y = self.y;
+			
+			ship.aiEnabled = false;
+			
+			animTimer = new TTimer(600, 41);
+			animTimer.ship = ship;
+			animTimer.addEventListener(TTimerEvent.TIMER_PROGRESS, progressLaunchingAnimation)
+			animTimer.addEventListener(TTimerEvent.TIMER_COMPLETE, stopLaunchingAnimation);
+			animTimer.start();
+		}
+		
+		private function progressLaunchingAnimation(t: TTimerEvent)
+		{
+			var ship:BaseEnemy = t.target.ship;
+			ship.y += 3;
+		}
+		
+		private function stopLaunchingAnimation(t: TTimerEvent)
+		{
+			var ship:BaseEnemy = t.target.ship;
+			ship.aiEnabled = true;
+			ship = null;
 		}
 		
 	}

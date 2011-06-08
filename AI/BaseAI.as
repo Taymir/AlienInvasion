@@ -8,10 +8,12 @@ package AI
 	public class BaseAI 
 	{
 		protected var fsm : FSM;
+		public var enabled: Boolean = true;
 		
 		public function update()
 		{
-			fsm.update();
+			if(enabled)
+				fsm.update();
 		}
 		
 	}

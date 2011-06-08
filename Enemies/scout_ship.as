@@ -18,7 +18,7 @@ package Enemies
 		
 		public function scout_ship() 
 		{
-			this.speed = 5.0;
+			this.speed = 13.0;
 			this.friction = 0.8;
 			this.maxspeed = 20;
 			this.maxHitPoints = 1;

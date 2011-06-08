@@ -134,11 +134,7 @@ package Levels
 				
 				ufo = new large_ship();
 				ufo.x = 800;
-				ufo.y = 150;
-				
-				var scout: scout_ship = new scout_ship();
-				scout.x = 600;
-				scout.y = 250;		
+				ufo.y = 150;	
 				
 				var suicide: suicide_ship = new suicide_ship();
 				suicide.x = -600;
@@ -157,6 +153,10 @@ package Levels
 				guard2.y = 100;
 				
 				transp.attach_guards(guard1, guard2);
+				
+				var scout: scout_ship = new scout_ship();
+				scout.x = 600;
+				scout.y = 250;	
 			}
 		}
 		

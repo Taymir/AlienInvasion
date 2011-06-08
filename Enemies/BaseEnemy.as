@@ -27,6 +27,16 @@ package Enemies
 			addToGlobalEnterFrame(update);
 		}
 		
+		public function get aiEnabled():Boolean
+		{
+			return ai.enabled;
+		}
+		
+		public function set aiEnabled(value: Boolean): void
+		{
+			ai.enabled = value;
+		}
+		
 		protected function update() : void
 		{	
 			ai.update();
