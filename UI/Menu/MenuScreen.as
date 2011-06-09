@@ -36,6 +36,7 @@ package UI.Menu
 		{
 			var label: MovieClip = new MovieClip();
 			var text: TextField = this.createLabel(itemText, new Point(menuOffset.x, itemOffset * itemPos + menuOffset.y), TextFieldAutoSize.LEFT, 30, 3, 0.85);
+			text.name = "textField";
 			label.addChild(text);
 			label.action = action;
 			
@@ -47,8 +48,23 @@ package UI.Menu
 			label.useHandCursor = true;
 			label.mouseChildren = false;
 			
+			label.setText = function(value: String)
+			{
+				(label.getChildByName("textField") as TextField).text = value;
+			}
+			
+			label.getText = function()
+			{
+				return (label.getChildByName("textField") as TextField).text;
+			}
+			
 			this.addChild(label);
 			return label;
+		}
+		
+		public function renameMenuItem(itemText: String, label: MovieClip)
+		{
+			(label.getChildByName("textField") as TextField).text = itemText;
 		}
 		
 		private function onItemClick(e: MouseEvent)

@@ -37,7 +37,7 @@
 			TRegistry.instance.setValue("debug_god_mode", true);
 			TRegistry.instance.setValue("debug_show_fps", true);
 			TRegistry.instance.setValue("debug_profiler", true);
-			TRegistry.instance.setValue("debug_no_menu", true);
+			TRegistry.instance.setValue("debug_no_menu", false);
 			
 			// Инициализация сцены
 			TRegistry.instance.setValue("stage", stage);
@@ -61,7 +61,7 @@
 			switch(e.keyCode)
 			{
 				/// GAME STATE MANAGER
-				case 27:
+				case 27: //ESC
 					TRegistry.instance.getValue("gameStateManager").showMenu();
 					break;
 				case 80: //P
