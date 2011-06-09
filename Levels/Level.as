@@ -175,16 +175,16 @@ package Levels
 			// Добавление UI-ярлыков
 			var ui:UserInterfaceManager = TRegistry.instance.getValue("UI");
 			
-			ui.addIcon(new WeaponIcon("base_weapon", 0, player.activateBaseWeapon));
-			ui.addIcon(new WeaponIcon("laser", 1, player.activateLaser));
-			ui.addIcon(new WeaponIcon("self_guided_missles", 2, player.activateRocketWeapon));
-			ui.addIcon(new WeaponIcon("bombs", 3, player.activateParalyzeBombs));
-			ui.addIcon(new WeaponIcon("reflector", 4, player.activateReflector));
+			ui.addIcon(new WeaponIcon("base_weapon", 0, "Пушка", player.activateBaseWeapon));
+			ui.addIcon(new WeaponIcon("laser", 1, "Лазер", player.activateLaser));
+			ui.addIcon(new WeaponIcon("self_guided_missles", 2, "Ракеты", player.activateRocketWeapon));
+			ui.addIcon(new WeaponIcon("bombs", 3, "Бомбы", player.activateParalyzeBombs));
+			ui.addIcon(new WeaponIcon("reflector", 4, "Отражатель", player.activateReflector));
 			
-			ui.addIcon(new ProtectionIcon("metal_shield", 0, player.activateMetalShield));
-			ui.addIcon(new ProtectionIcon("energy_umbrella", 1, player.activateEnergyUmbrella));
-			ui.addIcon(new ProtectionIcon("fire_accelerator", 2, player.activateFireAccelerator));
-			ui.addIcon(new ProtectionIcon("speed_accelerator", 3, player.activateSpeedAccelerator));
+			ui.addIcon(new ProtectionIcon("metal_shield", 0, "Металический щит", player.activateMetalShield));
+			ui.addIcon(new ProtectionIcon("energy_umbrella", 1, "Энергозонт", player.activateEnergyUmbrella));
+			ui.addIcon(new ProtectionIcon("fire_accelerator", 2, "Быстрая стрельба", player.activateFireAccelerator));
+			ui.addIcon(new ProtectionIcon("speed_accelerator", 3, "Быстрое передвижение", player.activateSpeedAccelerator));
 			//ui.addIcon(new ProtectionIcon("invisability", 4, null)); // Не будет доступно
 			
 		}

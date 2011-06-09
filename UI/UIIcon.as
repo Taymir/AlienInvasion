@@ -6,9 +6,11 @@ package UI
 	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
 	import flash.filters.GlowFilter;
 	import flash.geom.ColorTransform;
 	import flash.utils.getDefinitionByName;
+	import flash.utils.Timer;
 	
 	/**
 	 * ...
@@ -34,7 +36,9 @@ package UI
 		private var _progress_bar: Shape;
 		private var _position: int = 0;
 		
-		public function UIIcon(name: String, position: int, action: Function)
+		private var _tooltip: String;
+		
+		public function UIIcon(name: String, position: int, tooltip: String, action: Function)
 		{
 			this.name = name;
 			this.position = position;
@@ -57,6 +61,14 @@ package UI
 				this.buttonMode = true;
 				this._action = action;
 				this.addEventListener(MouseEvent.MOUSE_DOWN, onMouseClick);
+			}
+			
+			// Настройка тултипов:
+			this._tooltip = tooltip
+			if (tooltip)
+			{
+				this.addEventListener(MouseEvent.MOUSE_OVER, startTooltipCounter);
+				this.addEventListener(MouseEvent.MOUSE_OUT, hideTooltip);
 			}
 		}
 		
@@ -137,6 +149,41 @@ package UI
 			newColor.color = r << 16 | g << 8 | b;
 			
 			this._progress_bar.transform.colorTransform = newColor;
+		}
+		
+		/* TOOLTIP */
+		var tooltipTimer:Timer = new  Timer(500, 1);
+		var tooltip:Tooltip;
+		
+		private function startTooltipCounter(e:MouseEvent):void
+		{
+			tooltipTimer.addEventListener(TimerEvent.TIMER_COMPLETE, showTooltip);
+			tooltipTimer.start();
+		}
+		
+		private function showTooltip(e:TimerEvent):void
+		{
+			tooltipTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, showTooltip);
+			
+			/* Modify the parameters to get new tooltips */
+			
+			tooltip = new Tooltip(this._tooltip);
+			
+			/* Start Position */
+			tooltip.x = this.x + this.width / 2 - tooltip.width / 2;
+			tooltip.y = this.y - (tooltip.height + 3);
+			
+			parent.addChild(tooltip);
+		}
+
+		private function hideTooltip(e:MouseEvent):void
+		{
+			if (tooltipTimer.currentCount == 1)
+			{
+				tooltip.parent.removeChild(tooltip);
+			}
+
+			tooltipTimer.reset();
 		}
 	}
 

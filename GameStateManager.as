@@ -38,8 +38,9 @@ package
 		
 		public function startGame() 
 		{
-			this.initMusic();//@BUG : Повторная инициализация
-			this.initSounds();//@BUG : Повторная инициализация
+			this.initMusic();
+			this.initSounds();
+			this.initMenu();
 			this.initCore();
 			this.initAllLists();
 			
@@ -54,7 +55,7 @@ package
 		{
 			this.initMusic();
 			this.initSounds();
-			menu = new Menu(documentObj);
+			this.initMenu();
 			menu.show();
 			menu.playMenuMusic();
 		}
@@ -94,14 +95,26 @@ package
 		
 		private function initMusic()
 		{
-			var music : MusicManager = new MusicManager();
-			TRegistry.instance.setValue("music_manager", music);
+			if (!TRegistry.instance.getValue("music_manager"))
+			{
+				var music : MusicManager = new MusicManager();
+				TRegistry.instance.setValue("music_manager", music);
+			}
 		}
 		
 		private function initSounds()
 		{
-			var sounds: SoundManager = new SoundManager();
-			TRegistry.instance.setValue("sound_manager", sounds);
+			if (!TRegistry.instance.getValue("sound_manager"))
+			{
+				var sounds: SoundManager = new SoundManager();
+				TRegistry.instance.setValue("sound_manager", sounds);
+			}
+		}
+		
+		private function initMenu()
+		{
+			if (!menu)
+				menu = new Menu(documentObj);
 		}
 		
 		private function initAllLists()
