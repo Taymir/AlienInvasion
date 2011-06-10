@@ -1,5 +1,6 @@
 package UI.Menu 
 {
+	import flash.display.MovieClip;
 	/**
 	 * ...
 	 * @author Taymir
@@ -13,17 +14,17 @@ package UI.Menu
 			
 			this.setHeadline("УПРАВЛЕНИЕ");
 			
-			this.addMenuItem("TODO", 0);
-			
-			
-			
+			var controls: MovieClip = new controlsScreen();
+			controls.x = 70;
+			controls.y = 140;
+			this.addChild(controls);
 			
 			this.addMenuItem("НАЗАД", 4, backCallBack);
 		}
 		
 		private function backCallBack()
 		{
-			menu.switchToScreen("main");
+			menu.switchToPrevScreen();
 		}
 		
 	}

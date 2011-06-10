@@ -22,7 +22,7 @@ package UI.Menu
 		
 		private function backCallBack()
 		{
-			menu.switchToScreen("main");
+			menu.switchToPrevScreen();
 		}
 		
 	}

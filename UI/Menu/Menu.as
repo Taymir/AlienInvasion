@@ -15,6 +15,7 @@ package UI.Menu
 	{
 		var menuScreens: Dictionary;
 		var currentScreen: MenuScreen;
+		var prevScreenName: String = "";
 		
 		public function Menu(documentObj: MovieClip) 
 		{
@@ -23,14 +24,22 @@ package UI.Menu
 			this.addChild(background);
 			
 			menuScreens = new Dictionary();
-			menuScreens["main"] = new MainMenuScreen(this);
-			menuScreens["controls"] = new ControlsMenuScreen(this);
-			menuScreens["settings"] = new SettingsMenuScreen(this);
-			menuScreens["credits"] = new CreditsMenuScreen(this);
-			menuScreens["pause"] = new PauseMenuScreen(this);
+			
+			addMenuScreen("main", new MainMenuScreen(this));
+			addMenuScreen("controls", new ControlsMenuScreen(this));
+			addMenuScreen("settings", new SettingsMenuScreen(this));
+			addMenuScreen("credits", new CreditsMenuScreen(this));
+			addMenuScreen("pause", new PauseMenuScreen(this));
+			
 			this.loadSoundsAndMusic();
 			
 			this.visible = false;
+		}
+		
+		private function addMenuScreen(screenName: String, menuScreen: MenuScreen)
+		{
+			this.menuScreens[screenName] = menuScreen;
+			this.menuScreens[screenName].name = screenName;
 		}
 		
 		private function loadSoundsAndMusic()
@@ -51,10 +60,18 @@ package UI.Menu
 		public function switchToScreen(screenName: String)
 		{
 			if (currentScreen)
+			{
+				prevScreenName = currentScreen.name;
 				currentScreen.visible = false;
+			}
 			
 			menuScreens[screenName].visible = true;
 			currentScreen = menuScreens[screenName];
+		}
+		
+		public function switchToPrevScreen()
+		{
+			switchToScreen(prevScreenName);
 		}
 		
 		public function show(screenName: String = "main")

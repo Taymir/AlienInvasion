@@ -15,11 +15,10 @@ package UI.Menu
 			this.setHeadline("ПАУЗА");
 			
 			this.addMenuItem("ПРОДОЛЖИТЬ", 0, continueCallback);
-			this.addMenuItem("УПРАВЛЕНИЕ", 1);
-			this.addMenuItem("НАСТРОЙКИ", 2);
+			this.addMenuItem("УПРАВЛЕНИЕ", 1, controlsCallback);
+			this.addMenuItem("НАСТРОЙКИ", 2, settingsCallback);
 			this.addMenuItem("ЗАНОВО", 3, restartCallback);
-
-			this.addMenuItem("ЗАКОНЧИТЬ ИГРУ", 4);
+			this.addMenuItem("ЗАКОНЧИТЬ ИГРУ", 4, stopCallback);
 		}
 		
 		private function continueCallback()
@@ -31,6 +30,23 @@ package UI.Menu
 		{
 			TRegistry.instance.getValue("gameStateManager").hideMenu();
 			TRegistry.instance.getValue("gameStateManager").restartGame();
+		}
+		
+		private function settingsCallback()
+		{
+			menu.switchToScreen("settings");
+		}
+		
+		private function controlsCallback()
+		{
+			menu.switchToScreen("controls");
+		}
+		
+		private function stopCallback()
+		{
+			TRegistry.instance.getValue("gameStateManager").endGame();
+			menu.switchToScreen("main");
+			menu.playMenuMusic();
 		}
 	}
 

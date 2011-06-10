@@ -134,6 +134,7 @@ package
 		
 		private function startGameLoop()
 		{
+			isPause = false;
 			level.start();
 			TRegistry.instance.getValue("stage").addEventListener(Event.ENTER_FRAME, TRegistry.instance.getValue("globalEnterFrame").Update);
 		}
@@ -153,7 +154,7 @@ package
 			}
 		}
 		
-		private function endGame()
+		public function endGame()
 		{
 			level.unloadContent();
 			// Удаление всех инициализированных объектов
