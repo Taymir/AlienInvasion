@@ -34,7 +34,7 @@
 			TRegistry.instance.setValue("config_play_sounds", true);
 			TRegistry.instance.setValue("config_play_music", true);
 			TRegistry.instance.setValue("debug_no_enemies", false);
-			TRegistry.instance.setValue("debug_god_mode", true);
+			TRegistry.instance.setValue("debug_god_mode", false);
 			TRegistry.instance.setValue("debug_show_fps", true);
 			TRegistry.instance.setValue("debug_profiler", true);
 			TRegistry.instance.setValue("debug_no_menu", false);
@@ -64,20 +64,20 @@
 				case 27: //ESC
 					TRegistry.instance.getValue("gameStateManager").showMenu();
 					break;
-				case 80: //P
-					TRegistry.instance.getValue("gameStateManager").pauseGame();
-					break;
-				case 82: //R
-					TRegistry.instance.getValue("gameStateManager").restartGame();
-					break;
+				//case 80: //P
+				//	TRegistry.instance.getValue("gameStateManager").pauseGame();
+				//	break;
+				//case 82: //R
+				//	TRegistry.instance.getValue("gameStateManager").restartGame();
+				//	break;
 				
 				/// SOUND & MUSIC MANAGERS
-				case 77: //M
-					TRegistry.instance.getValue("music_manager").mute();
-					break;
-				case 83: //S
-					TRegistry.instance.getValue("sound_manager").mute();
-					break;
+				//case 77: //M
+				//	TRegistry.instance.getValue("music_manager").mute();
+				//	break;
+				//case 83: //S
+				//	TRegistry.instance.getValue("sound_manager").mute();
+				//	break;
 				
 				/// USER INTERFACE MANAGER
 				//case 48: //0

@@ -11,7 +11,7 @@ package UI.Menu
 		{
 			super(menu);
 			
-			this.setHeadline("ALIEN INVASION [WT]");
+			this.setHeadline("ALIEN INVASION");
 			
 			this.addMenuItem("ИГРАТЬ", 0, playCallback);
 			this.addMenuItem("УПРАВЛЕНИЕ", 1, controlsCallback);

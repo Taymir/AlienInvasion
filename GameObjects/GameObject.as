@@ -40,7 +40,7 @@ package  GameObjects
 		}
 		
 		public function dispose() : void
-		{
+		{			
 			// Прячем со сцены
 			hide();
 		}

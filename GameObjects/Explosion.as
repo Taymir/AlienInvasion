@@ -20,6 +20,7 @@ package GameObjects
 		
 		private function startExplosionAnimation() : void
 		{
+			this.stop();
 			this.addFrameScript(this.totalFrames - 1, stopExplosionAnimation);
 			this.play();
 		}
@@ -27,7 +28,7 @@ package GameObjects
 		private function stopExplosionAnimation() : void 
 		{
 			this.stop();
-			this.hide();
+			this.dispose();
 		}
 		
 	}
