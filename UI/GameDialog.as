@@ -14,45 +14,40 @@ package UI
 	 * @author Akkarin
 	 */
 	public class GameDialog
-	{
-		public static const CLOSE_DIALOG = 0;
-		
+	{	
 		public function GameDialog() 
 		{
 			
 		}
 		
-		public function MessageBox(str:String, color:uint, alpha:Number, padding:Number, width:Number, buttons:uint)
+		public function MessageBox(str:String, color:uint, alpha:Number, padding:Number, width:Number, buttons:Array, events:Array)
 		{
 			// Создаём текстовое поле
 			var text:TextField = makeTextField(str, padding, padding, width);
-					
-			switch(buttons)
-			{
-				case CLOSE_DIALOG:
-					// Создаём кнопку
-					var button:SimpleButton = new SimpleButton();
-					button = makeButton("Закрыть", 0xFFFFFF, 0xFF0000, 1, padding, text.y + text.height + padding, onCloseDialog);
-					break;
-			}
 			
 			// Создаём окно и добавляем туда текстовое поле и кнопку
 			var windowWidth = text.width + padding * 2;
-			var windowHeight = text.height + padding * 3 + button.height;
+			var windowHeight = text.height + padding * 3 + 50;//@TMP: добавил места для кнопки
 			var windowX = TRegistry.instance.getValue("stage").stageWidth / 2 - windowWidth / 2;
 			var windowY = TRegistry.instance.getValue("stage").stageHeight / 2 - (windowHeight) / 2;
 			var window:MovieClip = makeWindow(windowX, windowY, windowWidth, windowHeight, 0xFF0000, 0.5);
 			window.addChild(text);
-			window.addChild(button);
+			
+			for (var i:int = 0; i < buttons.length; ++i)
+			{
+				var button:SimpleButton = new SimpleButton();
+				button = makeButton(buttons[i], 0xFFFFFF, 0xFF0000, 1, padding, text.y + text.height + padding, events[i]);
+				window.addChild(button);
+			}
 			
 			TRegistry.instance.getValue("stage").addChild(window);
 		}		
 		
-		public function onCloseDialog(e:Event)
+		public static function closeDialog(e:Event)
 		{
 			TRegistry.instance.getValue("stage").removeChild(e.currentTarget.parent);
-			e.currentTarget.removeEventListener(MouseEvent.CLICK, onCloseDialog);
 		}
+		
 		
 		// Создание кнопки
 		private function makeButton(title:String, colorText:uint, colorBackground:uint, alpha:Number, x:Number, y:Number, funcEvent:Function) : SimpleButton
@@ -82,7 +77,7 @@ package UI
 			button.hitTestState = movieClip;
 			button.y = y;
 			button.x = x;
-			button.addEventListener(MouseEvent.CLICK, funcEvent);
+			button.addEventListener(MouseEvent.CLICK, funcEvent, false, 0, true);
 			
 			return button;
 		}

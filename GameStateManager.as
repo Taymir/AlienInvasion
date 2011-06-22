@@ -200,21 +200,26 @@ package
 				// Игрок погиб, конец игры
 				// Показываем месадж бокс и ставим на паузу
 				showEndGameDialog("Конец игры, смерть всем человекам!");
-				
-				this.pauseGame();
 			} else if (TRegistry.instance.getValue("enemies").Count() == 0) {
 				// Враги Повержены, конец игры
 				// Показываем месадж бокс и ставим на паузу
 				showEndGameDialog("Инопланетные захватчики повержены! УРА! УРА! УРА!");
-				
-				this.pauseGame();
 			}
 		}
 		
 		private function showEndGameDialog(message: String) : void
 		{
 			var dialog: GameDialog = new GameDialog();
-			dialog.MessageBox("<p align=\"center\"><b><font size=\"14\" color=\"#ffffff\">" + message + "</font></b><p>", 0xFF0000, 0.5, 20, 350, GameDialog.CLOSE_DIALOG);
+			dialog.MessageBox("<p align=\"center\"><b><font size=\"14\" color=\"#ffffff\">" + message + "</font></b><p>", 0xFF0000, 0.5, 20, 350, new Array("Закрыть"), new Array(closeDialog));
+			this.pauseGame();
+		}
+		
+		private function closeDialog(e:Event)
+		{
+			GameDialog.closeDialog(e);
+			this.endGame();
+			menu.show("main");
+			menu.playMenuMusic();
 		}
 	}
 

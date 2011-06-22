@@ -11,8 +11,8 @@
 	import UI.UserInterfaceManager;
 
 	public class AlienInvasion extends MovieClip {
-		
-		public function AlienInvasion() {		
+		public function go() : void
+		{
 			this.initGame();
 			
 			//this.runTests(); //@DEBUG
